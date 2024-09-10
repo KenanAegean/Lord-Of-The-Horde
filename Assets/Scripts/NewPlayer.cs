@@ -7,6 +7,18 @@ public class NewPlayer : PhysicsObject
 {
     [SerializeField] public Camera Camera;
 
+    //Singleton instantation
+    private static NewPlayer instance;
+    public static NewPlayer Instance
+    {
+        get
+        {
+            if (instance == null) instance = GameObject.FindObjectOfType<NewPlayer>();
+            return instance;
+        }
+    }
+
+
     private void Start()
     {
         if (Camera == null)
