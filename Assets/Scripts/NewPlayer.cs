@@ -5,7 +5,15 @@ using static UnityEngine.GraphicsBuffer;
 
 public class NewPlayer : PhysicsObject
 {
+    //configs
     [SerializeField] public Camera Camera;
+
+    [Header("Inventory")]
+    [SerializeField] public int maxHealth = 100;
+    [SerializeField] public int health = 100;
+
+    //state
+    bool isAlive = true;
 
     //Singleton instantation
     private static NewPlayer instance;
@@ -21,6 +29,7 @@ public class NewPlayer : PhysicsObject
 
     private void Start()
     {
+        if (!isAlive) { return; }
         if (Camera == null)
         {
             throw new System.InvalidOperationException("Camera not set");
@@ -37,5 +46,12 @@ public class NewPlayer : PhysicsObject
     {
         _target = Camera.ScreenToWorldPoint(Input.mousePosition);
         _target.z = 0; // Keep the player on the same Z-axis (2D)
+    }
+
+    private void Die()
+    {
+        
+        isAlive = false;
+            
     }
 }
