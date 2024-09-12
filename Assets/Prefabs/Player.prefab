@@ -49,6 +49,7 @@ MonoBehaviour:
   player: {fileID: 60810212610781551}
   rotationSpeed: 120
   weaponDemage: 50
+  isTwoHandWeapon: 1
 --- !u!1 &1471136031296127622
 GameObject:
   m_ObjectHideFlags: 0
@@ -163,7 +164,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -293,7 +294,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -321,7 +322,8 @@ GameObject:
   - component: {fileID: 1873566299486352598}
   - component: {fileID: 3515900415656647027}
   - component: {fileID: 6283632749564923077}
-  m_Layer: 6
+  - component: {fileID: 6977009763104930326}
+  m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -460,6 +462,33 @@ MonoBehaviour:
   Camera: {fileID: 0}
   maxHealth: 100
   health: 100
+--- !u!50 &6977009763104930326
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5373959594647340460}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
 --- !u!1 &8619800144732415566
 GameObject:
   m_ObjectHideFlags: 0
@@ -470,7 +499,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1534638070145394041}
   - component: {fileID: 3400090834148106148}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}

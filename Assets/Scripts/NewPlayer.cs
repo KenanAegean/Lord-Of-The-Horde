@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,8 +10,8 @@ public class NewPlayer : PhysicsObject
     [SerializeField] public Camera Camera;
 
     [Header("Inventory")]
-    [SerializeField] public int maxHealth = 100;
-    [SerializeField] public int health = 100;
+    [SerializeField] public float maxHealth = 100f;
+    [SerializeField] public float health = 100f;
 
     //state
     bool isAlive = true;
@@ -48,10 +49,14 @@ public class NewPlayer : PhysicsObject
         _target.z = 0; // Keep the player on the same Z-axis (2D)
     }
 
-    private void Die()
+    public void TakeDamage(float someDamage)
     {
-        
-        isAlive = false;
-            
+        health -= someDamage;
+        if (health < 0) Die();
+    }
+
+    public void Die()
+    {
+        throw new NotImplementedException();
     }
 }
