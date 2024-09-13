@@ -19,21 +19,19 @@ public class NewEnemy : PhysicsObject
     void Start()
     {
         FindPlayer();
-        StartCoroutine(Patrol());  // Patrol behavior
+        StartCoroutine(Patrol());  
     }
 
     public override void Update()
     {
         if (!_playerFound)
         {
-            FindPlayer(); // Search for the player if not found
+            FindPlayer(); 
         }
 
-        // Set target depending on whether player is detected
         FollowPlayerIfClose();
 
-        // Call the base class's Update method to handle movement
-        base.Update();
+        base.Update(); // Call parents MoveTowardsTarget method
     }
 
     private void FindPlayer()
@@ -54,17 +52,15 @@ public class NewEnemy : PhysicsObject
 
             if (distance <= followDistance)
             {
-                _target = _player.position;  // Set target to the player’s position
-                _target.z = 0;  // Ensure enemy stays in 2D plane
+                _target = _player.position;  
+                _target.z = 0;  
             }
             else if (distance <= searchRadius)
             {
-                // Continue patrolling if within the search radius
                 _target = _nextPatrolPoint;
             }
             else
             {
-                // Player is too far, reset player reference
                 _player = null;
                 _playerFound = false;
             }
@@ -77,27 +73,24 @@ public class NewEnemy : PhysicsObject
         {
             if (!_playerFound)
             {
-                // Get a new random patrol point
                 _nextPatrolPoint = GetRandomPatrolPoint();
-
-                // Set patrol point as target
                 _target = _nextPatrolPoint;
 
-                // Wait for patrolInterval seconds before moving to a new point
                 yield return new WaitForSeconds(patrolInterval);
             }
             else
             {
-                yield return null; // If the player is found, don't patrol
+                yield return null;
             }
         }
     }
 
     private Vector3 GetRandomPatrolPoint()
     {
-        Vector3 randomPoint;
+        Vector3 randomPoint;s
 
-        // Ensure patrol point is far enough from current position to prevent gathering
+        // Ensure patrol point is far enough from current position to prevent gatherin
+        // There is bug here sometimes enemies can gather in the center??
         do
         {
             randomPoint = transform.position + new Vector3(
@@ -106,7 +99,7 @@ public class NewEnemy : PhysicsObject
                 0
             );
         }
-        while (Vector3.Distance(transform.position, randomPoint) < 2.0f);  // Ensure patrol point is far enough away
+        while (Vector3.Distance(transform.position, randomPoint) < 2.0f);  // Ensure patrol point is far enough 
 
         // Ensure patrol point stays within searchRadius
         if (Vector3.Distance(transform.position, randomPoint) > searchRadius)

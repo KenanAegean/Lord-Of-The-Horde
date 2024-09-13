@@ -40,13 +40,13 @@ public class NewPlayer : PhysicsObject
     public override void Update()
     {
         FollowMouse(); // Update _target to mouse position
-        base.Update(); // Call PhysicsObject's MoveTowardsTarget method
+        base.Update(); // Call parents MoveTowardsTarget method
     }
 
     private void FollowMouse()
     {
         _target = Camera.ScreenToWorldPoint(Input.mousePosition);
-        _target.z = 0; // Keep the player on the same Z-axis (2D)
+        _target.z = 0; 
     }
 
     public void TakeDamage(float someDamage)
