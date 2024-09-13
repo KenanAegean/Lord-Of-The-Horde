@@ -87,7 +87,7 @@ public class NewEnemy : PhysicsObject
 
     private Vector3 GetRandomPatrolPoint()
     {
-        Vector3 randomPoint;s
+        Vector3 randomPoint;
 
         // Ensure patrol point is far enough from current position to prevent gatherin
         // There is bug here sometimes enemies can gather in the center??
