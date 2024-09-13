@@ -48,8 +48,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 60810212610781551}
   rotationSpeed: 120
-  weaponDemage: 50
   isTwoHandWeapon: 1
+  isGunWeapon: 0
+  meleeDamage: 10
+  bulletPrefab: {fileID: 0}
+  bulletSpeed: 100
+  spawnInterval: 1
+  bulletDamage: 10
 --- !u!1 &1471136031296127622
 GameObject:
   m_ObjectHideFlags: 0
@@ -61,8 +66,9 @@ GameObject:
   - component: {fileID: 6124862417435587267}
   - component: {fileID: 3565403315555026167}
   - component: {fileID: 8355055516202602350}
+  - component: {fileID: 2013705695736615647}
   m_Layer: 0
-  m_Name: Left
+  m_Name: Punch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -180,6 +186,27 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.16, y: 0.16}
   m_EdgeRadius: 0
+--- !u!114 &2013705695736615647
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1471136031296127622}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0f19d5375b22b4478e064bc82941103, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  rotationSpeed: 120
+  isTwoHandWeapon: 1
+  isGunWeapon: 0
+  meleeDamage: 50
+  bulletPrefab: {fileID: 0}
+  bulletSpeed: 100
+  spawnInterval: 1
+  bulletDamage: 10
 --- !u!1 &4921658076379191784
 GameObject:
   m_ObjectHideFlags: 0
@@ -191,8 +218,9 @@ GameObject:
   - component: {fileID: 1128218742412202484}
   - component: {fileID: 6297679337012413984}
   - component: {fileID: 4751469875559993366}
+  - component: {fileID: 6866188885996624781}
   m_Layer: 0
-  m_Name: Right
+  m_Name: GunHand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -310,6 +338,27 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.16, y: 0.16}
   m_EdgeRadius: 0
+--- !u!114 &6866188885996624781
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4921658076379191784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0f19d5375b22b4478e064bc82941103, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  rotationSpeed: 120
+  isTwoHandWeapon: 1
+  isGunWeapon: 1
+  meleeDamage: 50
+  bulletPrefab: {fileID: 7445391843622928986, guid: bfc51c07b42f6a741ba7914d9ded2936, type: 3}
+  bulletSpeed: 20
+  spawnInterval: 1
+  bulletDamage: 100
 --- !u!1 &5373959594647340460
 GameObject:
   m_ObjectHideFlags: 0
@@ -325,7 +374,7 @@ GameObject:
   - component: {fileID: 6977009763104930326}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

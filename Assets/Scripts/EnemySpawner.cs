@@ -1,34 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
 
 public class EnemySpawner : MonoBehaviour
 {
-    [SerializeField] public GameObject enemyPrefab;  // The enemy prefab to spawn
-    [SerializeField] public float spawnInterval = 1.0f;  // Spawn every second
+    [Header("Spawner Settings")]
+    [SerializeField] private GameObject enemyPrefab;  // The enemy prefab to spawn
+    [SerializeField] private float spawnInterval = 1.0f;  // Spawn every second
 
-    // References to boundary GameObjects
-    [SerializeField] public Transform topLeftBoundary;  // Reference to the Top Left boundary
-    [SerializeField] public Transform bottomRightBoundary;  // Reference to the Bottom Right boundary
-
-    [SerializeField] public GameObject targetPlayer;
-
-    public GameObject GetTargetPlayer()
-    {
-        return targetPlayer;
-    }
+    [Header("Boundaries")]
+    [SerializeField] private Transform topLeftBoundary;  // Reference to the Top Left boundary
+    [SerializeField] private Transform bottomRightBoundary;  // Reference to the Bottom Right boundary
 
     void Start()
     {
         StartCoroutine(SpawnEnemy());
     }
-
-    void Update()
-    {
-        //Vector3 targtPayerPos = targetPlayer.transform.position;
-    }
-
 
     IEnumerator SpawnEnemy()
     {
