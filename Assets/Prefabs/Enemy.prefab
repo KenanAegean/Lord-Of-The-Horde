@@ -105,8 +105,10 @@ MonoBehaviour:
   ObjectAccelerates: 0
   maxHealth: 100
   health: 100
-  _player: {fileID: 5373959594647340460, guid: 7f227cb61eff10141b8e5fe266b2aa1c, type: 3}
-  followDistance: 5
+  followDistance: 10
+  searchRadius: 10
+  patrolRadius: 5
+  patrolInterval: 1
 --- !u!61 &1909141102533873565
 BoxCollider2D:
   m_ObjectHideFlags: 0

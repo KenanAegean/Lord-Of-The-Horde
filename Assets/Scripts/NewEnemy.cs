@@ -9,7 +9,7 @@ public class NewEnemy : PhysicsObject
     [SerializeField] private float health = 100f;
     [SerializeField] private float followDistance = 5.0f;
     [SerializeField] private float searchRadius = 10.0f; // Radius to search for the player
-    [SerializeField] private float patrolRadius = 5.0f; // Radius for random patrol while searching
+    [SerializeField] private float patrolRadius = 7.0f; // Radius for random patrol around spawn point
     [SerializeField] private float patrolInterval = 2.0f; // Time between patrol movements
 
     private Transform _player;
@@ -19,7 +19,7 @@ public class NewEnemy : PhysicsObject
     void Start()
     {
         FindPlayer();
-        StartCoroutine(Patrol());
+        StartCoroutine(Patrol());  // Patrol behavior
     }
 
     public override void Update()
@@ -28,8 +28,12 @@ public class NewEnemy : PhysicsObject
         {
             FindPlayer(); // Search for the player if not found
         }
-        FollowPlayerIfClose(); // Follow player if within range
-        base.Update(); // Call PhysicsObject's MoveTowardsTarget method
+
+        // Set target depending on whether player is detected
+        FollowPlayerIfClose();
+
+        // Call the base class's Update method to handle movement
+        base.Update();
     }
 
     private void FindPlayer()
@@ -50,17 +54,18 @@ public class NewEnemy : PhysicsObject
 
             if (distance <= followDistance)
             {
-                _target = _player.position;
-                _target.z = 0; // Keep the enemy on the same Z-axis (2D)
+                _target = _player.position;  // Set target to the player’s position
+                _target.z = 0;  // Ensure enemy stays in 2D plane
             }
             else if (distance <= searchRadius)
             {
-                // Continue searching if within search radius
+                // Continue patrolling if within the search radius
                 _target = _nextPatrolPoint;
             }
             else
             {
-                _player = null; // Player is too far, stop following
+                // Player is too far, reset player reference
+                _player = null;
                 _playerFound = false;
             }
         }
@@ -72,25 +77,38 @@ public class NewEnemy : PhysicsObject
         {
             if (!_playerFound)
             {
+                // Get a new random patrol point
                 _nextPatrolPoint = GetRandomPatrolPoint();
+
+                // Set patrol point as target
+                _target = _nextPatrolPoint;
+
+                // Wait for patrolInterval seconds before moving to a new point
                 yield return new WaitForSeconds(patrolInterval);
             }
             else
             {
-                yield return null; // Continue to check for player if found
+                yield return null; // If the player is found, don't patrol
             }
         }
     }
 
     private Vector3 GetRandomPatrolPoint()
     {
-        Vector3 randomPoint = transform.position + new Vector3(
-            Random.Range(-patrolRadius, patrolRadius),
-            Random.Range(-patrolRadius, patrolRadius),
-            0
-        );
+        Vector3 randomPoint;
 
-        // Ensure patrol point is within search radius
+        // Ensure patrol point is far enough from current position to prevent gathering
+        do
+        {
+            randomPoint = transform.position + new Vector3(
+                Random.Range(-patrolRadius, patrolRadius),
+                Random.Range(-patrolRadius, patrolRadius),
+                0
+            );
+        }
+        while (Vector3.Distance(transform.position, randomPoint) < 2.0f);  // Ensure patrol point is far enough away
+
+        // Ensure patrol point stays within searchRadius
         if (Vector3.Distance(transform.position, randomPoint) > searchRadius)
         {
             randomPoint = transform.position + (randomPoint - transform.position).normalized * searchRadius;
