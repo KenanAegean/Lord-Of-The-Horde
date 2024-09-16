@@ -21,11 +21,11 @@ Lec 1, 2, 3, 4, 5, 6
 
 Features for distinction (VG) -
 • The enemy moves in a meaningful way examples of this;
-o Moving towards the player only if the player is in “range”
-o Moving towards the player faster if he looks away from the
-enemy, and slower if the player looks at them.
-o Moving towards the player in a circular pattern
-o Tries to dodge the players attacks
+  o Moving towards the player only if the player is in “range”
+  o Moving towards the player faster if he looks away from the
+  enemy, and slower if the player looks at them.
+  o Moving towards the player in a circular pattern
+  o Tries to dodge the players attacks
 
 Handing in
 Hand in GIF’s or video of all requirements on omniway. For distinction and
@@ -56,26 +56,26 @@ Features required (G) -
 • A main menu screen featuring a start button, and a settings menu
 • A total of 2 enemy types should be in the game, They should look diffrent and be
 diffrent somehow, it could be ex:
-o More HP
-o Faster movement speed
-o Diffrent movement pattern
+  o More HP
+  o Faster movement speed
+  o Diffrent movement pattern
 • Enemies “drop” xp, when an enemy dies the player gets increasingly more xp
 • UI for player xp. Could be a text, or a bar.
 • The player has a threshold of xp, when that is reached the player “levels up” and
 is rewarded somehow, could be ex:
-o Faster movement speed
-o More hp
-o More damage
-o Bigger projectiles
-o More projectiles
+  o Faster movement speed
+  o More hp
+  o More damage
+  o Bigger projectiles
+  o More projectiles
 • The camera should follow where the player moves
 Lectures relevant that gives basis for all requirementsLec 6, 7, 8, 9, 10, 11
 
 Features for distinction (VG) -
 • Game juice!
-o Blood fx when enemy dies
-o Enemy/Player animations
-o UI Animations
+  o Blood fx when enemy dies
+  o Enemy/Player animations
+  o UI Animations
 
 Handing in
 Hand in GIF’s or video of all requirements on omniway. For distinction and
