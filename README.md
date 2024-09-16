@@ -5,8 +5,8 @@ Game Project of Game Programming With C# Course
 - (5 September 2024)
 - Teacher referance: <a href="">Martin Andersson</a>
 
-## Assigment 1
-### Assigment 1 Description
+## First Assigment
+### First Assigment Description
 ```
 VAMPIRE 1
 
@@ -35,19 +35,19 @@ and player.
 DEADLINE : SEPTEMBER 13
 ```
 
-<br><b>Screenshots For Development Till Assigment 1</b>
+<br><b>Screenshots For Development Of First Assigment:</b>
 
 Screenshots           |  Screenshots 
 :-------------------------:|:-------------------------:
 ![](Assets/Other/Assigment1/Screenshots/1.png)  |  ![](Assets/Other/Assigment1/Screenshots/3.png)
 ![](Assets/Other/Assigment1/Screenshots/2.png)  |  ![](Assets/Other/Assigment1/Screenshots/4.png)
 
-<br><b>Video For Development Till Assigment 1:</b>  
+<br><b>Video For Development Of First Assigment:</b>  
 <video src="https://github.com/user-attachments/assets/1362650d-4468-4e34-9784-19760b629662" width=180/></video>
 
 
-## Assigment 2
-### Assigment 2 Description
+## Second Assigment
+### Second Assigment Description
 ```
 VAMPIRE 2
 
