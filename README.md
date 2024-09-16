@@ -1,4 +1,4 @@
-# Lord-Of-The-Horde
+# Lord Of The Horde
 Game Project of Game Programming With C# Course
 <br>
 - Futuregames Academy
