@@ -33488,7 +33488,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 814234d134f25bc48bb786da28c78080, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 2424548919708570033, guid: 56927f25ffcbb8c4485079ee75bf8204, type: 3}
+  enemyPrefabs:
+  - {fileID: 2424548919708570033, guid: 56927f25ffcbb8c4485079ee75bf8204, type: 3}
+  - {fileID: 2424548919708570033, guid: 488b1ab8c7ddfc944a9e9b06578d6f4f, type: 3}
+  spawnWeights:
+  - 100
+  - 5
   spawnInterval: 1
   topLeftBoundary: {fileID: 225449308}
   bottomRightBoundary: {fileID: 914262333}

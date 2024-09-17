@@ -5,15 +5,30 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     [Header("Spawner Settings")]
-    [SerializeField] private GameObject enemyPrefab;  // The enemy prefab to spawn
-    [SerializeField] private float spawnInterval = 1.0f;  // Spawn every second
+    [SerializeField] private List<GameObject> enemyPrefabs;  // List of enemy prefabs
+    [SerializeField] private List<float> spawnWeights;       // List of weights for each enemy type (rarity)
+    [SerializeField] private float spawnInterval = 1.0f;     // Spawn every second
 
     [Header("Boundaries")]
-    [SerializeField] private Transform topLeftBoundary;  // Reference to the Top Left boundary
+    [SerializeField] private Transform topLeftBoundary;      // Reference to the Top Left boundary
     [SerializeField] private Transform bottomRightBoundary;  // Reference to the Bottom Right boundary
+
+    private float totalWeight;
 
     void Start()
     {
+        if (enemyPrefabs.Count != spawnWeights.Count)
+        {
+            Debug.LogError("The number of enemy prefabs and weights must be the same!");
+            return;
+        }
+
+        // Calculate the total weight for later use
+        foreach (float weight in spawnWeights)
+        {
+            totalWeight += weight;
+        }
+
         StartCoroutine(SpawnEnemy());
     }
 
@@ -27,11 +42,33 @@ public class EnemySpawner : MonoBehaviour
                 Random.Range(bottomRightBoundary.position.y, topLeftBoundary.position.y)
             );
 
-            // Instantiate the enemy prefab at the random position
-            Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
+            // Select an enemy prefab based on weighted random selection
+            GameObject selectedEnemyPrefab = GetRandomEnemyPrefab();
+
+            // Instantiate the selected enemy prefab at the random position
+            Instantiate(selectedEnemyPrefab, spawnPosition, Quaternion.identity);
 
             // Wait for the defined spawn interval before spawning the next enemy
             yield return new WaitForSeconds(spawnInterval);
         }
+    }
+
+    // This function selects an enemy prefab based on the weights (rarity)
+    private GameObject GetRandomEnemyPrefab()
+    {
+        float randomValue = Random.Range(0, totalWeight);
+        float cumulativeWeight = 0.0f;
+
+        for (int i = 0; i < enemyPrefabs.Count; i++)
+        {
+            cumulativeWeight += spawnWeights[i];
+            if (randomValue < cumulativeWeight)
+            {
+                return enemyPrefabs[i];
+            }
+        }
+
+        // Fallback (should not occur if weights are properly set)
+        return enemyPrefabs[0];
     }
 }
