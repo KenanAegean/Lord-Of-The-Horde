@@ -3,7 +3,7 @@ Game Project of Game Programming With C# Course
 <br>
 - Futuregames Academy
 - (5 September 2024)
-- Teacher referance: <a href="">Martin Andersson</a>
+- Teacher referance: <a href="https://www.linkedin.com/in/martin-andersson-20424420a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app">Martin Andersson</a>
 
 ## First Assigment
 ### First Assigment Description
