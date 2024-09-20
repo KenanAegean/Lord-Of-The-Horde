@@ -12,6 +12,9 @@ public class NewEnemy : PhysicsObject
     [SerializeField] private float patrolRadius = 7.0f; // Radius for random patrol around spawn point
     [SerializeField] private float patrolInterval = 2.0f; // Time between patrol movements
 
+    [Header("Other Attributes")]
+    [SerializeField] private GameObject collectablePrefab;
+
     private Transform _player;
     private bool _playerFound = false;
     private Vector3 _nextPatrolPoint;
@@ -119,7 +122,10 @@ public class NewEnemy : PhysicsObject
 
     public void Die()
     {
+        Vector3 enemyLastPosition = transform.position;
         Destroy(gameObject);
         Debug.Log("Enemy died");
+        Instantiate(collectablePrefab, enemyLastPosition, Quaternion.identity);
     }
+
 }

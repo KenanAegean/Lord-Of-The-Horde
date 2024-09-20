@@ -11,6 +11,7 @@ public class PhysicsObject : MonoBehaviour
     [SerializeField] protected Vector3 _target;
     [SerializeField] public float ObjectSpeed = 2.0f;
     [SerializeField] public bool ObjectAccelerates;
+   
 
     public virtual void Update()
     {
