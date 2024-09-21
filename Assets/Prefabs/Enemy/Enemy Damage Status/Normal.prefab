@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1909141102533873565}
   - component: {fileID: 7861881709246825383}
   m_Layer: 0
-  m_Name: Enemy
+  m_Name: Normal
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -103,18 +103,14 @@ MonoBehaviour:
   _target: {x: 0, y: 0, z: 0}
   ObjectSpeed: 2
   ObjectAccelerates: 0
-  maxHealth: 500
-  health: 500
+  maxHealth: 100
+  health: 100
   followDistance: 10
   searchRadius: 10
   patrolRadius: 5
   patrolInterval: 1
   collectablePrefab: {fileID: 4059571283236773848, guid: a202949c2afebb544a8c16d5a59c9d3e, type: 3}
-  damageStatusPrefabs:
-  - {fileID: 2424548919708570033, guid: 9345bd51830720d478ef4b7847bf7ed2, type: 3}
-  - {fileID: 2424548919708570033, guid: 0415a9034372dab4bae7d748f5e6da47, type: 3}
-  - {fileID: 2424548919708570033, guid: 4f98ee323ca142d44a5dac90b6072d8d, type: 3}
-  - {fileID: 2424548919708570033, guid: 50075f228d8d05542bc63c070807c185, type: 3}
+  damageStatusPrefabs: []
 --- !u!61 &1909141102533873565
 BoxCollider2D:
   m_ObjectHideFlags: 0

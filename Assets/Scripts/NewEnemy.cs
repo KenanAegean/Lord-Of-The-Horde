@@ -14,15 +14,31 @@ public class NewEnemy : PhysicsObject
 
     [Header("Other Attributes")]
     [SerializeField] private GameObject collectablePrefab;
+    [SerializeField] private List<GameObject> damageStatusPrefabs;
 
     private Transform _player;
     private bool _playerFound = false;
     private Vector3 _nextPatrolPoint;
 
+    private SpriteRenderer spriteRenderer; // Current enemy's SpriteRenderer component
+
+    public enum CharacterState
+    {
+        Normal,
+        LightDamage,
+        MediumDamage,
+        HeavyDamage
+    }
+
+    private CharacterState currentState;
+
     void Start()
     {
+        spriteRenderer = GetComponent<SpriteRenderer>();
         FindPlayer();
-        StartCoroutine(Patrol());  
+        StartCoroutine(Patrol());
+
+        //ChangeDamagedSprite(CharacterState.Normal);
     }
 
     public override void Update()
@@ -35,6 +51,7 @@ public class NewEnemy : PhysicsObject
         FollowPlayerIfClose();
 
         base.Update(); // Call parents MoveTowardsTarget method
+
     }
 
     private void FindPlayer()
@@ -117,7 +134,86 @@ public class NewEnemy : PhysicsObject
     {
         Debug.Log("Enemy took damage");
         health -= someDamage;
-        if (health <= 0) Die();
+
+        float healthPercentage = health / maxHealth;
+
+        if (healthPercentage > 0.8f)
+        {
+            Debug.Log("Enemy Status Normal");
+            ChangeDamagedSprite(CharacterState.Normal);
+        }
+        else if (healthPercentage > 0.6f)
+        {
+            Debug.Log("Enemy Status LightDamage");
+            ChangeDamagedSprite(CharacterState.LightDamage);
+        }
+        else if (healthPercentage > 0.4f)
+        {
+            Debug.Log("Enemy Status MediumDamage");
+            ChangeDamagedSprite(CharacterState.MediumDamage);
+        }
+        else if (healthPercentage > 0.2f)
+        {
+            Debug.Log("Enemy Status HeavyDamage");
+            ChangeDamagedSprite(CharacterState.HeavyDamage);
+        }
+        else if (health <= 0)
+        {
+            Die();
+        }
+    }
+
+    private void ChangeDamagedSprite(CharacterState newState)
+    {
+        currentState = newState;
+
+        // Select one of the prefabs based on the state and assign its sprite to the enemy
+        switch (currentState)
+        {
+            case CharacterState.Normal:
+                if (damageStatusPrefabs != null && damageStatusPrefabs.Count > 0)
+                    AssignSpriteFromPrefab(0);
+                break;
+            case CharacterState.LightDamage:
+                if (damageStatusPrefabs != null && damageStatusPrefabs.Count > 1)
+                    AssignSpriteFromPrefab(1);
+                break;
+            case CharacterState.MediumDamage:
+                if (damageStatusPrefabs != null && damageStatusPrefabs.Count > 2)
+                    AssignSpriteFromPrefab(2);
+                break;
+            case CharacterState.HeavyDamage:
+                if (damageStatusPrefabs != null && damageStatusPrefabs.Count > 3)
+                    AssignSpriteFromPrefab(3);
+                break;
+            default:
+                Debug.LogError("Unknown CharacterState: " + currentState);
+                break;
+        }
+    }
+
+
+    private void AssignSpriteFromPrefab(int index)
+    {
+        if (damageStatusPrefabs.Count > index)
+        {
+            // Get the SpriteRenderer from the prefab and assign its sprite to the current enemy
+            SpriteRenderer prefabSpriteRenderer = damageStatusPrefabs[index].GetComponent<SpriteRenderer>();
+            if (prefabSpriteRenderer != null)
+            {
+                Debug.Log("Enemy Sprite Changed");
+                spriteRenderer.sprite = prefabSpriteRenderer.sprite;
+                spriteRenderer.color = prefabSpriteRenderer.color; //opsional
+            }
+            else
+            {
+                Debug.LogError("No SpriteRenderer found on prefab: " + damageStatusPrefabs[index].name);
+            }
+        }
+        else
+        {
+            Debug.LogError("Invalid index for damageStatusPrefabs list: " + index);
+        }
     }
 
     public void Die()
@@ -127,5 +223,6 @@ public class NewEnemy : PhysicsObject
         Debug.Log("Enemy died");
         Instantiate(collectablePrefab, enemyLastPosition, Quaternion.identity);
     }
+
 
 }

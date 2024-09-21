@@ -15,7 +15,7 @@ public class NewPlayer : PhysicsObject
     [Header("XP and Level")]
     [SerializeField] private int playerLevel = 1;
     [SerializeField] private float currentXP = 0f;
-    [SerializeField] private float xpToNextLevel = 100f; // XP required for the next level
+    [SerializeField] private float xpToNextLevel = 100f; 
 
     //state
     bool isAlive = true;
@@ -87,7 +87,6 @@ public class NewPlayer : PhysicsObject
 
         // Optionally grant player bonuses for leveling up (e.g., more health, speed, damage, etc.)
         maxHealth += 10f; // Example bonus
-        xpToNextLevel += 50f;
         health = maxHealth; // Restore health upon leveling up
     }
 

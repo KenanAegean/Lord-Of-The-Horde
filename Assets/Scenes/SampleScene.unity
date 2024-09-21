@@ -2657,10 +2657,6 @@ PrefabInstance:
       propertyPath: Camera
       value: 
       objectReference: {fileID: 519420031}
-    - target: {fileID: 6866188885996624781, guid: 7f227cb61eff10141b8e5fe266b2aa1c, type: 3}
-      propertyPath: bulletDamage
-      value: 34
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
