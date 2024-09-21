@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;  
+using TMPro;          
 
 public class NewPlayer : PhysicsObject
 {
@@ -15,7 +17,13 @@ public class NewPlayer : PhysicsObject
     [Header("XP and Level")]
     [SerializeField] private int playerLevel = 1;
     [SerializeField] private float currentXP = 0f;
-    [SerializeField] private float xpToNextLevel = 100f; 
+    [SerializeField] private float xpToNextLevel = 100f;
+
+    // UI references
+    [Header("UI Elements")]
+    [SerializeField] private Slider healthBar;
+    [SerializeField] private Slider xpBar;
+    [SerializeField] private TextMeshProUGUI levelText;
 
     //state
     bool isAlive = true;
@@ -38,6 +46,11 @@ public class NewPlayer : PhysicsObject
         {
             throw new System.InvalidOperationException("Camera not set");
         }
+
+        // Initialize UI elements
+        UpdateHealthUI();
+        UpdateXPUI();
+        UpdateLevelUI();
     }
 
     public override void Update()
@@ -52,26 +65,22 @@ public class NewPlayer : PhysicsObject
         _target.z = 0;
     }
 
-    public void TakeDamage(float someDamage)
+    public void TakeDamage(float damage)
     {
-        health -= someDamage;
-        if (health <= 0) Die();
+        health -= damage;
+        UpdateHealthUI();
+
+        if (health <= 0)
+        {
+            Die();
+        }
     }
 
-    public void Die()
-    {
-        isAlive = false;
-        Debug.Log("Player Died");
-        // You can add game over logic or reset the level here
-    }
-
-    // XP collection logic
     public void CollectXP(float xpAmount)
     {
         currentXP += xpAmount;
-        Debug.Log($"Collected {xpAmount} XP. Current XP: {currentXP}/{xpToNextLevel}");
+        UpdateXPUI();
 
-        // Check if player should level up
         if (currentXP >= xpToNextLevel)
         {
             LevelUp();
@@ -81,13 +90,49 @@ public class NewPlayer : PhysicsObject
     private void LevelUp()
     {
         playerLevel++;
-        currentXP -= xpToNextLevel; // Carry over the extra XP
-        xpToNextLevel *= 1.5f; // Increase XP threshold for next level (can be adjusted)
-        Debug.Log($"Level up! New level: {playerLevel}. XP needed for next level: {xpToNextLevel}");
+        currentXP -= xpToNextLevel; // Carry over extra XP
+        xpToNextLevel *= 1.5f;      // Increase XP threshold for the next level
+        maxHealth += 10f;           // Increase max health as a bonus
+        health += 15f;           // Increase health as a bonus
+        //health = maxHealth;         // Restore health upon leveling up
 
-        // Optionally grant player bonuses for leveling up (e.g., more health, speed, damage, etc.)
-        maxHealth += 10f; // Example bonus
-        health = maxHealth; // Restore health upon leveling up
+        UpdateXPUI();
+        UpdateLevelUI();
+        UpdateHealthUI();           // Health changes on level up
+    }
+
+    private void Die()
+    {
+        isAlive = false;
+        Debug.Log("Player died");
+        // Handle game over logic here
+    }
+
+    // UI update methods
+    private void UpdateHealthUI()
+    {
+        if (healthBar != null)
+        {
+            healthBar.maxValue = maxHealth;
+            healthBar.value = health;
+        }
+    }
+
+    private void UpdateXPUI()
+    {
+        if (xpBar != null)
+        {
+            xpBar.maxValue = xpToNextLevel;
+            xpBar.value = currentXP;
+        }
+    }
+
+    private void UpdateLevelUI()
+    {
+        if (levelText != null)
+        {
+            levelText.text = "LEVEL : " + playerLevel;
+        }
     }
 
     // Handle collectible collision

@@ -15,7 +15,10 @@ public class NewEnemy : PhysicsObject
     [Header("Other Attributes")]
     [SerializeField] private GameObject collectablePrefab;
     [SerializeField] private List<GameObject> damageStatusPrefabs;
+    [SerializeField] private float Damage = 10f;
 
+
+    private bool isDealingDamage = false; // Flag to track if we are already dealing damage
     private Transform _player;
     private bool _playerFound = false;
     private Vector3 _nextPatrolPoint;
@@ -204,6 +207,8 @@ public class NewEnemy : PhysicsObject
                 Debug.Log("Enemy Sprite Changed");
                 spriteRenderer.sprite = prefabSpriteRenderer.sprite;
                 spriteRenderer.color = prefabSpriteRenderer.color; //opsional
+
+                //spriteRenderer = prefabSpriteRenderer;
             }
             else
             {
@@ -216,7 +221,43 @@ public class NewEnemy : PhysicsObject
         }
     }
 
-    public void Die()
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.collider.CompareTag("PlayerBody"))
+        {
+            Debug.Log("Coll Player Found");
+            NewPlayer player = collision.collider.GetComponentInParent<NewPlayer>();
+            if (player != null && !isDealingDamage)
+            {
+                Debug.Log("Start dealing damage to the player");
+                StartCoroutine(DealDamageOverTime(player));
+            }
+        }
+    }
+
+    private IEnumerator DealDamageOverTime(NewPlayer player)
+    {
+        isDealingDamage = true; // Prevent multiple coroutines
+        while (true) // Continuous damage dealing
+        {
+            player.TakeDamage(Damage);
+            Debug.Log("Coll Player Damage Found");
+
+            yield return new WaitForSeconds(1f); // Damage every second
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.collider.CompareTag("PlayerBody"))
+        {
+            Debug.Log("Stop dealing damage");
+            StopAllCoroutines(); // Stop dealing damage when collision ends
+            isDealingDamage = false; // Reset flag so the coroutine can start again later
+        }
+    }
+
+        public void Die()
     {
         Vector3 enemyLastPosition = transform.position;
         Destroy(gameObject);
