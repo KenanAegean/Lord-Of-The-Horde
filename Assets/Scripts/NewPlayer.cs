@@ -19,11 +19,8 @@ public class NewPlayer : PhysicsObject
     [SerializeField] private float currentXP = 0f;
     [SerializeField] private float xpToNextLevel = 100f;
 
-    // UI references
-    [Header("UI Elements")]
-    [SerializeField] private Slider healthBar;
-    [SerializeField] private Slider xpBar;
-    [SerializeField] private TextMeshProUGUI levelText;
+    // Reference to UIManager
+    private UIManager uiManager;
 
     //state
     bool isAlive = true;
@@ -47,10 +44,19 @@ public class NewPlayer : PhysicsObject
             throw new System.InvalidOperationException("Camera not set");
         }
 
-        // Initialize UI elements
-        UpdateHealthUI();
-        UpdateXPUI();
-        UpdateLevelUI();
+        // Dynamically find the UIManager in the scene
+        uiManager = FindObjectOfType<UIManager>();
+
+        if (uiManager == null)
+        {
+            Debug.LogError("UIManager not found in the scene!");
+            return;
+        }
+
+        // Initialize UI elements using UIManager
+        uiManager.UpdateHealthUI(health, maxHealth);
+        uiManager.UpdateXPUI(currentXP, xpToNextLevel);
+        uiManager.UpdateLevelUI(playerLevel);
     }
 
     public override void Update()
@@ -68,7 +74,10 @@ public class NewPlayer : PhysicsObject
     public void TakeDamage(float damage)
     {
         health -= damage;
-        UpdateHealthUI();
+        uiManager.UpdateHealthUI(health, maxHealth); // Update health bar
+
+        // Show damage pop-up
+        uiManager.ShowDamagePopup(damage);
 
         if (health <= 0)
         {
@@ -79,7 +88,10 @@ public class NewPlayer : PhysicsObject
     public void CollectXP(float xpAmount)
     {
         currentXP += xpAmount;
-        UpdateXPUI();
+        uiManager.UpdateXPUI(currentXP, xpToNextLevel); // Update XP bar
+
+        // Show XP gain pop-up
+        uiManager.ShowXPGainPopup(xpAmount);
 
         if (currentXP >= xpToNextLevel)
         {
@@ -91,14 +103,14 @@ public class NewPlayer : PhysicsObject
     {
         playerLevel++;
         currentXP -= xpToNextLevel; // Carry over extra XP
-        xpToNextLevel *= 1.5f;      // Increase XP threshold for the next level
-        maxHealth += 10f;           // Increase max health as a bonus
-        health += 15f;           // Increase health as a bonus
-        //health = maxHealth;         // Restore health upon leveling up
+        xpToNextLevel *= 1.5f;      // Increase XP threshold for next level
+        maxHealth += 10f;           // Increase max health
+        health += 15f;              // Heal a bit upon leveling up
 
-        UpdateXPUI();
-        UpdateLevelUI();
-        UpdateHealthUI();           // Health changes on level up
+        // Update UI via UIManager
+        uiManager.UpdateHealthUI(health, maxHealth);
+        uiManager.UpdateXPUI(currentXP, xpToNextLevel);
+        uiManager.UpdateLevelUI(playerLevel);
     }
 
     private void Die()
@@ -106,33 +118,6 @@ public class NewPlayer : PhysicsObject
         isAlive = false;
         Debug.Log("Player died");
         // Handle game over logic here
-    }
-
-    // UI update methods
-    private void UpdateHealthUI()
-    {
-        if (healthBar != null)
-        {
-            healthBar.maxValue = maxHealth;
-            healthBar.value = health;
-        }
-    }
-
-    private void UpdateXPUI()
-    {
-        if (xpBar != null)
-        {
-            xpBar.maxValue = xpToNextLevel;
-            xpBar.value = currentXP;
-        }
-    }
-
-    private void UpdateLevelUI()
-    {
-        if (levelText != null)
-        {
-            levelText.text = "LEVEL : " + playerLevel;
-        }
     }
 
     // Handle collectible collision
