@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Weapon : MonoBehaviour
+public class Weapon : MonoBehaviour, IPausable
 {
     // General Weapon Settings
     [Header("General Settings")]
@@ -23,6 +23,7 @@ public class Weapon : MonoBehaviour
     [SerializeField] private float bulletDamage = 10f;  // Damage dealt by the bullet
 
     private bool canShoot = true;  // Flag to control shooting behavior
+    private bool isPaused = false;
 
     void Start()
     {
@@ -33,8 +34,20 @@ public class Weapon : MonoBehaviour
         }
     }
 
+    public void OnPause()
+    {
+        isPaused = true;
+    }
+
+    public void OnResume()
+    {
+        isPaused = false;
+    }
+
     void Update()
     {
+        if (isPaused) return;
+
         // Rotate the weapon around the player
         if (player != null)
         {
@@ -65,6 +78,12 @@ public class Weapon : MonoBehaviour
     {
         while (true)
         {
+            // Check if the game is paused
+            while (isPaused)
+            {
+                yield return null;  // While paused, do nothing and wait for the next frame
+            }
+
             if (canShoot)
             {
                 // Instantiate bullet and set its position and rotation
@@ -85,7 +104,20 @@ public class Weapon : MonoBehaviour
                 }
             }
 
-            yield return new WaitForSeconds(spawnInterval);  // Wait before spawning the next bullet
+            // Wait for the spawn interval, but pause the waiting if the game is paused
+            float elapsedTime = 0f;
+            while (elapsedTime < spawnInterval)
+            {
+                if (isPaused)
+                {
+                    yield return null;  // If paused, stop the timer
+                }
+                else
+                {
+                    elapsedTime += Time.deltaTime;  // If not paused, continue the timer
+                    yield return null;  // Wait for the next frame
+                }
+            }
         }
     }
 }

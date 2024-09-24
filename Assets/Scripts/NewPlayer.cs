@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;  
 using TMPro;          
 
-public class NewPlayer : PhysicsObject
+public class NewPlayer : PhysicsObject, IPausable
 {
     //configs
     [SerializeField] public Camera Camera;
@@ -24,6 +24,7 @@ public class NewPlayer : PhysicsObject
 
     //state
     bool isAlive = true;
+    private bool isPaused = false;
 
     //Singleton instantiation
     private static NewPlayer instance;
@@ -59,8 +60,20 @@ public class NewPlayer : PhysicsObject
         uiManager.UpdateLevelUI(playerLevel);
     }
 
+    public void OnPause()
+    {
+        isPaused = true;
+    }
+
+    public void OnResume()
+    {
+        isPaused = false;
+    }
+
     public override void Update()
     {
+        if (isPaused) return;
+
         FollowMouse(); // Update _target to mouse position
         base.Update(); // Call parent's MoveTowardsTarget method
     }

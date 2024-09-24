@@ -1,6 +1,7 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;  // Ensure Unity's SceneManagement namespace is imported
+using UnityEngine.SceneManagement;  // For scene loading
 using System.Collections;
+using System.Linq;
 
 public class GameSceneManager : MonoBehaviour
 {
@@ -8,7 +9,7 @@ public class GameSceneManager : MonoBehaviour
     public GameState currentState = GameState.Playing;  // Tracks the current game state
 
     public GameObject pauseMenuUI;  // Reference to the pause menu UI
-    private bool isPaused = false;  // Tracks whether the game is paused
+    private bool isPaused = false;
 
     private void Awake()
     {
@@ -22,6 +23,35 @@ public class GameSceneManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        // Register the sceneLoaded callback
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void Start()
+    {
+        // Try to find the PauseMenuPanel if it has not been assigned
+        if (pauseMenuUI == null)
+        {
+            //pauseMenuUI = GameObject.Find("PauseMenuPanel");
+            pauseMenuUI = GameObject.Find("PauseMenuCanvas").transform.Find("PauseMenuPanel").gameObject;
+
+            if (pauseMenuUI != null)
+            {
+                // Disable it immediately after finding it
+                pauseMenuUI.SetActive(false);
+            }
+            else
+            {
+                Debug.LogError("Pause Menu UI not found in the scene!");
+            }
+        }
+    }
+
+    private void OnDestroy()
+    {
+        // Unregister the sceneLoaded callback
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
     private void Update()
@@ -40,38 +70,97 @@ public class GameSceneManager : MonoBehaviour
         }
     }
 
-    // Pauses the game by disabling all active objects and showing the pause menu
+    // Pauses the game by pausing all IPausable objects and showing the pause menu
     public void PauseGame()
     {
         if (currentState == GameState.Playing)
         {
             currentState = GameState.Paused;
             isPaused = true;
-            pauseMenuUI.SetActive(true);
-            SetGameObjectsState(false);  // Disable all active game objects
+
+            
+            if (pauseMenuUI != null)
+            {
+                pauseMenuUI.SetActive(true);  // Show the pause menu UI
+            }
+            else
+            {
+                Debug.LogError("Pause Menu UI is missing!");
+            }
+
+            SetPausableObjectsState(false);  // Pause all IPausable objects
         }
     }
 
-    // Resumes the game by enabling all active objects and hiding the pause menu
+    // Resumes the game by resuming all IPausable objects and hiding the pause menu
     public void ResumeGame()
     {
         if (currentState == GameState.Paused)
         {
             currentState = GameState.Playing;
             isPaused = false;
-            pauseMenuUI.SetActive(false);
-            SetGameObjectsState(true);  // Enable all active game objects
+
+            if (pauseMenuUI != null)
+            {
+                pauseMenuUI.SetActive(false);  // Hide the pause menu UI
+            }
+
+            SetPausableObjectsState(true);  // Resume all IPausable objects
+        }
+    }
+
+    // Handle scene reloads to reinitialize necessary references
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        // Reassign the pause menu UI for the newly loaded scene if it's not already assigned
+        if (pauseMenuUI == null)
+        {
+            pauseMenuUI = GameObject.Find("PauseMenuCanvas").transform.Find("PauseMenuPanel").gameObject;
+
+            if (pauseMenuUI == null)
+            {
+                Debug.LogError("Pause Menu UI not found in the new scene!");
+            }
+            else
+            {
+                pauseMenuUI.SetActive(false);  // Hide it immediately after finding
+            }
+        }
+    }
+
+    // Sets the state of all IPausable objects in the scene
+    private void SetPausableObjectsState(bool isResuming)
+    {
+        IPausable[] pausableObjects = FindObjectsOfType<MonoBehaviour>().OfType<IPausable>().ToArray();
+
+        foreach (IPausable pausable in pausableObjects)
+        {
+            if (isResuming)
+            {
+                pausable.OnResume();
+            }
+            else
+            {
+                pausable.OnPause();
+            }
         }
     }
 
     // Restarts the current level
     public void RestartLevel()
     {
-        if (currentState == GameState.Paused || currentState == GameState.Playing)
+        // Reset the game state to playing and make sure the pause menu is hidden
+        currentState = GameState.Playing;
+        isPaused = false;
+
+        // Hide the pause menu UI
+        if (pauseMenuUI != null)
         {
-            currentState = GameState.Transitioning;
-            StartCoroutine(LoadScene(SceneManager.GetActiveScene().buildIndex));  // Reload current scene
+            pauseMenuUI.SetActive(false);
         }
+
+        // Reload the current scene
+        StartCoroutine(LoadScene(SceneManager.GetActiveScene().buildIndex));
     }
 
     // General method to transition to another scene

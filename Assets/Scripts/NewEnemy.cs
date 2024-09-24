@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NewEnemy : PhysicsObject
+public class NewEnemy : PhysicsObject, IPausable
 {
     [Header("Inventory")]
     [SerializeField] private float maxHealth = 100f;
@@ -22,6 +22,7 @@ public class NewEnemy : PhysicsObject
     private Transform _player;
     private bool _playerFound = false;
     private Vector3 _nextPatrolPoint;
+    private bool isPaused = false;
 
     private SpriteRenderer spriteRenderer; // Current enemy's SpriteRenderer component
 
@@ -44,8 +45,20 @@ public class NewEnemy : PhysicsObject
         //ChangeDamagedSprite(CharacterState.Normal);
     }
 
+    public void OnPause()
+    {
+        isPaused = true;
+    }
+
+    public void OnResume()
+    {
+        isPaused = false;
+    }
+
     public override void Update()
     {
+        if (isPaused) return;
+
         if (!_playerFound)
         {
             FindPlayer(); 

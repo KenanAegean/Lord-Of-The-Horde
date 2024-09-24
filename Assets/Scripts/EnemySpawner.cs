@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemySpawner : MonoBehaviour
+public class EnemySpawner : MonoBehaviour, IPausable
 {
     [Header("Spawner Settings")]
     [SerializeField] private List<GameObject> enemyPrefabs;  // List of enemy prefabs
@@ -14,8 +14,9 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private Transform bottomRightBoundary;  // Reference to the Bottom Right boundary
 
     private float totalWeight;
+    private bool isPaused = false;
 
-    void Start()
+    private void Start()
     {
         if (enemyPrefabs.Count != spawnWeights.Count)
         {
@@ -32,10 +33,26 @@ public class EnemySpawner : MonoBehaviour
         StartCoroutine(SpawnEnemy());
     }
 
-    IEnumerator SpawnEnemy()
+    public void OnPause()
+    {
+        isPaused = true;
+    }
+
+    public void OnResume()
+    {
+        isPaused = false;
+    }
+
+    private IEnumerator SpawnEnemy()
     {
         while (true)
         {
+            // Check if the game is paused
+            while (isPaused)
+            {
+                yield return null;  // While paused, do nothing and wait for the next frame
+            }
+
             // Generate random position within the defined boundary area
             Vector2 spawnPosition = new Vector2(
                 Random.Range(topLeftBoundary.position.x, bottomRightBoundary.position.x),
@@ -48,8 +65,20 @@ public class EnemySpawner : MonoBehaviour
             // Instantiate the selected enemy prefab at the random position
             Instantiate(selectedEnemyPrefab, spawnPosition, Quaternion.identity);
 
-            // Wait for the defined spawn interval before spawning the next enemy
-            yield return new WaitForSeconds(spawnInterval);
+            // Wait for the defined spawn interval before spawning the next enemy, but still respect the pause state
+            float elapsedTime = 0f;
+            while (elapsedTime < spawnInterval)
+            {
+                // If paused, stop the countdown
+                while (isPaused)
+                {
+                    yield return null;
+                }
+
+                // Continue counting the spawn interval
+                elapsedTime += Time.deltaTime;
+                yield return null;
+            }
         }
     }
 
