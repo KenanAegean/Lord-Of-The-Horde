@@ -1,5 +1,5 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;  // For scene loading
+using UnityEngine.SceneManagement;
 using System.Collections;
 using System.Linq;
 
@@ -22,29 +22,22 @@ public class GameSceneManager : MonoBehaviour
         else
         {
             Destroy(gameObject);
+            return;
         }
 
-        // Register the sceneLoaded callback
-        SceneManager.sceneLoaded += OnSceneLoaded;
+        // Try to find the PauseMenuCanvas and make it persistent across scenes
+        if (pauseMenuUI == null)
+        {
+            FindPauseMenuUI();
+        }
     }
 
     private void Start()
     {
-        // Try to find the PauseMenuPanel if it has not been assigned
-        if (pauseMenuUI == null)
+        if (pauseMenuUI != null)
         {
-            //pauseMenuUI = GameObject.Find("PauseMenuPanel");
-            pauseMenuUI = GameObject.Find("PauseMenuCanvas").transform.Find("PauseMenuPanel").gameObject;
-
-            if (pauseMenuUI != null)
-            {
-                // Disable it immediately after finding it
-                pauseMenuUI.SetActive(false);
-            }
-            else
-            {
-                Debug.LogError("Pause Menu UI not found in the scene!");
-            }
+            // Make the pause menu canvas persistent across scenes
+            DontDestroyOnLoad(pauseMenuUI.transform.root.gameObject);  // Ensures the entire Canvas isn't destroyed
         }
     }
 
@@ -70,6 +63,25 @@ public class GameSceneManager : MonoBehaviour
         }
     }
 
+    // Finds the Pause Menu UI in the scene
+    private void FindPauseMenuUI()
+    {
+        pauseMenuUI = GameObject.Find("PauseMenuCanvas")?.transform.Find("PauseMenuPanel")?.gameObject;
+
+        if (pauseMenuUI == null)
+        {
+            Debug.LogError("Pause Menu UI not found in the scene!");
+        }
+        else
+        {
+            // Hide the pause menu at the start of the game
+            pauseMenuUI.SetActive(false);
+
+            // Make sure the Pause Menu Canvas persists across scenes
+            DontDestroyOnLoad(pauseMenuUI.transform.root.gameObject);  // Ensure the canvas doesn't get destroyed
+        }
+    }
+
     // Pauses the game by pausing all IPausable objects and showing the pause menu
     public void PauseGame()
     {
@@ -78,7 +90,6 @@ public class GameSceneManager : MonoBehaviour
             currentState = GameState.Paused;
             isPaused = true;
 
-            
             if (pauseMenuUI != null)
             {
                 pauseMenuUI.SetActive(true);  // Show the pause menu UI
@@ -112,19 +123,9 @@ public class GameSceneManager : MonoBehaviour
     // Handle scene reloads to reinitialize necessary references
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        // Reassign the pause menu UI for the newly loaded scene if it's not already assigned
         if (pauseMenuUI == null)
         {
-            pauseMenuUI = GameObject.Find("PauseMenuCanvas").transform.Find("PauseMenuPanel").gameObject;
-
-            if (pauseMenuUI == null)
-            {
-                Debug.LogError("Pause Menu UI not found in the new scene!");
-            }
-            else
-            {
-                pauseMenuUI.SetActive(false);  // Hide it immediately after finding
-            }
+            FindPauseMenuUI();  // Refind the UI if needed after a new scene load
         }
     }
 
@@ -149,17 +150,14 @@ public class GameSceneManager : MonoBehaviour
     // Restarts the current level
     public void RestartLevel()
     {
-        // Reset the game state to playing and make sure the pause menu is hidden
         currentState = GameState.Playing;
         isPaused = false;
 
-        // Hide the pause menu UI
         if (pauseMenuUI != null)
         {
-            pauseMenuUI.SetActive(false);
+            pauseMenuUI.SetActive(false);  // Hide the pause menu UI before restarting
         }
 
-        // Reload the current scene
         StartCoroutine(LoadScene(SceneManager.GetActiveScene().buildIndex));
     }
 
@@ -173,13 +171,19 @@ public class GameSceneManager : MonoBehaviour
     // Coroutine to load scenes asynchronously
     private IEnumerator LoadScene(int sceneIndex)
     {
-        yield return SceneManager.LoadSceneAsync(sceneIndex);  // Use Unity's SceneManager for scene loading
+        yield return SceneManager.LoadSceneAsync(sceneIndex);  // Load the scene asynchronously
         currentState = GameState.Playing;  // Set the game state back to playing after the scene loads
     }
 
     // Returns to the main menu
     public void ReturnToMainMenu()
     {
+        // Remove the PauseMenuCanvas from DontDestroyOnLoad
+        if (pauseMenuUI != null)
+        {
+            Destroy(pauseMenuUI.transform.root.gameObject);  // Destroy the Pause Menu Canvas when returning to the main menu
+        }
+
         TransitionToScene(0);  // Assuming the main menu is scene 0
     }
 
@@ -188,18 +192,5 @@ public class GameSceneManager : MonoBehaviour
     {
         Debug.Log("Exiting game...");
         Application.Quit();
-    }
-
-    // Sets the active state of all relevant game objects
-    private void SetGameObjectsState(bool state)
-    {
-        GameObject[] allObjects = FindObjectsOfType<GameObject>();
-        foreach (GameObject obj in allObjects)
-        {
-            if (obj.CompareTag("Player") || obj.CompareTag("Enemy"))  // Assuming player/enemy tags for controllable objects
-            {
-                obj.SetActive(state);  // Enable or disable based on the game state
-            }
-        }
     }
 }
