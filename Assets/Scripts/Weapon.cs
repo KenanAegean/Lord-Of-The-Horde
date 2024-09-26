@@ -19,8 +19,10 @@ public class Weapon : MonoBehaviour, IPausable
     [Header("Gun Settings")]
     [SerializeField] private GameObject bulletPrefab;   // The bullet prefab for shooting
     [SerializeField] private float bulletSpeed = 100f;  // Speed of the bullet
-    [SerializeField] private float spawnInterval = 1.0f; // Time between bullet shots
+    [SerializeField] public float spawnInterval = 1.0f; // Time between bullet shots
     [SerializeField] private float bulletDamage = 10f;  // Damage dealt by the bullet
+
+    //[SerializeField] private LevelManager levelManager;
 
     private bool canShoot = true;  // Flag to control shooting behavior
     private bool isPaused = false;

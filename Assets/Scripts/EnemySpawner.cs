@@ -7,7 +7,7 @@ public class EnemySpawner : MonoBehaviour, IPausable
     [Header("Spawner Settings")]
     [SerializeField] private List<GameObject> enemyPrefabs;  // List of enemy prefabs
     [SerializeField] private List<float> spawnWeights;       // List of weights for each enemy type (rarity)
-    [SerializeField] private float spawnInterval = 1.0f;     // Spawn every second
+    [SerializeField] public float spawnInterval = 1.0f;     // Spawn every second
 
     [Header("Boundaries")]
     [SerializeField] private Transform topLeftBoundary;      // Reference to the Top Left boundary

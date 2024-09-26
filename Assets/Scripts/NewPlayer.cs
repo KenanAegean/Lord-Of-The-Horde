@@ -15,13 +15,14 @@ public class NewPlayer : PhysicsObject, IPausable
     [SerializeField] public float health = 100f;
 
     [Header("XP and Level")]
-    [SerializeField] public int playerLevel = 1;
+    [SerializeField] public int playerLevel = 0;
     [SerializeField] public float currentXP = 0f;
     [SerializeField] public float xpToNextLevel = 100f;
 
     // Reference to UIManager and LevelManager
     private UIManager uiManager;
-    private LevelManager levelManager;
+    [SerializeField] private LevelManager levelManager;
+
 
     //state
     bool isAlive = true;
@@ -117,28 +118,8 @@ public class NewPlayer : PhysicsObject, IPausable
         
     private void LevelUp()
     {
-        //levelManager.UpdatePlayerStats();
-        UpdatePlayerStats();
+        levelManager.UpdatePlayerStats();
         UpdateUI();
-    }
-
-    private void UpdatePlayerStats()
-    {
-        playerLevel++;
-        currentXP -= xpToNextLevel; // Carry over extra XP
-        xpToNextLevel *= 1.5f;      // Increase XP threshold for next level
-        maxHealth += 10f;           // Increase max health
-        health += 15f;              // Heal a bit upon leveling up
-        ObjectSpeed *= 1.2f;
-
-        if (playerLevel == 0)
-        {
-
-        }
-        else if (playerLevel == 1)
-        {
-
-        }
     }
 
     private void UpdateUI()
