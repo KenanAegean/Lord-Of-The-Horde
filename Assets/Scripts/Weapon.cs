@@ -7,7 +7,7 @@ public class Weapon : MonoBehaviour, IPausable
     // General Weapon Settings
     [Header("General Settings")]
     [SerializeField] private Transform player;          // The player the weapon orbits around
-    [SerializeField] private float rotationSpeed = 120f; // Speed of rotation around the player
+    [SerializeField] public float rotationSpeed = 120f; // Speed of rotation around the player
     [SerializeField] private bool isTwoHandWeapon = true; // True if it's a two-hand weapon
     [SerializeField] private bool isGunWeapon = false;  // True if the weapon can shoot bullets
 
@@ -33,6 +33,7 @@ public class Weapon : MonoBehaviour, IPausable
             StartCoroutine(SpawnBullet());
         }
     }
+
 
     public void OnPause()
     {

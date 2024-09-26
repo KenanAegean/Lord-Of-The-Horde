@@ -15,12 +15,13 @@ public class NewPlayer : PhysicsObject, IPausable
     [SerializeField] public float health = 100f;
 
     [Header("XP and Level")]
-    [SerializeField] private int playerLevel = 1;
-    [SerializeField] private float currentXP = 0f;
-    [SerializeField] private float xpToNextLevel = 100f;
+    [SerializeField] public int playerLevel = 1;
+    [SerializeField] public float currentXP = 0f;
+    [SerializeField] public float xpToNextLevel = 100f;
 
-    // Reference to UIManager
+    // Reference to UIManager and LevelManager
     private UIManager uiManager;
+    private LevelManager levelManager;
 
     //state
     bool isAlive = true;
@@ -58,6 +59,8 @@ public class NewPlayer : PhysicsObject, IPausable
         uiManager.UpdateHealthUI(health, maxHealth);
         uiManager.UpdateXPUI(currentXP, xpToNextLevel);
         uiManager.UpdateLevelUI(playerLevel);
+
+        //weaponStats = FindObjectOfType<WeaponHand>();
     }
 
     public void OnPause()
@@ -111,15 +114,35 @@ public class NewPlayer : PhysicsObject, IPausable
             LevelUp();
         }
     }
-
+        
     private void LevelUp()
+    {
+        //levelManager.UpdatePlayerStats();
+        UpdatePlayerStats();
+        UpdateUI();
+    }
+
+    private void UpdatePlayerStats()
     {
         playerLevel++;
         currentXP -= xpToNextLevel; // Carry over extra XP
         xpToNextLevel *= 1.5f;      // Increase XP threshold for next level
         maxHealth += 10f;           // Increase max health
         health += 15f;              // Heal a bit upon leveling up
+        ObjectSpeed *= 1.2f;
 
+        if (playerLevel == 0)
+        {
+
+        }
+        else if (playerLevel == 1)
+        {
+
+        }
+    }
+
+    private void UpdateUI()
+    {
         // Update UI via UIManager
         uiManager.UpdateHealthUI(health, maxHealth);
         uiManager.UpdateXPUI(currentXP, xpToNextLevel);
