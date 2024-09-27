@@ -35,14 +35,14 @@ and player.
 DEADLINE : SEPTEMBER 13
 ```
 
-<br><b>Screenshots For First Assigment:</b>
+<br><b>Screenshots - First Assigment:</b>
 
 Screenshots           |  Screenshots 
 :-------------------------:|:-------------------------:
 ![](Assets/Other/Assigment1/Screenshots/1.png)  |  ![](Assets/Other/Assigment1/Screenshots/3.png)
 ![](Assets/Other/Assigment1/Screenshots/2.png)  |  ![](Assets/Other/Assigment1/Screenshots/4.png)
 
-<br><b>Video For First Assigment:</b>  
+<br><b>Video - First Assigment:</b>  
 <video src="https://github.com/user-attachments/assets/1362650d-4468-4e34-9784-19760b629662" width=180/></video>
 
 
@@ -84,7 +84,7 @@ enemy type.
 
 DEADLINE : SEPTEMBER 27
 ```
-<br><b>Screenshots For Second Assigment:</b>
+<br><b>Screenshots - Second Assigment:</b>
 
 Screenshots           |  Screenshots 
 :-------------------------:|:-------------------------:
@@ -92,7 +92,7 @@ Screenshots           |  Screenshots
 ![](Assets/Other/Assigment2/Screenshots/2.png)  |  ![](Assets/Other/Assigment2/Screenshots/5.png)
 ![](Assets/Other/Assigment2/Screenshots/3.png)  |  ![](Assets/Other/Assigment2/Screenshots/6.png)
 
-<br><b>Video For Second Assigment:</b>  
+<br><b>Video - Second Assigment:</b>  
 <video src="https://github.com/user-attachments/assets/f09a2e4a-8c23-4129-a670-da74cd73c8a2" width=180/></video>
 
 
