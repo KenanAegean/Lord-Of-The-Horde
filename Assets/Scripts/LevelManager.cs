@@ -24,7 +24,7 @@ public class LevelManager : MonoBehaviour
 
         weapon.rotationSpeed = 100.0f;
 
-        enemySpawner.spawnInterval = 2.0f;
+        enemySpawner.spawnInterval = 1.2f;
 
         player.playerLevel = 0;
         player.xpToNextLevel = 50.0f;
