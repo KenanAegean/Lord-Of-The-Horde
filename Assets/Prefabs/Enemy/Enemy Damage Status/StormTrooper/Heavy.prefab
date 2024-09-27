@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1909141102533873565}
   - component: {fileID: 7861881709246825383}
   m_Layer: 0
-  m_Name: Normal
+  m_Name: Heavy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29,8 +29,8 @@ Transform:
   m_GameObject: {fileID: 2424548919708570033}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.57, y: 3.4, z: 0}
-  m_LocalScale: {x: 0.058289565, y: 0.058289565, z: 0.058289565}
+  m_LocalPosition: {x: 6.9766, y: 2.9926, z: 0}
+  m_LocalScale: {x: 0.5756648, y: 0.5756648, z: 0.5756648}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8384424088851206584}
@@ -77,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 35b4be90efdc5964aa847221e1e3eb96, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f21d4aa83568a7c4cb39f6d3690e0bcd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -102,9 +102,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _target: {x: 0, y: 0, z: 0}
   ObjectSpeed: 2
-  ObjectAccelerates: 0
-  maxHealth: 100
-  health: 100
+  ObjectAccelerates: 1
+  maxHealth: 1000
+  health: 1000
   followDistance: 10
   searchRadius: 10
   patrolRadius: 5
@@ -144,18 +144,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.00000047683716, y: -0.048895836}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 11.13, y: 11.15}
+    oldSize: {x: 4.22, y: 4.09}
     newSize: {x: 11.13, y: 11.15}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 11.13, y: 11.15}
+  m_Size: {x: 4.4801397, y: 4.5001383}
   m_EdgeRadius: 0
 --- !u!50 &7861881709246825383
 Rigidbody2D:
@@ -210,8 +210,8 @@ Transform:
   m_GameObject: {fileID: 5569412946503081119}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.09, y: -5.69, z: 0.9617228}
-  m_LocalScale: {x: 81.74156, y: 23.440044, z: 2.4043753}
+  m_LocalPosition: {x: -0.08, y: -1.75, z: 0.9617228}
+  m_LocalScale: {x: 29.97463, y: 8.595464, z: 0.8816844}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4562623579406271159}
