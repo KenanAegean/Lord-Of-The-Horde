@@ -2,12 +2,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;  
-using TMPro;          
+using UnityEngine.UI;
+using TMPro;
 
 public class NewPlayer : PhysicsObject, IPausable
 {
-    //configs
+    // Configurations
     [SerializeField] public Camera Camera;
 
     [Header("Inventory")]
@@ -19,16 +19,13 @@ public class NewPlayer : PhysicsObject, IPausable
     [SerializeField] public float currentXP = 0f;
     [SerializeField] public float xpToNextLevel = 100f;
 
-    // Reference to UIManager and LevelManager
     private UIManager uiManager;
     [SerializeField] private LevelManager levelManager;
 
-
-    //state
     bool isAlive = true;
     private bool isPaused = false;
 
-    //Singleton instantiation
+    // Singleton instantiation
     private static NewPlayer instance;
     public static NewPlayer Instance
     {
@@ -41,45 +38,33 @@ public class NewPlayer : PhysicsObject, IPausable
 
     private void Start()
     {
-        if (!isAlive) { return; }
-        if (Camera == null)
-        {
-            throw new System.InvalidOperationException("Camera not set");
-        }
+        if (!isAlive) return;
 
-        // Dynamically find the UIManager in the scene
+        if (Camera == null) throw new InvalidOperationException("Camera not set");
+
         uiManager = FindObjectOfType<UIManager>();
-
         if (uiManager == null)
         {
             Debug.LogError("UIManager not found in the scene!");
             return;
         }
 
-        // Initialize UI elements using UIManager
+        // Initialize UI
         uiManager.UpdateHealthUI(health, maxHealth);
         uiManager.UpdateXPUI(currentXP, xpToNextLevel);
         uiManager.UpdateLevelUI(playerLevel);
-
-        //weaponStats = FindObjectOfType<WeaponHand>();
     }
 
-    public void OnPause()
-    {
-        isPaused = true;
-    }
+    public void OnPause() => isPaused = true;
 
-    public void OnResume()
-    {
-        isPaused = false;
-    }
+    public void OnResume() => isPaused = false;
 
     public override void Update()
     {
         if (isPaused) return;
 
-        FollowMouse(); // Update _target to mouse position
-        base.Update(); // Call parent's MoveTowardsTarget method
+        FollowMouse();
+        base.Update();
     }
 
     private void FollowMouse()
@@ -91,31 +76,21 @@ public class NewPlayer : PhysicsObject, IPausable
     public void TakeDamage(float damage)
     {
         health -= damage;
-        uiManager.UpdateHealthUI(health, maxHealth); // Update health bar
-
-        // Show damage pop-up
+        uiManager.UpdateHealthUI(health, maxHealth);
         uiManager.ShowDamagePopup(damage);
 
-        if (health <= 0)
-        {
-            Die();
-        }
+        if (health <= 0) Die();
     }
 
     public void CollectXP(float xpAmount)
     {
         currentXP += xpAmount;
-        uiManager.UpdateXPUI(currentXP, xpToNextLevel); // Update XP bar
-
-        // Show XP gain pop-up
+        uiManager.UpdateXPUI(currentXP, xpToNextLevel);
         uiManager.ShowXPGainPopup(xpAmount);
 
-        if (currentXP >= xpToNextLevel)
-        {
-            LevelUp();
-        }
+        if (currentXP >= xpToNextLevel) LevelUp();
     }
-        
+
     private void LevelUp()
     {
         levelManager.UpdatePlayerStats();
@@ -124,7 +99,6 @@ public class NewPlayer : PhysicsObject, IPausable
 
     private void UpdateUI()
     {
-        // Update UI via UIManager
         uiManager.UpdateHealthUI(health, maxHealth);
         uiManager.UpdateXPUI(currentXP, xpToNextLevel);
         uiManager.UpdateLevelUI(playerLevel);
@@ -137,31 +111,25 @@ public class NewPlayer : PhysicsObject, IPausable
         // Handle game over logic here
     }
 
-    // Handle collectible collision
     private void OnTriggerEnter2D(Collider2D other)
     {
-        // Check if the object we collided with is a Collectible
         if (other.CompareTag("Collectible"))
         {
-            // Find the child object tagged "PlayerBody"
             GameObject playerBody = GameObject.FindGameObjectWithTag("PlayerBody");
             if (playerBody != null)
             {
                 Collider2D playerBodyCollider = playerBody.GetComponent<Collider2D>();
 
-                // Ensure the collision is with PlayerBody
                 if (playerBodyCollider != null && other.IsTouching(playerBodyCollider))
                 {
-                    // Assume the collectible has a script that defines the XP amount
                     Collectible collectible = other.GetComponent<Collectible>();
                     if (collectible != null)
                     {
-                        CollectXP(collectible.GetXPAmount()); // Collect the XP
-                        Destroy(other.gameObject); // Destroy the collectible after it's picked up
+                        CollectXP(collectible.GetXPAmount());
+                        Destroy(other.gameObject);
                     }
                 }
             }
         }
     }
-
 }

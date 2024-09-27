@@ -5,32 +5,29 @@ using System.Linq;
 
 public class GameSceneManager : MonoBehaviour
 {
-    public static GameSceneManager Instance;  // Singleton instance
+    public static GameSceneManager Instance;
 
     [Header("Main Menu Panels")]
-    public GameObject mainMenuCanvas;  // Reference to the MainMenuCanvas
-    public GameObject settingsPanel;  // Reference to the SettingsPanel
-    public GameObject creditsPanel;   // Reference to the CreditsPanel
+    public GameObject mainMenuCanvas;
+    public GameObject settingsPanel;
+    public GameObject creditsPanel;
 
     [Header("Pause Menu")]
-    public GameObject pauseMenuUI;  // Reference to the pause menu UI
+    public GameObject pauseMenuUI;
 
     private bool isPaused = false;
-    public GameState currentState = GameState.Playing;  // Tracks the current game state
-    private string currentSceneName;
+    public GameState currentState = GameState.Playing;
 
     private void Awake()
     {
-
-        // Ensure there is only one instance of this class
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);  // Persist across scenes
+            DontDestroyOnLoad(gameObject);
 
             if (mainMenuCanvas != null)
             {
-                DontDestroyOnLoad(mainMenuCanvas);  // Keep the MainMenuCanvas persistent
+                DontDestroyOnLoad(mainMenuCanvas);
             }
         }
         else
@@ -39,22 +36,12 @@ public class GameSceneManager : MonoBehaviour
             return;
         }
 
-        // If Pause Menu is not set, attempt to find it
-        if (pauseMenuUI == null)
-        {
-            FindPauseMenuUI();
-        }
-
-        // Subscribe to scene load event
+        if (pauseMenuUI == null) FindPauseMenuUI();
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     private void Start()
     {
-        // Get the current active scene at the beginning
-        //string currentSceneName = SceneManager.GetActiveScene().name;
-
-        // Make the pause menu persistent across scenes if it's set
         if (pauseMenuUI != null)
         {
             DontDestroyOnLoad(pauseMenuUI.transform.root.gameObject);
@@ -63,88 +50,71 @@ public class GameSceneManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        // Activate or deactivate MainMenuCanvas based on the scene name
         if (mainMenuCanvas != null)
         {
             mainMenuCanvas.SetActive(scene.name == "MainMenu");
         }
 
-        // Re-find the pause menu UI if needed
-        if (pauseMenuUI == null)
-        {
-            FindPauseMenuUI();
-        }
+        if (pauseMenuUI == null) FindPauseMenuUI();
     }
 
     private void Update()
     {
-        if (SceneManager.GetActiveScene().name != "MainMenu" )
+        if (SceneManager.GetActiveScene().name != "MainMenu")
         {
-            // Check for pause button (Escape key) to pause or resume the game
-            if (Input.GetKeyDown(KeyCode.Escape) && currentState == GameState.Playing)
+            if (Input.GetKeyDown(KeyCode.Escape))
             {
-                PauseGame();
-            }
-            else if (Input.GetKeyDown(KeyCode.Escape) && currentState == GameState.Paused)
-            {
-                ResumeGame();
+                if (currentState == GameState.Playing) PauseGame();
+                else if (currentState == GameState.Paused) ResumeGame();
             }
         }
-        
     }
 
     // ---------------------- Main Menu Functions ---------------------- //
 
-    // This method is called when the "Start Game" button is clicked
     public void StartGame()
     {
-        SceneManager.LoadScene(1);  // Load game scene (assumed to be scene 1)
+        SceneManager.LoadScene(1);
     }
 
-    // This method is called when the "Settings" button is clicked
     public void OpenSettings()
     {
-        settingsPanel.SetActive(true);  // Show settings panel
+        settingsPanel.SetActive(true);
     }
 
-    // This method is called when the "Credits" button is clicked
     public void OpenCredits()
     {
-        creditsPanel.SetActive(true);  // Show credits panel
+        creditsPanel.SetActive(true);
     }
 
-    // Close the Settings or Credits panel
     public void ClosePanel(GameObject panel)
     {
-        panel.SetActive(false);  // Hide the panel (either settings or credits)
+        panel.SetActive(false);
     }
 
-    // Exits the game
     public void ExitGame()
     {
         Debug.Log("Exiting game...");
-        Application.Quit();  // This works only in a built application, not in the editor
+        Application.Quit();
     }
 
     // ---------------------- Pause Menu Functions ---------------------- //
 
-    // Finds the Pause Menu UI in the scene
     private void FindPauseMenuUI()
     {
         pauseMenuUI = GameObject.Find("PauseMenuCanvas")?.transform.Find("PauseMenuPanel")?.gameObject;
 
         if (pauseMenuUI == null)
         {
-            Debug.LogError("Pause Menu UI not found in the scene!"); //bura
+            Debug.LogError("Pause Menu UI not found in the scene!");
         }
         else
         {
-            pauseMenuUI.SetActive(false);  // Hide the pause menu at the start
-            DontDestroyOnLoad(pauseMenuUI.transform.root.gameObject);  // Make it persistent across scenes
+            pauseMenuUI.SetActive(false);
+            DontDestroyOnLoad(pauseMenuUI.transform.root.gameObject);
         }
     }
 
-    // Pauses the game by pausing all IPausable objects and showing the pause menu
     public void PauseGame()
     {
         currentState = GameState.Paused;
@@ -152,13 +122,12 @@ public class GameSceneManager : MonoBehaviour
 
         if (pauseMenuUI != null)
         {
-            pauseMenuUI.SetActive(true);  // Show the pause menu UI
+            pauseMenuUI.SetActive(true);
         }
 
-        SetPausableObjectsState(false);  // Pause all IPausable objects
+        SetPausableObjectsState(false);
     }
 
-    // Resumes the game by resuming all IPausable objects and hiding the pause menu
     public void ResumeGame()
     {
         currentState = GameState.Playing;
@@ -166,15 +135,14 @@ public class GameSceneManager : MonoBehaviour
 
         if (pauseMenuUI != null)
         {
-            pauseMenuUI.SetActive(false);  // Hide the pause menu UI
+            pauseMenuUI.SetActive(false);
         }
 
-        SetPausableObjectsState(true);  // Resume all IPausable objects
+        SetPausableObjectsState(true);
     }
 
     // ---------------------- Game Scene Transition Functions ---------------------- //
 
-    // Restarts the current level
     public void RestartLevel()
     {
         currentState = GameState.Playing;
@@ -182,54 +150,43 @@ public class GameSceneManager : MonoBehaviour
 
         if (pauseMenuUI != null)
         {
-            pauseMenuUI.SetActive(false);  // Hide the pause menu UI before restarting
+            pauseMenuUI.SetActive(false);
         }
 
         StartCoroutine(LoadScene(SceneManager.GetActiveScene().buildIndex));
     }
 
-    // General method to transition to another scene
     public void TransitionToScene(int sceneIndex)
     {
         currentState = GameState.Transitioning;
         StartCoroutine(LoadScene(sceneIndex));
     }
 
-    // Coroutine to load scenes asynchronously
     private IEnumerator LoadScene(int sceneIndex)
     {
-        yield return SceneManager.LoadSceneAsync(sceneIndex);  // Load the scene asynchronously
-        currentState = GameState.Playing;  // Set the game state back to playing after the scene loads
+        yield return SceneManager.LoadSceneAsync(sceneIndex);
+        currentState = GameState.Playing;
     }
 
-    // Returns to the main menu
     public void ReturnToMainMenu()
     {
-        // Completely destroy the PauseMenuCanvas when returning to the main menu
         if (pauseMenuUI != null)
         {
-            pauseMenuUI.SetActive(false);  // Hide the pause menu UI before restarting
-            //Destroy(pauseMenuUI.transform.root.gameObject);  // Destroy Pause Menu when returning to the main menu
+            pauseMenuUI.SetActive(false);
+            //Destroy(pauseMenuUI.transform.root.gameObject);
         }
 
-        TransitionToScene(0);  // Assuming the main menu is scene 0
+        TransitionToScene(0);
     }
 
-    // Sets the state of all IPausable objects in the scene
     private void SetPausableObjectsState(bool isResuming)
     {
         IPausable[] pausableObjects = FindObjectsOfType<MonoBehaviour>().OfType<IPausable>().ToArray();
 
         foreach (IPausable pausable in pausableObjects)
         {
-            if (isResuming)
-            {
-                pausable.OnResume();
-            }
-            else
-            {
-                pausable.OnPause();
-            }
+            if (isResuming) pausable.OnResume();
+            else pausable.OnPause();
         }
     }
 }
