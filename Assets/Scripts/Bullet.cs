@@ -1,12 +1,53 @@
 using UnityEngine;
 
-public class Bullet : MonoBehaviour
+public class Bullet : MonoBehaviour, IPausable
 {
-    private float damage = 10f;  // Default damage value
+    private float damage = 10f;
+    private bool isPaused = false;
+    private Rigidbody2D rb;
+    private Vector2 storedVelocity;
+
+    private void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
+        if (rb == null)
+        {
+            Debug.LogError("No Rigidbody2D found on Bullet!");
+        }
+    }
+
+    public void OnPause()
+    {
+        isPaused = true;
+
+        if (rb != null)
+        {
+            storedVelocity = rb.velocity;
+            rb.velocity = Vector2.zero;
+            rb.isKinematic = true;
+        }
+    }
+
+    public void OnResume()
+    {
+        isPaused = false;
+
+        if (rb != null)
+        {
+            rb.isKinematic = false;
+            rb.velocity = storedVelocity;
+        }
+    }
+
+    private void Update()
+    {
+        if (isPaused) return;
+        // Additional update logic (if any) goes here
+    }
 
     public void SetDamage(float newDamage)
     {
-        damage = newDamage;  // Set the bullet damage
+        damage = newDamage;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -16,9 +57,8 @@ public class Bullet : MonoBehaviour
             NewEnemy enemy = collision.GetComponent<NewEnemy>();
             if (enemy != null)
             {
-                // Deal damage to the enemy on bullet impact
                 enemy.TakeDamage(damage);
-                Destroy(gameObject);  // Destroy the bullet after hitting an enemy
+                Destroy(gameObject);
             }
         }
     }

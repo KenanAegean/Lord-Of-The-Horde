@@ -109,6 +109,7 @@ MonoBehaviour:
   searchRadius: 10
   patrolRadius: 5
   patrolInterval: 1
+  collectablePrefab: {fileID: 4059571283236773848, guid: a202949c2afebb544a8c16d5a59c9d3e, type: 3}
 --- !u!61 &1909141102533873565
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -2,49 +2,43 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Weapon : MonoBehaviour
+public class Weapon : MonoBehaviour, IPausable
 {
-    // General Weapon Settings
     [Header("General Settings")]
-    [SerializeField] private Transform player;          // The player the weapon orbits around
-    [SerializeField] private float rotationSpeed = 120f; // Speed of rotation around the player
-    [SerializeField] private bool isTwoHandWeapon = true; // True if it's a two-hand weapon
-    [SerializeField] private bool isGunWeapon = false;  // True if the weapon can shoot bullets
+    [SerializeField] private Transform player;
+    [SerializeField] public float rotationSpeed = 120f;
+    [SerializeField] private bool isTwoHandWeapon = true;
+    [SerializeField] private bool isGunWeapon = false;
 
-    // Melee (Punch) Settings
     [Header("Melee Settings")]
-    [SerializeField] private float meleeDamage = 10f;   // Damage dealt when colliding with an enemy
+    [SerializeField] private float meleeDamage = 10f;
 
-    // Gun (Shooting) Settings
     [Header("Gun Settings")]
-    [SerializeField] private GameObject bulletPrefab;   // The bullet prefab for shooting
-    [SerializeField] private float bulletSpeed = 100f;  // Speed of the bullet
-    [SerializeField] private float spawnInterval = 1.0f; // Time between bullet shots
-    [SerializeField] private float bulletDamage = 10f;  // Damage dealt by the bullet
+    [SerializeField] private GameObject bulletPrefab;
+    [SerializeField] private float bulletSpeed = 100f;
+    [SerializeField] public float spawnInterval = 1.0f;
+    [SerializeField] private float bulletDamage = 10f;
 
-    private bool canShoot = true;  // Flag to control shooting behavior
+    private bool canShoot = true;
+    private bool isPaused = false;
 
     void Start()
     {
-        // Start bullet spawning only if the weapon is a gun
-        if (isGunWeapon)
-        {
-            StartCoroutine(SpawnBullet());
-        }
+        if (isGunWeapon) StartCoroutine(SpawnBullet());
     }
+
+    public void OnPause() => isPaused = true;
+
+    public void OnResume() => isPaused = false;
 
     void Update()
     {
-        // Rotate the weapon around the player
-        if (player != null)
-        {
-            RotateAroundPlayer();
-        }
+        if (isPaused) return;
+        if (player != null) RotateAroundPlayer();
     }
 
     private void RotateAroundPlayer()
     {
-        // Rotate the weapon around the player's center
         transform.RotateAround(player.position, Vector3.forward, rotationSpeed * Time.deltaTime * -1);
     }
 
@@ -53,11 +47,7 @@ public class Weapon : MonoBehaviour
         if (collision.CompareTag("Enemy"))
         {
             NewEnemy enemy = collision.GetComponent<NewEnemy>();
-            if (enemy != null)
-            {
-                // Deal melee damage (punch) on contact
-                enemy.TakeDamage(meleeDamage);
-            }
+            if (enemy != null) enemy.TakeDamage(meleeDamage);
         }
     }
 
@@ -65,27 +55,25 @@ public class Weapon : MonoBehaviour
     {
         while (true)
         {
+            while (isPaused) yield return null;
+
             if (canShoot)
             {
-                // Instantiate bullet and set its position and rotation
                 GameObject bullet = Instantiate(bulletPrefab, transform.position, transform.rotation);
-
-                // Assign velocity to the bullet to move it forward
                 Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
-                if (rb != null)
-                {
-                    rb.velocity = transform.right * bulletSpeed;  // Moves the bullet in the "right" direction
-                }
+                if (rb != null) rb.velocity = transform.right * bulletSpeed;
 
-                // Set the bullet damage via a method
                 Bullet bulletScript = bullet.GetComponent<Bullet>();
-                if (bulletScript != null)
-                {
-                    bulletScript.SetDamage(bulletDamage);  // Pass bullet damage to the bullet script
-                }
+                if (bulletScript != null) bulletScript.SetDamage(bulletDamage);
             }
 
-            yield return new WaitForSeconds(spawnInterval);  // Wait before spawning the next bullet
+            float elapsedTime = 0f;
+            while (elapsedTime < spawnInterval)
+            {
+                if (isPaused) yield return null;
+                else elapsedTime += Time.deltaTime;
+                yield return null;
+            }
         }
     }
 }
