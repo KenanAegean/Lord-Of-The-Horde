@@ -27,10 +27,12 @@ public class LevelManager : MonoBehaviour
         enemySpawner.spawnInterval = 2.0f;
 
         player.playerLevel = 0;
+        player.xpToNextLevel = 50.0f;
     }
 
     public void UpdatePlayerStats()
     {
+        Effects.LeveltUpFX(player.transform);
         player.playerLevel++;
 
         if (player.playerLevel == 1)
@@ -47,11 +49,11 @@ public class LevelManager : MonoBehaviour
         player.xpToNextLevel *= 1.5f;
         player.maxHealth += 10f;
         player.health += 15f;
-        player.ObjectSpeed *= 1.2f;
+        player.ObjectSpeed *= 1.3f;
 
-        weapon.rotationSpeed *= 1.2f;
-        weaponGun.spawnInterval /= 1.2f;
+        weapon.rotationSpeed *= 1.5f;
+        weaponGun.spawnInterval /= 1.5f;
 
-        enemySpawner.spawnInterval /= 1.2f;
+        enemySpawner.spawnInterval /= 1.5f;
     }
 }

@@ -189,6 +189,7 @@ public class NewEnemy : PhysicsObject, IPausable
     public void Die()
     {
         Instantiate(collectablePrefab, transform.position, Quaternion.identity);
+        Effects.SpawnDeathFX(transform.position);
         Destroy(gameObject);
     }
 }
