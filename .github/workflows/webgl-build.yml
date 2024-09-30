@@ -42,6 +42,16 @@ jobs:
         run: sudo chmod -R 777 build/WebGL
       
 
+      # Move all WebGL files to the root of the build directory
+      - name: Copy WebGL files to a temp folder
+        run: |
+           mkdir temp
+           cp -r build/WebGL/* temp/
+
+      - name: Move files from temp to root
+        run: |
+           cp -r temp/* build/
+           rm -r temp  # Clean up the temp directory
       
       # Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
@@ -50,5 +60,5 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: build/  # The directory where your WebGL build is located
           publish_branch: web-build  # Your target branch
-          destination_dir: .
+          #destination_dir: .
           keep_files: false  # Remove existing files in target branch before pushing
