@@ -6,7 +6,8 @@ Game Project of Game Programming With C# Course
 - Teacher referance: <a href="https://www.linkedin.com/in/martin-andersson-20424420a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app">Martin Andersson</a>
 
 <p align="center">
-  <img src="Assets/Art/Logo/Logo White.png" width="350" title="hover text">
+  <img src="Assets/Art/Logo/Logo White.png" width="350" title="hover text"><br>
+  <a href="https://kenanaegean.github.io/Lord-Of-The-Horde/">Try Game On Browser</a>
 </p>
 
 ## First Assigment
