@@ -50,8 +50,9 @@ jobs:
 
       - name: Move files from temp to root
         run: |
-           cp -r temp/* build/
+           cp -r temp/* .
            rm -r temp  # Clean up the temp directory
+           rm -r build/WebGL 
       
       # Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
