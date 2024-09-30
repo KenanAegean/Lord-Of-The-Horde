@@ -41,7 +41,9 @@ jobs:
 
       # Move all WebGL files to the root of the build directory
       - name: Move WebGL files to root
-        run: mv build/WebGL/* build/
+        run: |
+            shopt -s dotglob
+            mv build/WebGL/* build/
 
       # Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
