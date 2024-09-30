@@ -40,11 +40,15 @@ jobs:
 
 
       # Move all WebGL files to the root of the build directory
-      - name: Move WebGL files to root
+      - name: Move WebGL files to a temp folder
         run: |
-            shopt -s dotglob
-            mv build/WebGL/* build/
-            rmdir build/WebGL  # Remove the empty WebGL directory
+          mkdir temp
+          mv build/WebGL/* temp/
+
+      - name: Move files from temp to root
+        run: |
+          mv temp/* build/
+          rmdir temp  # Clean up the temp directory
 
       # Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
