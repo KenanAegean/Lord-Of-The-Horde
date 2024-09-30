@@ -1,0 +1,37 @@
+name: WebGL Build and Deploy
+
+on:
+  push:
+    branches:
+      - test-build  # Triggers the workflow whenever changes are pushed to the test-build branch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the code
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      # Step 2: Setup Unity
+      - name: Setup Unity
+        uses: game-ci/unity-builder@v2
+        with:
+          projectPath: ./
+          targetPlatform: WebGL
+
+      # Step 3: Build WebGL
+      - name: Build WebGL
+        uses: game-ci/unity-builder@v2
+        with:
+          targetPlatform: WebGL
+          unityVersion: 2021.3.44f1 # Specify your Unity version here
+
+      # Step 4: Deploy to web-build branch
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: build/WebGL  # The directory where your WebGL build is located
+          publish_branch: web-build  # Your target branch
