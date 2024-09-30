@@ -8,15 +8,13 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write  # Explicitly grant permission to write contents
 
     steps:
-      # Checkout the code
+      # Step 1: Checkout the code
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # Cache Unity Library folder
+      # Step 2: Cache Unity Library folder
       - name: Cache Library folder
         uses: actions/cache@v3
         with:
@@ -25,7 +23,7 @@ jobs:
           restore-keys: |
             Library-
 
-      # Build WebGL
+      # Step 4: Build WebGL
       - name: Build WebGL
         uses: game-ci/unity-builder@v4
         env:
@@ -38,28 +36,11 @@ jobs:
           unityVersion: 2022.3.42f1  # Specify your exact Unity version
           dockerImage: unityci/editor:2022.3.42f1-webgl-0  # Use the correct Docker image tag for WebGL
 
-      - name: Set permissions for build directory
-        run: sudo chmod -R 777 build/WebGL
-      
-
-      # Move all WebGL files to the root of the build directory
-      - name: Copy WebGL files to a temp folder
-        run: |
-           mkdir temp
-           cp -r build/WebGL/* temp/
-
-      - name: Move files from temp to root
-        run: |
-           cp -r temp/* .
-           rm -r temp  # Clean up the temp directory
-           # rm -r build/WebGL 
-      
-      # Deploy to GitHub Pages
+      # Step 5: Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: build/  # The directory where your WebGL build is located
+          publish_dir: build/WebGL  # The directory where your WebGL build is located
           publish_branch: web-build  # Your target branch
-          #destination_dir: .
           keep_files: false  # Remove existing files in target branch before pushing
