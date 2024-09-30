@@ -43,7 +43,7 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: build/WebGL  # The directory where your WebGL build is located
+          publish_dir: build/  # The directory where your WebGL build is located
           publish_branch: web-build  # Your target branch
-          destination_dir: .
+          #destination_dir: .
           keep_files: false  # Remove existing files in target branch before pushing
