@@ -12,24 +12,39 @@ jobs:
     steps:
       # Step 1: Checkout the code
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
-      # Step 2: Cache the Unity environment
-      - name: Cache Unity
+      # Step 2: Cache Unity Library folder
+      - name: Cache Library folder
         uses: actions/cache@v3
         with:
-          path: ~/.cache/unity
-          key: ${{ runner.os }}-unity-cache
+          path: Library
+          key: Library-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
+          restore-keys: |
+            Library-
 
-      # Step 3: Setup Unity Builder (this includes activating the license automatically)
+      # Step 3: Run tests (Optional)
+      - name: Run tests
+        uses: game-ci/unity-test-runner@v4
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+        with:
+          githubToken: ${{ secrets.GITHUB_TOKEN }}
+
+      # Step 4: Build WebGL
       - name: Build WebGL
-        uses: game-ci/unity-builder@v2
+        uses: game-ci/unity-builder@v4
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
         with:
           projectPath: ./  # Root directory of your Unity project
           targetPlatform: WebGL  # Building for WebGL
-          unityVersion: 2021.3.44f1  # Replace with your exact Unity version
 
-      # Step 4: Deploy to GitHub Pages (deploy build files to web-build branch)
+      # Step 5: Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
