@@ -14,25 +14,22 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      # Step 2: Activate Unity License (for Unity Personal edition)
-      - name: Activate Unity License
-        uses: game-ci/unity-activate@v1
+      # Step 2: Cache the Unity environment
+      - name: Cache Unity
+        uses: actions/cache@v3
         with:
-          unityVersion: 2021.3.44f1  # Specify your Unity version here
+          path: ~/.cache/unity
+          key: ${{ runner.os }}-unity-cache
 
-      # Step 3: Setup Unity Builder (build WebGL)
+      # Step 3: Setup Unity Builder (this includes activating the license automatically)
       - name: Build WebGL
         uses: game-ci/unity-builder@v2
         with:
           projectPath: ./  # Root directory of your Unity project
           targetPlatform: WebGL  # Building for WebGL
-          unityVersion: 2021.3.44f1  # Make sure this matches your Unity Editor version
+          unityVersion: 2021.3.44f1  # Replace with your exact Unity version
 
-      # Step 4: Return Unity License (best practice to release license)
-      - name: Return Unity License
-        uses: game-ci/unity-return-license@v1
-
-      # Step 5: Deploy to GitHub Pages (deploy build files to web-build branch)
+      # Step 4: Deploy to GitHub Pages (deploy build files to web-build branch)
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
