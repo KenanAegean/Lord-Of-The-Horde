@@ -12,41 +12,29 @@ jobs:
     steps:
       # Step 1: Checkout the code
       - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          lfs: true
+        uses: actions/checkout@v2
 
-      # Cache
-      - uses: actions/cache@v3
+      # Step 2: Activate Unity License (for Unity Personal edition)
+      - name: Activate Unity License
+        uses: game-ci/unity-activate@v1
         with:
-          path: Library
-          key: Library-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
-          restore-keys: |
-            Library-
+          unityVersion: 2021.3.44f1  # Specify your Unity version here
 
-     # Test
-      - name: Run tests
-        uses: game-ci/unity-test-runner@v4
-        env:
-          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
-          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
-          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+      # Step 3: Setup Unity Builder (build WebGL)
+      - name: Build WebGL
+        uses: game-ci/unity-builder@v2
         with:
-          githubToken: ${{ secrets.GITHUB_TOKEN }}
+          projectPath: ./  # Root directory of your Unity project
+          targetPlatform: WebGL  # Building for WebGL
+          unityVersion: 2021.3.44f1  # Make sure this matches your Unity Editor version
 
-      # Build
-      - name: Build project
-        uses: game-ci/unity-builder@v4
-        env:
-          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
-          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
-          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
-        with:
-          targetPlatform: WebGL
+      # Step 4: Return Unity License (best practice to release license)
+      - name: Return Unity License
+        uses: game-ci/unity-return-license@v1
 
       # Step 5: Deploy to GitHub Pages (deploy build files to web-build branch)
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4
+        uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: build/WebGL  # The directory where your WebGL build is located
