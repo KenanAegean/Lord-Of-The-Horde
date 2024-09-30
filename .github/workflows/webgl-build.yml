@@ -40,16 +40,16 @@ jobs:
 
 
       # Move all WebGL files to the root of the build directory
-      - name: Move WebGL files to a temp folder
+      - name: Copy WebGL files to a temp folder
         run: |
-          mkdir temp
-          mv build/WebGL/* temp/
+           mkdir temp
+           cp -r build/WebGL/* temp/
 
       - name: Move files from temp to root
         run: |
-          mv temp/* build/
-          rmdir temp  # Clean up the temp directory
-
+           cp -r temp/* build/
+           rm -r temp  # Clean up the temp directory
+      
       # Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
