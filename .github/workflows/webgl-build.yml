@@ -44,6 +44,7 @@ jobs:
         run: |
             shopt -s dotglob
             mv build/WebGL/* build/
+            rmdir build/WebGL  # Remove the empty WebGL directory
 
       # Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
