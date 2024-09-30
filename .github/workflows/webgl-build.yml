@@ -16,13 +16,13 @@ jobs:
 
       # Step 2: Activate Unity License (for Unity Personal edition)
       - name: Activate Unity License
-        uses: game-ci/unity-activate@v3
+        uses: game-ci/unity-activate@v4
         with:
           unityVersion: 2021.3.44f1  # Specify your Unity version here
 
       # Step 3: Setup Unity Builder (build WebGL)
       - name: Build WebGL
-        uses: game-ci/unity-builder@v2
+        uses: game-ci/unity-builder@v4
         with:
           projectPath: ./  # Root directory of your Unity project
           targetPlatform: WebGL  # Building for WebGL
@@ -30,11 +30,11 @@ jobs:
 
       # Step 4: Return Unity License (best practice to release license)
       - name: Return Unity License
-        uses: game-ci/unity-return-license@v3
+        uses: game-ci/unity-return-license@v4
 
       # Step 5: Deploy to GitHub Pages (deploy build files to web-build branch)
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+        uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: build/WebGL  # The directory where your WebGL build is located
