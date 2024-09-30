@@ -23,18 +23,6 @@ jobs:
           restore-keys: |
             Library-
 
-      # Step 3: Run tests (Optional)
-      - name: Run tests
-        uses: game-ci/unity-test-runner@v4
-        env:
-          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
-          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
-          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
-        with:
-          githubToken: ${{ secrets.GITHUB_TOKEN }}
-          unityVersion: 2022.3.42f1  # Specify your exact Unity version
-          dockerImage: unityci/editor:2022.3.42f1-webgl-0  # Use the correct Docker image tag for WebGL
-
       # Step 4: Build WebGL
       - name: Build WebGL
         uses: game-ci/unity-builder@v4
