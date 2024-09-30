@@ -22,8 +22,7 @@ Lec 1, 2, 3, 4, 5, 6
 Features for distinction (VG) -
 • The enemy moves in a meaningful way examples of this;
   o Moving towards the player only if the player is in “range”
-  o Moving towards the player faster if he looks away from the
-  enemy, and slower if the player looks at them.
+  o Moving towards the player faster if he looks away from the enemy, and slower if the player looks at them.
   o Moving towards the player in a circular pattern
   o Tries to dodge the players attacks
 
@@ -94,6 +93,53 @@ Screenshots           |  Screenshots
 
 <br><b>Video - Second Assigment:</b>  
 <video src="https://github.com/user-attachments/assets/f09a2e4a-8c23-4129-a670-da74cd73c8a2" width=180/></video>
+
+## Third Assigment
+### Third Assigment Description
+```
+VAMPIRE 3
+
+Features required (G) -
+  • All previous requirements from vampire 1 & 2 (not including VG)
+  • Player can die and reset the game
+  • Player can aquire diffrent upgrades of their choosing, ex; more swords,
+projectiles, hp, movement speed
+  • Upgrades can be chosen on level up, ex; 2 buttons show up – button 1 says “+1
+sword” and button 2 says “+3 movement speed”
+  • The enemies either (or and) become more difficult to kill or spawn more
+frequently as the game progresses
+  • Some sort of highscore visible in the main menu, ex; enemy kills, xp gained,
+levels gained.
+Lectures relevant that gives basis for all requirements – All lectures (1-15)
+
+Features for distinction (VG) -
+  • The game should include a total of 3 enemies
+  • There should be a tool (editor window) created using the namespace UnityEditor
+able to create new enemy types that are easy to put into the game once they are
+created
+  • There should be a tool (editor window) created using the namespace UnityEditor
+able to create new upgrades that are easy to put into the game once they are
+created
+
+Handing in
+To hand this project in: Go to omniway and turn in the project file of your project.
+Remember to turn in a zip file, without the library and temp files – if you forget i will
+remind you and you will have to turn in again.
+
+DEADLINE : OCTOBER 11
+```
+<br><b>Screenshots - Third Assigment:</b>
+
+Screenshots           |  Screenshots 
+:-------------------------:|:-------------------------:
+![](Assets/Other/Assigment3/Screenshots/1.png)  |  ![](Assets/Other/Assigment3/Screenshots/5.png)
+![](Assets/Other/Assigment3/Screenshots/2.png)  |  ![](Assets/Other/Assigment3/Screenshots/6.png)
+![](Assets/Other/Assigmen3/Screenshots/3.png)  |  ![](Assets/Other/Assigment3/Screenshots/7.png)
+![](Assets/Other/Assigmen3/Screenshots/4.png)  |  ![](Assets/Other/Assigment3/Screenshots/8.png)
+
+<br><b>Video - Third Assigment:</b>  
+<video src="" width=180/></video>
+
 
 
 
