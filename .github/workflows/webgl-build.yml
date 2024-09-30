@@ -32,7 +32,7 @@ jobs:
           UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
         with:
           githubToken: ${{ secrets.GITHUB_TOKEN }}
-          unityVersion: 2021.3.44f1  # Specify your exact Unity version
+          unityVersion: 2022.3.44f1  # Specify your exact Unity version
 
       # Step 4: Build WebGL
       - name: Build WebGL
@@ -44,7 +44,7 @@ jobs:
         with:
           projectPath: ./  # Root directory of your Unity project
           targetPlatform: WebGL  # Building for WebGL
-          unityVersion: 2021.3.42f1  # Specify your exact Unity version 2021.3.44f1
+          unityVersion: 2022.3.42f1  # Specify your exact Unity version 2021.3.44f1
 
       # Step 5: Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
