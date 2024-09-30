@@ -52,7 +52,7 @@ jobs:
         run: |
            cp -r temp/* .
            rm -r temp  # Clean up the temp directory
-           rm -r build/WebGL 
+           # rm -r build/WebGL 
       
       # Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
