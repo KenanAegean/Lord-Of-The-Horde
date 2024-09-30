@@ -40,6 +40,6 @@ jobs:
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          personal_token: ${{ secrets.ACTIONS_DEPLOY_KEY }}
           publish_dir: build/WebGL  # The directory where your WebGL build is located
           publish_branch: web-build  # Your target branch
