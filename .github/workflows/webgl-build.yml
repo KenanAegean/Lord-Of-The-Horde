@@ -42,16 +42,6 @@ jobs:
         run: sudo chmod -R 777 build/WebGL
       
 
-      # Move all WebGL files to the root of the build directory
-      - name: Copy WebGL files to a temp folder
-        run: |
-           mkdir temp
-           cp -r build/WebGL/* temp/
-
-      - name: Move files from temp to root
-        run: |
-           cp -r temp/* build/
-           rm -r temp  # Clean up the temp directory
       
       # Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
