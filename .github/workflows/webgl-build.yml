@@ -12,11 +12,11 @@ jobs:
       contents: write  # Explicitly grant permission to write contents
 
     steps:
-      # Step 1: Checkout the code
+      # Checkout the code
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # Step 2: Cache Unity Library folder
+      # Cache Unity Library folder
       - name: Cache Library folder
         uses: actions/cache@v3
         with:
@@ -25,7 +25,7 @@ jobs:
           restore-keys: |
             Library-
 
-      # Step 3: Build WebGL
+      # Build WebGL
       - name: Build WebGL
         uses: game-ci/unity-builder@v4
         env:
@@ -38,7 +38,12 @@ jobs:
           unityVersion: 2022.3.42f1  # Specify your exact Unity version
           dockerImage: unityci/editor:2022.3.42f1-webgl-0  # Use the correct Docker image tag for WebGL
 
-      # Step 4: Deploy to GitHub Pages
+
+      # Move all WebGL files to the root of the build directory
+      - name: Move WebGL files to root
+        run: mv build/WebGL/* build/
+
+      # Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
