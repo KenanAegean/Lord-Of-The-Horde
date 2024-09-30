@@ -39,7 +39,7 @@ jobs:
           dockerImage: unityci/editor:2022.3.42f1-webgl-0  # Use the correct Docker image tag for WebGL
 
       - name: Set permissions for build directory
-        run: chmod -R 777 build/WebGL
+        run: sudo chmod -R 777 build/WebGL
       
 
       # Move all WebGL files to the root of the build directory
