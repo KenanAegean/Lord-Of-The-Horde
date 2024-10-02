@@ -1,0 +1,46 @@
+name: WebGL Build and Deploy
+
+on:
+  push:
+    branches:
+      - test-build  # Triggers the workflow whenever changes are pushed to the test-build branch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout the code
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Cache Unity Library folder
+      - name: Cache Library folder
+        uses: actions/cache@v3
+        with:
+          path: Library
+          key: Library-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
+          restore-keys: |
+            Library-
+
+      # Build WebGL
+      - name: Build WebGL
+        uses: game-ci/unity-builder@v4
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+        with:
+          projectPath: ./  # Root directory of your Unity project
+          targetPlatform: WebGL  # Building for WebGL
+          unityVersion: 2022.3.42f1  # Specify your exact Unity version
+          dockerImage: unityci/editor:2022.3.42f1-webgl-0  # Use the correct Docker image tag for WebGL
+
+      # Deploy to GitHub Pages
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: build/WebGL  # The directory where your WebGL build is located
+          publish_branch: web-build  # Your target branch
+          keep_files: true

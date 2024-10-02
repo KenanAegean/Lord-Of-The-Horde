@@ -1459,6 +1459,55 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0f19d5375b22b4478e064bc82941103, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1097932442
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1097932444}
+  - component: {fileID: 1097932443}
+  m_Layer: 0
+  m_Name: TempPauseManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1097932443
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1097932442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e94afe7dc5a7a74289a5199f1224408, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainMenuCanvas: {fileID: 0}
+  settingsPanel: {fileID: 0}
+  creditsPanel: {fileID: 0}
+  pauseMenuUI: {fileID: 1684723555}
+  currentState: 0
+--- !u!4 &1097932444
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1097932442}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1116279531
 GameObject:
   m_ObjectHideFlags: 0
@@ -3048,6 +3097,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2691535931534796636, guid: 2958135616889e849ae29f0c83b0f278, type: 3}
+      propertyPath: m_text
+      value: PAUSE
+      objectReference: {fileID: 0}
+    - target: {fileID: 2691535931534796636, guid: 2958135616889e849ae29f0c83b0f278, type: 3}
+      propertyPath: m_fontSize
+      value: 18
+      objectReference: {fileID: 0}
     - target: {fileID: 2959691322408526704, guid: 2958135616889e849ae29f0c83b0f278, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -3157,9 +3214,25 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8822090818149822985, guid: 2958135616889e849ae29f0c83b0f278, type: 3}
+      propertyPath: m_Colors.m_HighlightedColor.b
+      value: 0.63529414
+      objectReference: {fileID: 0}
+    - target: {fileID: 8822090818149822985, guid: 2958135616889e849ae29f0c83b0f278, type: 3}
+      propertyPath: m_Colors.m_HighlightedColor.g
+      value: 0.86274517
+      objectReference: {fileID: 0}
+    - target: {fileID: 8822090818149822985, guid: 2958135616889e849ae29f0c83b0f278, type: 3}
+      propertyPath: m_Colors.m_HighlightedColor.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8822090818149822985, guid: 2958135616889e849ae29f0c83b0f278, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 907856664}
+    - target: {fileID: 8822090818149822985, guid: 2958135616889e849ae29f0c83b0f278, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PauseGame
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3672,3 +3745,4 @@ SceneRoots:
   - {fileID: 7423543174188943905}
   - {fileID: 1415162873593745682}
   - {fileID: 5412218250231054506}
+
