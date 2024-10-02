@@ -22,7 +22,7 @@ public class NewPlayer : PhysicsObject, IPausable
     private UIManager uiManager;
     [SerializeField] private LevelManager levelManager;
 
-    bool isAlive = true;
+    public bool isAlive = true;
     private bool isPaused = false;
 
     // Singleton instantiation
@@ -108,7 +108,16 @@ public class NewPlayer : PhysicsObject, IPausable
     {
         isAlive = false;
         Debug.Log("Player died");
-        // Handle game over logic here
+
+        // Activate the die menu
+        if (GameSceneManager.Instance.dieMenuUI != null)
+        {
+            GameSceneManager.Instance.dieMenuUI.SetActive(true);
+        }
+
+        // Optionally, stop all movement or interactions
+        // This could involve disabling controls, stopping enemies, etc.
+        GameSceneManager.Instance.SetPausableObjectsState(false);
     }
 
     private void OnTriggerEnter2D(Collider2D other)

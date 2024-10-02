@@ -15,8 +15,12 @@ public class GameSceneManager : MonoBehaviour
     [Header("Pause Menu")]
     public GameObject pauseMenuUI;
 
+    [Header("Die Menu")]
+    public GameObject dieMenuUI;
+
     private bool isPaused = false;
     public GameState currentState = GameState.Playing;
+    private NewPlayer player;
 
     private void Awake()
     {
@@ -42,9 +46,11 @@ public class GameSceneManager : MonoBehaviour
 
     private void Start()
     {
-        if (pauseMenuUI != null)
+        player = NewPlayer.Instance;
+        if (pauseMenuUI != null || dieMenuUI != null)
         {
             DontDestroyOnLoad(pauseMenuUI.transform.root.gameObject);
+            DontDestroyOnLoad(dieMenuUI.transform.root.gameObject);
         }
     }
 
@@ -55,15 +61,16 @@ public class GameSceneManager : MonoBehaviour
             mainMenuCanvas.SetActive(scene.name == "MainMenu");
         }
 
-        if (pauseMenuUI == null) FindPauseMenuUI();
+        if (pauseMenuUI == null || dieMenuUI == null) FindPauseMenuUI();
     }
 
     private void Update()
     {
         if (SceneManager.GetActiveScene().name != "MainMenu")
         {
-            if (Input.GetKeyDown(KeyCode.Escape))
+            if (Input.GetKeyDown(KeyCode.Escape) && !dieMenuUI.activeSelf)
             {
+                Debug.Log(dieMenuUI.activeSelf);
                 if (currentState == GameState.Playing) PauseGame();
                 else if (currentState == GameState.Paused) ResumeGame();
             }
@@ -98,20 +105,24 @@ public class GameSceneManager : MonoBehaviour
         Application.Quit();
     }
 
-    // ---------------------- Pause Menu Functions ---------------------- //
+    // ---------------------- Pause & Die Menu Functions ---------------------- //
 
-    private void FindPauseMenuUI()
+    private void FindPauseMenuUI() //burayý editle
     {
         pauseMenuUI = GameObject.Find("PauseMenuCanvas")?.transform.Find("PauseMenuPanel")?.gameObject;
+        dieMenuUI = GameObject.Find("DieMenuCanvas")?.transform.Find("DieMenuPanel")?.gameObject;
 
-        if (pauseMenuUI == null)
+        if (pauseMenuUI == null || dieMenuUI == null)
         {
+            Debug.LogError("Pause Menu UI not found in the scene!");
             Debug.LogError("Pause Menu UI not found in the scene!");
         }
         else
         {
             pauseMenuUI.SetActive(false);
             DontDestroyOnLoad(pauseMenuUI.transform.root.gameObject);
+            dieMenuUI.SetActive(false);
+            DontDestroyOnLoad(dieMenuUI.transform.root.gameObject);
         }
     }
 
@@ -126,6 +137,7 @@ public class GameSceneManager : MonoBehaviour
         }
 
         SetPausableObjectsState(false);
+
     }
 
     public void ResumeGame()
@@ -139,6 +151,26 @@ public class GameSceneManager : MonoBehaviour
         }
 
         SetPausableObjectsState(true);
+    }
+
+    // Method to restart the level when "Restart" is clicked
+    public void RestartFromDieMenu()
+    {
+        if (dieMenuUI != null)
+        {
+            dieMenuUI.SetActive(false);
+        }
+        RestartLevel();
+    }
+
+    // Method to return to the main menu when "Main Menu" is clicked
+    public void ReturnToMainMenuFromDieMenu()
+    {
+        if (dieMenuUI != null)
+        {
+            dieMenuUI.SetActive(false);
+        }
+        ReturnToMainMenu();
     }
 
     // ---------------------- Game Scene Transition Functions ---------------------- //
@@ -179,7 +211,7 @@ public class GameSceneManager : MonoBehaviour
         TransitionToScene(0);
     }
 
-    private void SetPausableObjectsState(bool isResuming)
+    public void SetPausableObjectsState(bool isResuming)
     {
         IPausable[] pausableObjects = FindObjectsOfType<MonoBehaviour>().OfType<IPausable>().ToArray();
 
