@@ -81,6 +81,7 @@ public class GameSceneManager : MonoBehaviour
 
     public void StartGame()
     {
+        ScoreManager.Instance.ResetScore();
         SceneManager.LoadScene(1);
     }
 
@@ -156,6 +157,7 @@ public class GameSceneManager : MonoBehaviour
     // Method to restart the level when "Restart" is clicked
     public void RestartFromDieMenu()
     {
+        ScoreManager.Instance.ResetScore();
         if (dieMenuUI != null)
         {
             dieMenuUI.SetActive(false);
@@ -177,8 +179,10 @@ public class GameSceneManager : MonoBehaviour
 
     public void RestartLevel()
     {
+        ScoreManager.Instance.ResetScore();
         currentState = GameState.Playing;
         isPaused = false;
+
 
         if (pauseMenuUI != null)
         {

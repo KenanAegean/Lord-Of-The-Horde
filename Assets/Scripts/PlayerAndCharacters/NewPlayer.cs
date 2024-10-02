@@ -18,6 +18,7 @@ public class NewPlayer : PhysicsObject, IPausable
     [SerializeField] public int playerLevel = 0;
     [SerializeField] public float currentXP = 0f;
     [SerializeField] public float xpToNextLevel = 100f;
+    [SerializeField] public float score = 0f;
 
     private UIManager uiManager;
     [SerializeField] private LevelManager levelManager;
@@ -53,6 +54,8 @@ public class NewPlayer : PhysicsObject, IPausable
         uiManager.UpdateHealthUI(health, maxHealth);
         uiManager.UpdateXPUI(currentXP, xpToNextLevel);
         uiManager.UpdateLevelUI(playerLevel);
+        uiManager.UpdateScoreUI(currentXP);
+        uiManager.ShowLastScore(score);
     }
 
     public void OnPause() => isPaused = true;
@@ -85,7 +88,13 @@ public class NewPlayer : PhysicsObject, IPausable
     public void CollectXP(float xpAmount)
     {
         currentXP += xpAmount;
+        score += xpAmount;
+
+        // Update the score in the ScoreManager
+        ScoreManager.Instance.AddScore(score);
+
         uiManager.UpdateXPUI(currentXP, xpToNextLevel);
+        uiManager.UpdateScoreUI(score);
         uiManager.ShowXPGainPopup(xpAmount);
 
         if (currentXP >= xpToNextLevel) LevelUp();
@@ -102,12 +111,17 @@ public class NewPlayer : PhysicsObject, IPausable
         uiManager.UpdateHealthUI(health, maxHealth);
         uiManager.UpdateXPUI(currentXP, xpToNextLevel);
         uiManager.UpdateLevelUI(playerLevel);
+        uiManager.UpdateScoreUI(score);
+        uiManager.ShowLastScore(score);
     }
 
     private void Die()
     {
         isAlive = false;
         Debug.Log("Player died");
+
+        // Update the score on the die screen directly from ScoreManager
+        ScoreManager.Instance.UpdateDieCanvasScore();
 
         // Activate the die menu
         if (GameSceneManager.Instance.dieMenuUI != null)
