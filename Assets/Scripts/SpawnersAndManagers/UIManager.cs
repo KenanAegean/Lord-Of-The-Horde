@@ -5,10 +5,13 @@ using System.Collections;
 
 public class UIManager : MonoBehaviour
 {
+    public static UIManager Instance;
+
     [Header("UI Elements")]
     public Slider healthBar;
     public Slider xpBar;
     public TextMeshProUGUI levelText;
+    public TextMeshProUGUI scoreText;
 
     // Pop-up texts
     public TextMeshProUGUI xpPopupText;
@@ -20,12 +23,32 @@ public class UIManager : MonoBehaviour
     private Vector3 damagePopupInitialPosition;
     private Vector3 healthPopupInitialPosition;
 
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
+    }
+
     private void Start()
     {
-        // Store initial positions of pop-up texts
-        xpPopupInitialPosition = xpPopupText.transform.localPosition;
-        damagePopupInitialPosition = damagePopupText.transform.localPosition;
-        healthPopupInitialPosition = healthPopupText.transform.localPosition;
+        // Check if all pop-up texts are assigned
+        if (xpPopupText != null && damagePopupText != null && healthPopupText != null)
+        {
+            xpPopupInitialPosition = xpPopupText.transform.localPosition;
+            damagePopupInitialPosition = damagePopupText.transform.localPosition;
+            healthPopupInitialPosition = healthPopupText.transform.localPosition;
+        }
+        else
+        {
+            Debug.LogWarning("One or more pop-up texts are not assigned.");
+        }
     }
 
     public void ShowXPGainPopup(float xpAmount)
@@ -94,5 +117,21 @@ public class UIManager : MonoBehaviour
         {
             levelText.text = "LEVEL: " + playerLevel;
         }
+    }
+
+    public void UpdateScoreUI(float playerScore)
+    {
+        if (scoreText != null)
+        {
+            scoreText.text = "SCORE: " + playerScore;
+            Debug.Log("Score Updated: " + playerScore);
+        }
+        
+
+    }
+
+    public void ShowLastScore(float playerScore)
+    {
+        scoreText.text = "SCORE: " + playerScore;
     }
 }
