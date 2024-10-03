@@ -117,6 +117,12 @@ public class NewPlayer : PhysicsObject, IPausable
         isAlive = false;
         Debug.Log("Player died");
 
+        // Save the last run score
+        if (GameSceneManager.Instance != null)
+        {
+            GameSceneManager.Instance.SetLastRunScore(score);
+        }
+
         // Update the score on the die screen directly from NewPlayer's score
         ScoreManager.Instance.UpdateDieCanvasScore(score);
 

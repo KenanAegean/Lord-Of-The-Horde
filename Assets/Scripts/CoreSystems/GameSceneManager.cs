@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
 using System.Linq;
+using TMPro;
 
 public class GameSceneManager : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class GameSceneManager : MonoBehaviour
     public GameObject mainMenuCanvas;
     public GameObject settingsPanel;
     public GameObject creditsPanel;
+    public TextMeshProUGUI lastRunScoreText;
 
     [Header("Pause Menu")]
     public GameObject pauseMenuUI;
@@ -21,6 +23,7 @@ public class GameSceneManager : MonoBehaviour
     private bool isPaused = false;
     public GameState currentState = GameState.Playing;
     private NewPlayer player;
+    private float lastRunScore = 0f;
 
     private void Awake()
     {
@@ -68,6 +71,12 @@ public class GameSceneManager : MonoBehaviour
         }
 
         if (pauseMenuUI == null || dieMenuUI == null) FindPauseMenuUI();
+
+        // If the scene is the main menu, update the last run score text
+        if (scene.name == "MainMenu" && lastRunScoreText != null)
+        {
+            lastRunScoreText.text = "LAST RUN SCORE: " + lastRunScore.ToString("F0");
+        }
 
         // Re-find the player when a new scene is loaded
         player = NewPlayer.Instance;
@@ -126,6 +135,17 @@ public class GameSceneManager : MonoBehaviour
     {
         Debug.Log("Exiting game...");
         Application.Quit();
+    }
+
+    public void SetLastRunScore(float score)
+    {
+        lastRunScore = score;
+
+        // Update the main menu's last score display if it's already active
+        if (lastRunScoreText != null)
+        {
+            lastRunScoreText.text = "Last Run Score: " + lastRunScore.ToString("F0");
+        }
     }
 
     // ---------------------- Pause & Die Menu Functions ---------------------- //
