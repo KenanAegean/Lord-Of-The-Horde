@@ -1492,6 +1492,7 @@ MonoBehaviour:
   settingsPanel: {fileID: 0}
   creditsPanel: {fileID: 0}
   pauseMenuUI: {fileID: 1684723555}
+  dieMenuUI: {fileID: 0}
   currentState: 0
 --- !u!4 &1097932444
 Transform:
@@ -3745,4 +3746,4 @@ SceneRoots:
   - {fileID: 7423543174188943905}
   - {fileID: 1415162873593745682}
   - {fileID: 5412218250231054506}
-
+  - {fileID: 1097932444}
