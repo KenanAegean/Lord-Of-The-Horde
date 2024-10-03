@@ -95,6 +95,8 @@ Screenshots           |  Screenshots
 ![](Assets/Other/Assigment2/Screenshots/1.png)  |  ![](Assets/Other/Assigment2/Screenshots/4.png)
 ![](Assets/Other/Assigment2/Screenshots/2.png)  |  ![](Assets/Other/Assigment2/Screenshots/5.png)
 ![](Assets/Other/Assigment2/Screenshots/3.png)  |  ![](Assets/Other/Assigment2/Screenshots/6.png)
+
+:-------------------------:|:-------------------------:
 ![](Assets/Other/Assigment2/Screenshots/7.png)  |  ![](Assets/Other/Assigment2/Screenshots/8.png)
 
 <br><b>Video - Second Assigment:</b>  
