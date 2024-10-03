@@ -1491,6 +1491,7 @@ MonoBehaviour:
   mainMenuCanvas: {fileID: 0}
   settingsPanel: {fileID: 0}
   creditsPanel: {fileID: 0}
+  lastRunScoreText: {fileID: 0}
   pauseMenuUI: {fileID: 1684723555}
   dieMenuUI: {fileID: 0}
   currentState: 0
@@ -2870,7 +2871,7 @@ PrefabInstance:
       objectReference: {fileID: 519420031}
     - target: {fileID: 6283632749564923077, guid: 7f227cb61eff10141b8e5fe266b2aa1c, type: 3}
       propertyPath: health
-      value: 20
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 6283632749564923077, guid: 7f227cb61eff10141b8e5fe266b2aa1c, type: 3}
       propertyPath: levelManager
