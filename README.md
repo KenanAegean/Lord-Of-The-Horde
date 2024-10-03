@@ -95,6 +95,7 @@ Screenshots           |  Screenshots
 ![](Assets/Other/Assigment2/Screenshots/1.png)  |  ![](Assets/Other/Assigment2/Screenshots/4.png)
 ![](Assets/Other/Assigment2/Screenshots/2.png)  |  ![](Assets/Other/Assigment2/Screenshots/5.png)
 ![](Assets/Other/Assigment2/Screenshots/3.png)  |  ![](Assets/Other/Assigment2/Screenshots/6.png)
+![](Assets/Other/Assigment2/Screenshots/7.png)  |  ![](Assets/Other/Assigment2/Screenshots/8.png)
 
 <br><b>Video - Second Assigment:</b>  
 <video src="https://github.com/user-attachments/assets/f09a2e4a-8c23-4129-a670-da74cd73c8a2" width=180/></video>
@@ -139,8 +140,8 @@ Screenshots           |  Screenshots
 :-------------------------:|:-------------------------:
 ![](Assets/Other/Assigment3/Screenshots/1.png)  |  ![](Assets/Other/Assigment3/Screenshots/5.png)
 ![](Assets/Other/Assigment3/Screenshots/2.png)  |  ![](Assets/Other/Assigment3/Screenshots/6.png)
-![](Assets/Other/Assigmen3/Screenshots/3.png)  |  ![](Assets/Other/Assigment3/Screenshots/7.png)
-![](Assets/Other/Assigmen3/Screenshots/4.png)  |  ![](Assets/Other/Assigment3/Screenshots/8.png)
+![](Assets/Other/Assigment3/Screenshots/3.png)  |  ![](Assets/Other/Assigment3/Screenshots/7.png)
+![](Assets/Other/Assigment3/Screenshots/4.png)  |  ![](Assets/Other/Assigment3/Screenshots/8.png)
 
 <br><b>Video - Third Assigment:</b>  
 <video src="" width=180/></video>
