@@ -96,6 +96,7 @@ Screenshots           |  Screenshots
 ![](Assets/Other/Assigment2/Screenshots/2.png)  |  ![](Assets/Other/Assigment2/Screenshots/5.png)
 ![](Assets/Other/Assigment2/Screenshots/3.png)  |  ![](Assets/Other/Assigment2/Screenshots/6.png)
 
+Github           |  Pages 
 :-------------------------:|:-------------------------:
 ![](Assets/Other/Assigment2/Screenshots/7.png)  |  ![](Assets/Other/Assigment2/Screenshots/8.png)
 
