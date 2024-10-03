@@ -90,9 +90,6 @@ public class NewPlayer : PhysicsObject, IPausable
         currentXP += xpAmount;
         score += xpAmount;
 
-        // Update the score in the ScoreManager
-        ScoreManager.Instance.AddScore(score);
-
         uiManager.UpdateXPUI(currentXP, xpToNextLevel);
         uiManager.UpdateScoreUI(score);
         uiManager.ShowXPGainPopup(xpAmount);
@@ -120,8 +117,8 @@ public class NewPlayer : PhysicsObject, IPausable
         isAlive = false;
         Debug.Log("Player died");
 
-        // Update the score on the die screen directly from ScoreManager
-        ScoreManager.Instance.UpdateDieCanvasScore();
+        // Update the score on the die screen directly from NewPlayer's score
+        ScoreManager.Instance.UpdateDieCanvasScore(score);
 
         // Activate the die menu
         if (GameSceneManager.Instance.dieMenuUI != null)
@@ -130,8 +127,13 @@ public class NewPlayer : PhysicsObject, IPausable
         }
 
         // Optionally, stop all movement or interactions
-        // This could involve disabling controls, stopping enemies, etc.
         GameSceneManager.Instance.SetPausableObjectsState(false);
+    }
+
+    public void ResetPlayerScore()
+    {
+        score = 0;
+        uiManager.UpdateScoreUI(score);
     }
 
     private void OnTriggerEnter2D(Collider2D other)

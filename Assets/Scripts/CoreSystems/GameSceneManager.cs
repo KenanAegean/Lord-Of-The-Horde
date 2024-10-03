@@ -46,7 +46,13 @@ public class GameSceneManager : MonoBehaviour
 
     private void Start()
     {
+        // Find the player instance safely
         player = NewPlayer.Instance;
+        if (player == null)
+        {
+            Debug.LogWarning("NewPlayer instance not found in the scene.");
+        }
+
         if (pauseMenuUI != null || dieMenuUI != null)
         {
             DontDestroyOnLoad(pauseMenuUI.transform.root.gameObject);
@@ -62,6 +68,13 @@ public class GameSceneManager : MonoBehaviour
         }
 
         if (pauseMenuUI == null || dieMenuUI == null) FindPauseMenuUI();
+
+        // Re-find the player when a new scene is loaded
+        player = NewPlayer.Instance;
+        if (player == null)
+        {
+            Debug.LogWarning("NewPlayer instance not found after scene load.");
+        }
     }
 
     private void Update()
@@ -81,7 +94,16 @@ public class GameSceneManager : MonoBehaviour
 
     public void StartGame()
     {
-        ScoreManager.Instance.ResetScore();
+        // Check if player is not null before resetting score
+        if (player != null)
+        {
+            player.ResetPlayerScore();
+        }
+        else
+        {
+            Debug.LogWarning("Player is null in StartGame.");
+        }
+
         SceneManager.LoadScene(1);
     }
 
@@ -108,15 +130,14 @@ public class GameSceneManager : MonoBehaviour
 
     // ---------------------- Pause & Die Menu Functions ---------------------- //
 
-    private void FindPauseMenuUI() //burayý editle
+    private void FindPauseMenuUI()
     {
         pauseMenuUI = GameObject.Find("PauseMenuCanvas")?.transform.Find("PauseMenuPanel")?.gameObject;
         dieMenuUI = GameObject.Find("DieMenuCanvas")?.transform.Find("DieMenuPanel")?.gameObject;
 
         if (pauseMenuUI == null || dieMenuUI == null)
         {
-            Debug.LogError("Pause Menu UI not found in the scene!");
-            Debug.LogError("Pause Menu UI not found in the scene!");
+            Debug.LogError("Pause Menu UI or Die Menu UI not found in the scene!");
         }
         else
         {
@@ -138,7 +159,6 @@ public class GameSceneManager : MonoBehaviour
         }
 
         SetPausableObjectsState(false);
-
     }
 
     public void ResumeGame()
@@ -157,7 +177,15 @@ public class GameSceneManager : MonoBehaviour
     // Method to restart the level when "Restart" is clicked
     public void RestartFromDieMenu()
     {
-        ScoreManager.Instance.ResetScore();
+        if (player != null)
+        {
+            player.ResetPlayerScore();
+        }
+        else
+        {
+            Debug.LogWarning("Player is null in RestartFromDieMenu.");
+        }
+
         if (dieMenuUI != null)
         {
             dieMenuUI.SetActive(false);
@@ -179,10 +207,17 @@ public class GameSceneManager : MonoBehaviour
 
     public void RestartLevel()
     {
-        ScoreManager.Instance.ResetScore();
+        if (player != null)
+        {
+            player.ResetPlayerScore();
+        }
+        else
+        {
+            Debug.LogWarning("Player is null in RestartLevel.");
+        }
+
         currentState = GameState.Playing;
         isPaused = false;
-
 
         if (pauseMenuUI != null)
         {
@@ -209,7 +244,6 @@ public class GameSceneManager : MonoBehaviour
         if (pauseMenuUI != null)
         {
             pauseMenuUI.SetActive(false);
-            //Destroy(pauseMenuUI.transform.root.gameObject);
         }
 
         TransitionToScene(0);
