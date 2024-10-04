@@ -22,6 +22,8 @@ public class LevelManager : MonoBehaviour
 
     public void InitalValues()
     {
+        player.transform.position = new Vector3(0, 0, 0);
+
         weaponPunch.gameObject.SetActive(true);
         weaponPunchSecond.gameObject.SetActive(false);
         weaponGun.gameObject.SetActive(false);
