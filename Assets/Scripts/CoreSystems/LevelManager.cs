@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class LevelManager : MonoBehaviour
 {
@@ -8,6 +9,9 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private Weapon weaponGun;
     [SerializeField] private Weapon weaponPunch;
     [SerializeField] private Weapon weaponPunchSecond;
+
+    [SerializeField] private List<UpgradeOption> allUpgrades;
+
     [SerializeField] private EnemySpawner enemySpawner;
 
     private void Start()
@@ -28,6 +32,14 @@ public class LevelManager : MonoBehaviour
 
         player.playerLevel = 0;
         player.xpToNextLevel = 50.0f;
+
+        // Reset player health, score, and other stats as necessary
+        player.health = player.maxHealth;
+        player.currentXP = 0f;
+        player.ResetPlayerScore();
+
+        // Update the UI after resetting values
+        player.UpdateUI();
     }
 
     public void UpdatePlayerStats()
@@ -35,25 +47,50 @@ public class LevelManager : MonoBehaviour
         Effects.LeveltUpFX(player.transform);
         player.playerLevel++;
 
-        if (player.playerLevel == 1)
-        {
-            weaponPunchSecond.gameObject.SetActive(true);
-        }
-        else if (player.playerLevel == 2)
-        {
-            weaponPunchSecond.gameObject.SetActive(false);
-            weaponGun.gameObject.SetActive(true);
-        }
+        TriggerUpgradeSelection();
 
         player.currentXP -= player.xpToNextLevel;
         player.xpToNextLevel *= 1.5f;
-        player.maxHealth += 10f;
-        player.health += 15f;
-        player.ObjectSpeed *= 1.3f;
+        //player.maxHealth += 10f;
+        //player.health += 15f;
+        //player.ObjectSpeed *= 1.3f;
 
         weapon.rotationSpeed *= 1.5f;
         weaponGun.spawnInterval /= 1.5f;
 
         enemySpawner.spawnInterval /= 1.5f;
+    }
+
+    private void TriggerUpgradeSelection()
+    {
+        // Ensure the allUpgrades list has enough items
+        if (allUpgrades == null || allUpgrades.Count < 3)
+        {
+            Debug.LogError("Not enough upgrades available in the allUpgrades list.");
+            return;
+        }
+
+        // Randomly pick 3 upgrades
+        List<UpgradeOption> selectedUpgrades = new List<UpgradeOption>();
+        while (selectedUpgrades.Count < 3)
+        {
+            int randomIndex = Random.Range(0, allUpgrades.Count);
+
+            // Make sure the upgrade is not already in the selected list
+            UpgradeOption randomUpgrade = allUpgrades[randomIndex];
+            if (!selectedUpgrades.Contains(randomUpgrade))
+            {
+                selectedUpgrades.Add(randomUpgrade);
+            }
+        }
+
+        GameSceneManager.Instance.ShowUpgradeChoices(selectedUpgrades, OnUpgradeSelected);
+    }
+
+
+    private void OnUpgradeSelected(UpgradeOption selectedUpgrade)
+    {
+        selectedUpgrade.ApplyUpgrade(player);
+        player.UpdateUI();
     }
 }

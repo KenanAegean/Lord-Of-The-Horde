@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5718384120791055239}
   - component: {fileID: 4644776204500792122}
   m_Layer: 0
-  m_Name: Gun Swapner
+  m_Name: GunSwapner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

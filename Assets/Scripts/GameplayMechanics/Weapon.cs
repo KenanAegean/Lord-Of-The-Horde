@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Weapon : MonoBehaviour, IPausable
@@ -7,7 +6,6 @@ public class Weapon : MonoBehaviour, IPausable
     [Header("General Settings")]
     [SerializeField] private Transform player;
     [SerializeField] public float rotationSpeed = 120f;
-    [SerializeField] private bool isTwoHandWeapon = true;
     [SerializeField] private bool isGunWeapon = false;
 
     [Header("Melee Settings")]
@@ -19,8 +17,8 @@ public class Weapon : MonoBehaviour, IPausable
     [SerializeField] public float spawnInterval = 1.0f;
     [SerializeField] private float bulletDamage = 10f;
 
-    private bool canShoot = true;
     private bool isPaused = false;
+    //private bool canShoot = true;
 
     void Start()
     {
@@ -57,23 +55,14 @@ public class Weapon : MonoBehaviour, IPausable
         {
             while (isPaused) yield return null;
 
-            if (canShoot)
-            {
-                GameObject bullet = Instantiate(bulletPrefab, transform.position, transform.rotation);
-                Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
-                if (rb != null) rb.velocity = transform.right * bulletSpeed;
+            GameObject bullet = Instantiate(bulletPrefab, transform.position, transform.rotation);
+            Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
+            if (rb != null) rb.velocity = transform.right * bulletSpeed;
 
-                Bullet bulletScript = bullet.GetComponent<Bullet>();
-                if (bulletScript != null) bulletScript.SetDamage(bulletDamage);
-            }
+            Bullet bulletScript = bullet.GetComponent<Bullet>();
+            if (bulletScript != null) bulletScript.SetDamage(bulletDamage);
 
-            float elapsedTime = 0f;
-            while (elapsedTime < spawnInterval)
-            {
-                if (isPaused) yield return null;
-                else elapsedTime += Time.deltaTime;
-                yield return null;
-            }
+            yield return new WaitForSeconds(spawnInterval);
         }
     }
 }

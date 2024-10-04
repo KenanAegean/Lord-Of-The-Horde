@@ -103,7 +103,7 @@ public class NewPlayer : PhysicsObject, IPausable
         UpdateUI();
     }
 
-    private void UpdateUI()
+    public void UpdateUI()
     {
         uiManager.UpdateHealthUI(health, maxHealth);
         uiManager.UpdateXPUI(currentXP, xpToNextLevel);
@@ -141,6 +141,19 @@ public class NewPlayer : PhysicsObject, IPausable
         score = 0;
         uiManager.UpdateScoreUI(score);
     }
+
+    public void ResetPlayerState()
+    {
+        // Reset player health, XP, and position to initial state
+        health = maxHealth; // Assuming `maxHealth` is the full health value
+        currentXP = 0f;
+        transform.position = Vector3.zero; // Reset to the initial spawn position
+
+        // Update UI elements
+        UIManager.Instance.UpdateHealthUI(health, maxHealth);
+        UIManager.Instance.UpdateXPUI(currentXP, xpToNextLevel);
+    }
+
 
     private void OnTriggerEnter2D(Collider2D other)
     {
