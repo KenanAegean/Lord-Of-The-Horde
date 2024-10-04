@@ -1,8 +1,10 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using System.Collections;
 using System.Linq;
 using TMPro;
+using System.Collections.Generic;
 
 public class GameSceneManager : MonoBehaviour
 {
@@ -19,6 +21,12 @@ public class GameSceneManager : MonoBehaviour
 
     [Header("Die Menu")]
     public GameObject dieMenuUI;
+
+    [Header("Upgrade System")]
+    public GameObject upgradePanel; // The panel containing the upgrade buttons
+    public List<Button> upgradeButtons; // A list of buttons for the upgrades
+    public TextMeshProUGUI upgradeDescriptionText; // The text field for showing descriptions
+    private System.Action<UpgradeOption> onUpgradeSelectedCallback;
 
     private bool isPaused = false;
     public GameState currentState = GameState.Playing;
@@ -98,6 +106,56 @@ public class GameSceneManager : MonoBehaviour
             }
         }
     }
+
+    // ---------------------- Upgrade Functions ---------------------- //
+
+    public void ShowUpgradeChoices(List<UpgradeOption> upgrades, System.Action<UpgradeOption> onUpgradeSelected)
+    {
+        upgradePanel.SetActive(true);
+        onUpgradeSelectedCallback = onUpgradeSelected;
+
+        for (int i = 0; i < upgradeButtons.Count; i++)
+        {
+            currentState = GameState.Paused;
+            isPaused = true;
+            int index = i;
+            UpgradeOption upgrade = upgrades[i];
+
+            // Set the button text to the upgrade name
+            upgradeButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = upgrade.upgradeName;
+
+            // Remove any previous listeners
+            upgradeButtons[i].onClick.RemoveAllListeners();
+
+            // Add a click listener to apply the upgrade
+            upgradeButtons[i].onClick.AddListener(() =>
+            {
+                onUpgradeSelectedCallback(upgrade);
+                upgradePanel.SetActive(false); // Hide panel after selection
+                ResumeGame();
+            });
+
+            // Add listeners for showing the description on hover/selection
+            upgradeButtons[i].onClick.AddListener(() =>
+            {
+                upgradeDescriptionText.text = upgrade.description; // Show description on hover
+            });
+
+            // Alternatively, if using hover effects (requires Unity's Event Trigger system):
+            var trigger = upgradeButtons[i].gameObject.AddComponent<UnityEngine.EventSystems.EventTrigger>();
+            var entry = new UnityEngine.EventSystems.EventTrigger.Entry
+            {
+                eventID = UnityEngine.EventSystems.EventTriggerType.PointerEnter
+            };
+            entry.callback.AddListener((data) => { upgradeDescriptionText.text = upgrade.description; });
+            trigger.triggers.Add(entry);
+        }
+
+        // Reset the description text when the panel is first shown
+        upgradeDescriptionText.text = "Hover over an upgrade to see its description.";
+        SetPausableObjectsState(false);
+    }
+
 
     // ---------------------- Main Menu Functions ---------------------- //
 

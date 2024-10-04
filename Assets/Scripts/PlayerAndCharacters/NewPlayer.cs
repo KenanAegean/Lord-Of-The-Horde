@@ -103,7 +103,7 @@ public class NewPlayer : PhysicsObject, IPausable
         UpdateUI();
     }
 
-    private void UpdateUI()
+    public void UpdateUI()
     {
         uiManager.UpdateHealthUI(health, maxHealth);
         uiManager.UpdateXPUI(currentXP, xpToNextLevel);
