@@ -32,6 +32,14 @@ public class LevelManager : MonoBehaviour
 
         player.playerLevel = 0;
         player.xpToNextLevel = 50.0f;
+
+        // Reset player health, score, and other stats as necessary
+        player.health = player.maxHealth;
+        player.currentXP = 0f;
+        player.ResetPlayerScore();
+
+        // Update the UI after resetting values
+        player.UpdateUI();
     }
 
     public void UpdatePlayerStats()

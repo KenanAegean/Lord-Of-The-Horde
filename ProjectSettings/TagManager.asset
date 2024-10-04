@@ -8,6 +8,7 @@ TagManager:
   - Wall
   - Collectible
   - PlayerBody
+  - Bullet
   layers:
   - Default
   - TransparentFX

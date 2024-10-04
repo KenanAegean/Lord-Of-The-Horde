@@ -44,6 +44,7 @@ public class GameSceneManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(gameObject);
 
+            // mainMenuCanvas should not be destroyed, as it will be used across game state transitions
             if (mainMenuCanvas != null)
             {
                 DontDestroyOnLoad(mainMenuCanvas);
@@ -56,11 +57,16 @@ public class GameSceneManager : MonoBehaviour
         }
 
         if (pauseMenuUI == null) FindPauseMenuUI();
-        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     private void Start()
     {
+        // Explicitly deactivate main menu canvas at the start
+        if (mainMenuCanvas != null)
+        {
+            mainMenuCanvas.SetActive(false);
+        }
+
         // Find the player instance safely
         player = NewPlayer.Instance;
         if (player == null)
@@ -73,103 +79,59 @@ public class GameSceneManager : MonoBehaviour
             DontDestroyOnLoad(pauseMenuUI.transform.root.gameObject);
             DontDestroyOnLoad(dieMenuUI.transform.root.gameObject);
         }
+
         UpgradeOption.SetDefaultIcons(defaultHealthIcon, defaultSpeedIcon, defaultWeaponIcon);
-    }
 
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        if (mainMenuCanvas != null)
-        {
-            mainMenuCanvas.SetActive(scene.name == "MainMenu");
-        }
-
-        if (pauseMenuUI == null || dieMenuUI == null) FindPauseMenuUI();
-
-        // If the scene is the main menu, update the last run score text
-        if (scene.name == "MainMenu" && lastRunScoreText != null)
-        {
-            lastRunScoreText.text = "LAST RUN SCORE: " + lastRunScore.ToString("F0");
-        }
-
-        // Re-find the player when a new scene is loaded
-        player = NewPlayer.Instance;
-        if (player == null)
-        {
-            Debug.LogWarning("NewPlayer instance not found after scene load.");
-        }
+        // Display the main menu only when the game starts (not on restart)
+        ShowMainMenu();
     }
 
     private void Update()
     {
-        if (SceneManager.GetActiveScene().name != "MainMenu")
+        // Prevent pausing while in the main menu
+        if (mainMenuCanvas != null && mainMenuCanvas.activeSelf) return;
+
+        if (Input.GetKeyDown(KeyCode.Escape) && !dieMenuUI.activeSelf)
         {
-            if (Input.GetKeyDown(KeyCode.Escape) && !dieMenuUI.activeSelf)
-            {
-                Debug.Log(dieMenuUI.activeSelf);
-                if (currentState == GameState.Playing) PauseGame();
-                else if (currentState == GameState.Paused) ResumeGame();
-            }
+            if (currentState == GameState.Playing) PauseGame();
+            else if (currentState == GameState.Paused) ResumeGame();
         }
     }
-
-    // ---------------------- Upgrade Functions ---------------------- //
-
-    public void ShowUpgradeChoices(List<UpgradeOption> upgrades, System.Action<UpgradeOption> onUpgradeSelected)
-    {
-        upgradePanel.SetActive(true);
-        onUpgradeSelectedCallback = onUpgradeSelected;
-
-        currentState = GameState.Paused;
-        isPaused = true;
-
-        for (int i = 0; i < upgradeButtons.Count; i++)
-        {
-            int index = i;
-            UpgradeOption upgrade = upgrades[i];
-
-            // Access the card's elements
-            var card = upgradeButtons[i].transform.parent; // Assuming button is a child of card
-            var icon = card.Find("Image").GetComponent<Image>(); // Find the image component
-            var description = card.Find("Upgrade Desc").GetComponent<TextMeshProUGUI>(); // Find the text component
-
-            // Check for nulls
-            if (icon == null)
-            {
-                Debug.LogError($"Icon Image component missing for upgrade {i}");
-                continue;
-            }
-            if (description == null)
-            {
-                Debug.LogError($"Description Text component missing for upgrade {i}");
-                continue;
-            }
-
-            // Set the icon, name, and description for each upgrade card
-            icon.sprite = upgrade.GetIcon(); // Use GetIcon() to assign the correct icon
-            description.text = $"{upgrade.upgradeName}\n{upgrade.GetDescription()}";
-
-            // Remove any previous listeners
-            upgradeButtons[i].onClick.RemoveAllListeners();
-
-            // Add a click listener to apply the upgrade and unpause the game
-            upgradeButtons[i].onClick.AddListener(() =>
-            {
-                onUpgradeSelectedCallback(upgrade);
-                upgradePanel.SetActive(false);
-
-                // Resume the game after an upgrade is selected
-                ResumeGame();
-            });
-        }
-        SetPausableObjectsState(false);
-    }
-
 
     // ---------------------- Main Menu Functions ---------------------- //
 
+    public void ShowMainMenu()
+    {
+        // Set the game state to paused since we're in the main menu
+        currentState = GameState.Paused;
+        isPaused = true;
+
+        // Activate the main menu panel
+        if (mainMenuCanvas != null)
+        {
+            mainMenuCanvas.SetActive(true);
+        }
+
+        // Pause all game objects
+        SetPausableObjectsState(false);
+    }
+
     public void StartGame()
     {
-        // Check if player is not null before resetting score
+        // Deactivate the main menu panel to start the game
+        if (mainMenuCanvas != null)
+        {
+            mainMenuCanvas.SetActive(false);
+        }
+        RestartLevel();
+
+        if (dieMenuUI != null)
+        {
+            dieMenuUI.SetActive(false);
+        }
+
+
+        // Reset player score or any other state necessary to start the game
         if (player != null)
         {
             player.ResetPlayerScore();
@@ -179,7 +141,27 @@ public class GameSceneManager : MonoBehaviour
             Debug.LogWarning("Player is null in StartGame.");
         }
 
-        SceneManager.LoadScene(1);
+        // Set game state
+        currentState = GameState.Playing;
+        isPaused = false;
+
+        // Resume all pausable objects
+        SetPausableObjectsState(true);
+    }
+
+    public void ReturnToMainMenu()
+    {
+        // Pause the game and show the main menu panel
+        currentState = GameState.Paused;
+        isPaused = true;
+
+        if (mainMenuCanvas != null)
+        {
+            mainMenuCanvas.SetActive(true);
+        }
+
+        // Pause all game objects
+        SetPausableObjectsState(false);
     }
 
     public void OpenSettings()
@@ -266,6 +248,7 @@ public class GameSceneManager : MonoBehaviour
         if (player != null)
         {
             player.ResetPlayerScore();
+            player.ResetPlayerState(); // Assuming you create this method to reset health, XP, position, etc.
         }
         else
         {
@@ -276,63 +259,150 @@ public class GameSceneManager : MonoBehaviour
         {
             dieMenuUI.SetActive(false);
         }
+
         RestartLevel();
     }
 
-    // Method to return to the main menu when "Main Menu" is clicked
-    public void ReturnToMainMenuFromDieMenu()
+    // ---------------------- Upgrade Functions ---------------------- //
+
+    public void ShowUpgradeChoices(List<UpgradeOption> upgrades, System.Action<UpgradeOption> onUpgradeSelected)
     {
-        if (dieMenuUI != null)
+        upgradePanel.SetActive(true);
+        onUpgradeSelectedCallback = onUpgradeSelected;
+
+        currentState = GameState.Paused;
+        isPaused = true;
+
+        for (int i = 0; i < upgradeButtons.Count; i++)
         {
-            dieMenuUI.SetActive(false);
+            int index = i;
+            UpgradeOption upgrade = upgrades[i];
+
+            // Access the card's elements
+            var card = upgradeButtons[i].transform.parent; // Assuming button is a child of card
+            var icon = card.Find("Image").GetComponent<Image>(); // Find the image component
+            var description = card.Find("Upgrade Desc").GetComponent<TextMeshProUGUI>(); // Find the text component
+
+            // Check for nulls
+            if (icon == null)
+            {
+                Debug.LogError($"Icon Image component missing for upgrade {i}");
+                continue;
+            }
+            if (description == null)
+            {
+                Debug.LogError($"Description Text component missing for upgrade {i}");
+                continue;
+            }
+
+            // Set the icon, name, and description for each upgrade card
+            icon.sprite = upgrade.GetIcon(); // Use GetIcon() to assign the correct icon
+            description.text = $"{upgrade.upgradeName}\n{upgrade.GetDescription()}";
+
+            // Remove any previous listeners
+            upgradeButtons[i].onClick.RemoveAllListeners();
+
+            // Add a click listener to apply the upgrade and unpause the game
+            upgradeButtons[i].onClick.AddListener(() =>
+            {
+                onUpgradeSelectedCallback(upgrade);
+                upgradePanel.SetActive(false);
+
+                // Resume the game after an upgrade is selected
+                ResumeGame();
+            });
         }
-        ReturnToMainMenu();
+        SetPausableObjectsState(false);
     }
 
-    // ---------------------- Game Scene Transition Functions ---------------------- //
+    // ---------------------- Restart and Utility Functions ---------------------- //
 
     public void RestartLevel()
     {
-        if (player != null)
-        {
-            player.ResetPlayerScore();
-        }
-        else
-        {
-            Debug.LogWarning("Player is null in RestartLevel.");
-        }
-
+        // Ensure game state is properly reset to "playing"
         currentState = GameState.Playing;
         isPaused = false;
 
-        if (pauseMenuUI != null)
+        // Hide any UI panels that shouldn't be visible during the game
+        if (pauseMenuUI != null) pauseMenuUI.SetActive(false);
+        if (dieMenuUI != null) dieMenuUI.SetActive(false);
+        if (mainMenuCanvas != null) mainMenuCanvas.SetActive(false);
+        if (upgradePanel != null) upgradePanel.SetActive(false);
+
+        // Reset upgrades and player/game state through LevelManager's InitalValues()
+        ResetUpgrades();
+
+        // Reset enemies, bullets, or other gameplay objects
+        ResetEnemies(); // Reset all enemies
+        ResetCollectibles(); // Reset any collectibles
+        ResetBullets(); // Reset all bullets
+
+        // Resume all game objects that should start active
+        SetPausableObjectsState(true);
+
+        Debug.Log("Game restarted without reloading scene.");
+    }
+
+    private void ResetUpgrades()
+    {
+        // Reset the upgrade panel if it's active
+        if (upgradePanel != null)
         {
-            pauseMenuUI.SetActive(false);
+            upgradePanel.SetActive(false);
         }
 
-        StartCoroutine(LoadScene(SceneManager.GetActiveScene().buildIndex));
-    }
-
-    public void TransitionToScene(int sceneIndex)
-    {
-        currentState = GameState.Transitioning;
-        StartCoroutine(LoadScene(sceneIndex));
-    }
-
-    private IEnumerator LoadScene(int sceneIndex)
-    {
-        yield return SceneManager.LoadSceneAsync(sceneIndex);
-        currentState = GameState.Playing;
-    }
-
-    public void ReturnToMainMenu()
-    {
-        if (pauseMenuUI != null)
+        // Reset upgrade buttons by removing listeners and clearing text
+        foreach (Button button in upgradeButtons)
         {
-            pauseMenuUI.SetActive(false);
+            button.onClick.RemoveAllListeners();
+            var card = button.transform.parent;
+            var description = card.Find("Upgrade Desc").GetComponent<TextMeshProUGUI>();
+            if (description != null) description.text = string.Empty;
         }
 
-        TransitionToScene(0);
+        // Call InitalValues() to reset the player and game state
+        LevelManager levelManager = FindObjectOfType<LevelManager>();
+        if (levelManager != null)
+        {
+            levelManager.InitalValues();
+        }
+        else
+        {
+            Debug.LogError("LevelManager not found in the scene!");
+        }
+    }
+
+    private void ResetEnemies()
+    {
+        // Find all enemies in the scene
+        NewEnemy[] enemies = FindObjectsOfType<NewEnemy>();
+        foreach (var enemy in enemies)
+        {
+            Destroy(enemy.gameObject); // Remove or reset each enemy as required
+        }
+
+        // Optionally, respawn enemies or set up the initial state
+        // enemySpawner.SpawnInitialEnemies(); // Assuming you have an enemy spawner
+    }
+
+    private void ResetCollectibles()
+    {
+        // Find and destroy all collectibles in the scene
+        Collectible[] collectibles = FindObjectsOfType<Collectible>();
+        foreach (var collectible in collectibles)
+        {
+            Destroy(collectible.gameObject);
+        }
+    }
+
+    private void ResetBullets()
+    {
+        // Find all bullets in the scene
+        Bullet[] bullets = FindObjectsOfType<Bullet>();
+        foreach (var bullet in bullets)
+        {
+            Destroy(bullet.gameObject); // Destroy each bullet
+        }
     }
 
     public void SetPausableObjectsState(bool isResuming)
