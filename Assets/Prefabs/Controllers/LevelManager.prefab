@@ -47,4 +47,30 @@ MonoBehaviour:
   weapon: {fileID: 0}
   weaponGun: {fileID: 0}
   weaponPunch: {fileID: 0}
+  weaponPunchSecond: {fileID: 0}
+  allUpgrades:
+  - upgradeName: Health
+    type: 0
+    description: 
+    value: 200
+    weaponToActivate: {fileID: 0}
+    icon: {fileID: 0}
+  - upgradeName: Weapon Gun
+    type: 2
+    description: 
+    value: 0
+    weaponToActivate: {fileID: 0}
+    icon: {fileID: 0}
+  - upgradeName: Speed
+    type: 1
+    description: 
+    value: 3
+    weaponToActivate: {fileID: 0}
+    icon: {fileID: 0}
+  - upgradeName: Weapon Punch
+    type: 2
+    description: 
+    value: 100
+    weaponToActivate: {fileID: 0}
+    icon: {fileID: 0}
   enemySpawner: {fileID: 0}

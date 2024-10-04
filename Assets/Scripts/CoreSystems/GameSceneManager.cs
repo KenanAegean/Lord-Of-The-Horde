@@ -28,6 +28,10 @@ public class GameSceneManager : MonoBehaviour
     public TextMeshProUGUI upgradeDescriptionText; // The text field for showing descriptions
     private System.Action<UpgradeOption> onUpgradeSelectedCallback;
 
+    public Sprite defaultHealthIcon;
+    public Sprite defaultSpeedIcon;
+    public Sprite defaultWeaponIcon;
+
     private bool isPaused = false;
     public GameState currentState = GameState.Playing;
     private NewPlayer player;
@@ -69,6 +73,7 @@ public class GameSceneManager : MonoBehaviour
             DontDestroyOnLoad(pauseMenuUI.transform.root.gameObject);
             DontDestroyOnLoad(dieMenuUI.transform.root.gameObject);
         }
+        UpgradeOption.SetDefaultIcons(defaultHealthIcon, defaultSpeedIcon, defaultWeaponIcon);
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -114,45 +119,48 @@ public class GameSceneManager : MonoBehaviour
         upgradePanel.SetActive(true);
         onUpgradeSelectedCallback = onUpgradeSelected;
 
+        currentState = GameState.Paused;
+        isPaused = true;
+
         for (int i = 0; i < upgradeButtons.Count; i++)
         {
-            currentState = GameState.Paused;
-            isPaused = true;
             int index = i;
             UpgradeOption upgrade = upgrades[i];
 
-            // Set the button text to the upgrade name
-            upgradeButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = upgrade.upgradeName;
+            // Access the card's elements
+            var card = upgradeButtons[i].transform.parent; // Assuming button is a child of card
+            var icon = card.Find("Image").GetComponent<Image>(); // Find the image component
+            var description = card.Find("Upgrade Desc").GetComponent<TextMeshProUGUI>(); // Find the text component
+
+            // Check for nulls
+            if (icon == null)
+            {
+                Debug.LogError($"Icon Image component missing for upgrade {i}");
+                continue;
+            }
+            if (description == null)
+            {
+                Debug.LogError($"Description Text component missing for upgrade {i}");
+                continue;
+            }
+
+            // Set the icon, name, and description for each upgrade card
+            icon.sprite = upgrade.GetIcon(); // Use GetIcon() to assign the correct icon
+            description.text = $"{upgrade.upgradeName}\n{upgrade.GetDescription()}";
 
             // Remove any previous listeners
             upgradeButtons[i].onClick.RemoveAllListeners();
 
-            // Add a click listener to apply the upgrade
+            // Add a click listener to apply the upgrade and unpause the game
             upgradeButtons[i].onClick.AddListener(() =>
             {
                 onUpgradeSelectedCallback(upgrade);
-                upgradePanel.SetActive(false); // Hide panel after selection
+                upgradePanel.SetActive(false);
+
+                // Resume the game after an upgrade is selected
                 ResumeGame();
             });
-
-            // Add listeners for showing the description on hover/selection
-            upgradeButtons[i].onClick.AddListener(() =>
-            {
-                upgradeDescriptionText.text = upgrade.description; // Show description on hover
-            });
-
-            // Alternatively, if using hover effects (requires Unity's Event Trigger system):
-            var trigger = upgradeButtons[i].gameObject.AddComponent<UnityEngine.EventSystems.EventTrigger>();
-            var entry = new UnityEngine.EventSystems.EventTrigger.Entry
-            {
-                eventID = UnityEngine.EventSystems.EventTriggerType.PointerEnter
-            };
-            entry.callback.AddListener((data) => { upgradeDescriptionText.text = upgrade.description; });
-            trigger.triggers.Add(entry);
         }
-
-        // Reset the description text when the panel is first shown
-        upgradeDescriptionText.text = "Hover over an upgrade to see its description.";
         SetPausableObjectsState(false);
     }
 
