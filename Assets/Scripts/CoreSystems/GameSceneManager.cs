@@ -31,6 +31,8 @@ public class GameSceneManager : MonoBehaviour
     public Sprite defaultHealthIcon;
     public Sprite defaultSpeedIcon;
     public Sprite defaultWeaponIcon;
+    public Sprite defaultOrbitIcon;
+    public Sprite defaultOrbitDIcon;
 
     private bool isPaused = false;
     public GameState currentState = GameState.Playing;
@@ -80,7 +82,7 @@ public class GameSceneManager : MonoBehaviour
             DontDestroyOnLoad(dieMenuUI.transform.root.gameObject);
         }
 
-        UpgradeOption.SetDefaultIcons(defaultHealthIcon, defaultSpeedIcon, defaultWeaponIcon);
+        UpgradeOption.SetDefaultIcons(defaultHealthIcon, defaultSpeedIcon, defaultWeaponIcon, defaultOrbitIcon, defaultOrbitDIcon);
 
         // Display the main menu only when the game starts (not on restart)
         ShowMainMenu();

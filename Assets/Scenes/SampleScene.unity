@@ -3451,6 +3451,34 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1051672499}
     - target: {fileID: 7374623756225094040, guid: 870f96a6a8c69cd408a401c3d7574439, type: 3}
+      propertyPath: allUpgrades.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7374623756225094040, guid: 870f96a6a8c69cd408a401c3d7574439, type: 3}
+      propertyPath: allUpgrades.Array.data[4].type
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7374623756225094040, guid: 870f96a6a8c69cd408a401c3d7574439, type: 3}
+      propertyPath: allUpgrades.Array.data[5].type
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7374623756225094040, guid: 870f96a6a8c69cd408a401c3d7574439, type: 3}
+      propertyPath: allUpgrades.Array.data[4].value
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7374623756225094040, guid: 870f96a6a8c69cd408a401c3d7574439, type: 3}
+      propertyPath: allUpgrades.Array.data[5].value
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7374623756225094040, guid: 870f96a6a8c69cd408a401c3d7574439, type: 3}
+      propertyPath: allUpgrades.Array.data[4].upgradeName
+      value: Orbital Speed
+      objectReference: {fileID: 0}
+    - target: {fileID: 7374623756225094040, guid: 870f96a6a8c69cd408a401c3d7574439, type: 3}
+      propertyPath: allUpgrades.Array.data[5].upgradeName
+      value: Orbit Direction
+      objectReference: {fileID: 0}
+    - target: {fileID: 7374623756225094040, guid: 870f96a6a8c69cd408a401c3d7574439, type: 3}
       propertyPath: allUpgrades.Array.data[1].weaponToActivate
       value: 
       objectReference: {fileID: 1975619091}
@@ -3458,6 +3486,14 @@ PrefabInstance:
       propertyPath: allUpgrades.Array.data[3].weaponToActivate
       value: 
       objectReference: {fileID: 1051672499}
+    - target: {fileID: 7374623756225094040, guid: 870f96a6a8c69cd408a401c3d7574439, type: 3}
+      propertyPath: allUpgrades.Array.data[4].weaponToActivate
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7374623756225094040, guid: 870f96a6a8c69cd408a401c3d7574439, type: 3}
+      propertyPath: allUpgrades.Array.data[5].weaponToActivate
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 9218058697484056997, guid: 870f96a6a8c69cd408a401c3d7574439, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -3948,6 +3984,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1598619871}
     - target: {fileID: 153538774416761914, guid: 3f2d230bf79b23242814eb4df82f6dbd, type: 3}
+      propertyPath: defaultOrbitIcon
+      value: 
+      objectReference: {fileID: 21300000, guid: 1b64a198925aa044b84dfb6753bf518e, type: 3}
+    - target: {fileID: 153538774416761914, guid: 3f2d230bf79b23242814eb4df82f6dbd, type: 3}
       propertyPath: defaultSpeedIcon
       value: 
       objectReference: {fileID: 21300000, guid: 8ba794504e7d34a479ce6df2fec41389, type: 3}
@@ -3959,6 +3999,10 @@ PrefabInstance:
       propertyPath: defaultHealthIcon
       value: 
       objectReference: {fileID: 21300000, guid: a98f067d77b7b9d4db66845e282a0540, type: 3}
+    - target: {fileID: 153538774416761914, guid: 3f2d230bf79b23242814eb4df82f6dbd, type: 3}
+      propertyPath: defaultOrbitDIcon
+      value: 
+      objectReference: {fileID: 21300000, guid: d556ae4a5156f224d818ee689a350e6d, type: 3}
     - target: {fileID: 153538774416761914, guid: 3f2d230bf79b23242814eb4df82f6dbd, type: 3}
       propertyPath: defaultWeaponIcon
       value: 
