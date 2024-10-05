@@ -172,7 +172,10 @@ public class NewEnemy : PhysicsObject, IPausable
         isDealingDamage = true;
         while (true)
         {
-            player.TakeDamage(Damage);
+            if (!isPaused)
+            {
+                player.TakeDamage(Damage);
+            }
             yield return new WaitForSeconds(1f);
         }
     }
