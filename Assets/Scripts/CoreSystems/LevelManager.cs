@@ -6,7 +6,6 @@ public class LevelManager : MonoBehaviour
     private NewPlayer player;
 
     [SerializeField] private Weapon weapon;
-    [SerializeField] private Weapon mainWeapon;
     [SerializeField] private List<Weapon> secondaryWeapons;
 
     [SerializeField] private List<UpgradeOption> allUpgrades;
@@ -18,20 +17,47 @@ public class LevelManager : MonoBehaviour
     private void Start()
     {
         player = NewPlayer.Instance;
-        InitalValues();
+        InitializeValues(player); // Initialize values when the game starts
     }
 
-    public void InitalValues()
+    public void InitializeValues(NewPlayer player)
     {
-        player.transform.position = new Vector3(0, 0, 0);
+        // Find the PlayerInitializer on the player to get initial values
+        PlayerInitializer initializer = player.GetComponent<PlayerInitializer>();
 
-        // Initialize main weapon
-        mainWeapon.gameObject.SetActive(true);
+        if (initializer == null)
+        {
+            Debug.LogError("PlayerInitializer not found on the player object!");
+            return;
+        }
 
-        // Loop through all secondary weapons and set them inactive
+        player.transform.position = Vector3.zero;
+
+        // Set player initial stats
+        player.maxHealth = initializer.maxHealth;
+        player.health = initializer.startHealth;
+        player.currentXP = initializer.startXP;
+        player.xpToNextLevel = initializer.xpToNextLevel;
+
+        // Initialize main weapon dynamically
+        Transform mainWeaponTransform = player.transform.Find("WeaponHand/MainWeapon");
+        if (mainWeaponTransform != null)
+        {
+            Weapon mainWeapon = mainWeaponTransform.GetComponent<Weapon>();
+            if (mainWeapon != null)
+            {
+                mainWeapon.gameObject.SetActive(true);
+            }
+        }
+
+        // Deactivate all secondary weapons, then activate initial ones
         foreach (Weapon secondaryWeapon in secondaryWeapons)
         {
             secondaryWeapon.gameObject.SetActive(false);
+        }
+        foreach (Weapon startingSecondaryWeapon in initializer.secondaryWeapons)
+        {
+            startingSecondaryWeapon.gameObject.SetActive(true);
         }
 
         weapon.rotationSpeed = 100.0f;
@@ -39,11 +65,8 @@ public class LevelManager : MonoBehaviour
         enemySpawner.spawnInterval = 1.2f;
 
         player.playerLevel = 0;
-        player.xpToNextLevel = 50.0f;
 
-        // Reset player health, score, and other stats as necessary
-        player.health = player.maxHealth;
-        player.currentXP = 0f;
+        // Reset player score and other stats
         player.ResetPlayerScore();
 
         // Update the UI after resetting values
@@ -52,20 +75,20 @@ public class LevelManager : MonoBehaviour
 
     public void UpdatePlayerStats()
     {
-        //Effects.LeveltUpFX(player.transform);
+        // Effects.LeveltUpFX(player.transform);
         player.playerLevel++;
 
         TriggerUpgradeSelection();
-        //Effects.LeveltUpFX(player.transform);
+        // Effects.LeveltUpFX(player.transform);
 
         player.currentXP -= player.xpToNextLevel;
         player.xpToNextLevel *= 1.5f;
-        //player.maxHealth += 10f;
-        //player.health += 15f;
-        //player.ObjectSpeed *= 1.3f;
+        // player.maxHealth += 10f;
+        // player.health += 15f;
+        // player.ObjectSpeed *= 1.3f;
 
-        //weapon.rotationSpeed *= 1.5f;
-        //weaponGun.spawnInterval /= 1.5f;
+        // weapon.rotationSpeed *= 1.5f;
+        // weaponGun.spawnInterval /= 1.5f;
 
         enemySpawner.spawnInterval /= 1.2f;
     }

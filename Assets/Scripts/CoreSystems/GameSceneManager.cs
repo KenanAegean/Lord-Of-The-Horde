@@ -39,6 +39,16 @@ public class GameSceneManager : MonoBehaviour
     private NewPlayer player;
     private float lastRunScore = 0f;
 
+    // Player Selection Variables
+    [Header("Player Selection")]
+    [SerializeField] private List<GameObject> playerPrefabs; // List of player prefabs for initial data
+    [SerializeField] private GameObject characterSelectionCanvas; // Reference to the Character Selection Canvas
+    [SerializeField] private Image playerImage; // Player portrait image
+    [SerializeField] private Image playerMainWeaponImage; // Main weapon image
+    [SerializeField] private TextMeshProUGUI playerNameText; // Player name text
+    [SerializeField] private TextMeshProUGUI playerDescriptionText; // Player description text
+    private int currentIndex = 0;
+
     private void Awake()
     {
         if (Instance == null)
@@ -63,10 +73,17 @@ public class GameSceneManager : MonoBehaviour
 
     private void Start()
     {
+
         // Explicitly deactivate main menu canvas at the start
         if (mainMenuCanvas != null)
         {
             mainMenuCanvas.SetActive(false);
+        }
+
+        // Start with the selection canvas inactive
+        if (characterSelectionCanvas != null)
+        {
+            characterSelectionCanvas.SetActive(false);
         }
 
         // Find the player instance safely
@@ -98,7 +115,147 @@ public class GameSceneManager : MonoBehaviour
             if (currentState == GameState.Playing) PauseGame();
             else if (currentState == GameState.Paused) ResumeGame();
         }
+
+        // Handle navigation input for switching players during selection
+        if (characterSelectionCanvas != null && characterSelectionCanvas.activeSelf)
+        {
+            if (Input.GetKeyDown(KeyCode.LeftArrow))
+            {
+                Navigate(-1); // Move to the previous player
+            }
+            else if (Input.GetKeyDown(KeyCode.RightArrow))
+            {
+                Navigate(1); // Move to the next player
+            }
+        }
     }
+
+    // ---------------------- Player Selection Functions ---------------------- //
+
+    public void StartCharacterSelection()
+    {
+        // Activate the character selection canvas when called
+        characterSelectionCanvas.SetActive(true);
+        UpdatePlayerSelectionUI();
+        
+        
+    }
+
+    public void Navigate(int direction)
+    {
+        // Calculate new index with wrap-around
+        currentIndex += direction;
+        if (currentIndex < 0) currentIndex = playerPrefabs.Count - 1;
+        if (currentIndex >= playerPrefabs.Count) currentIndex = 0;
+
+        UpdatePlayerSelectionUI();
+    }
+
+    private void UpdatePlayerSelectionUI()
+    {
+        // Get the PlayerInitializer component from the current selection
+        GameObject selectedPlayerPrefab = playerPrefabs[currentIndex];
+        PlayerInitializer initializer = selectedPlayerPrefab.GetComponent<PlayerInitializer>();
+        if (initializer == null) return;
+
+        // Update UI elements with data from the initializer
+        playerNameText.text = initializer.playerName;
+        playerDescriptionText.text = initializer.playerDescription;
+
+        // Get the portrait from the SpriteRenderer of the root object
+        SpriteRenderer spriteRenderer = selectedPlayerPrefab.GetComponent<SpriteRenderer>();
+        if (spriteRenderer != null)
+        {
+            playerImage.sprite = spriteRenderer.sprite;
+        }
+
+        // Get the main weapon's sprite
+        Transform mainWeaponTransform = selectedPlayerPrefab.transform.Find("WeaponHand/MainWeapon");
+        if (mainWeaponTransform != null)
+        {
+            Weapon mainWeapon = mainWeaponTransform.GetComponent<Weapon>();
+            if (mainWeapon != null)
+            {
+                SpriteRenderer weaponSpriteRenderer = mainWeapon.GetComponent<SpriteRenderer>();
+                if (weaponSpriteRenderer != null)
+                {
+                    playerMainWeaponImage.sprite = weaponSpriteRenderer.sprite;
+                }
+            }
+        }
+    }
+
+    public void ConfirmCharacterSelection()
+    {
+        // Get the PlayerInitializer component from the selected prefab
+        GameObject selectedPlayerPrefab = playerPrefabs[currentIndex];
+        PlayerInitializer initializer = selectedPlayerPrefab.GetComponent<PlayerInitializer>();
+        if (initializer == null) return;
+
+        // Apply the initializer's data to the existing player
+        ApplyDataToPlayer(initializer, selectedPlayerPrefab);
+
+        // Hide the character selection canvas
+        characterSelectionCanvas.SetActive(false);
+
+        //RestartLevel();
+
+        // Set game state to playing
+        currentState = GameState.Playing;
+        isPaused = false;
+
+        // Resume all pausable objects
+        SetPausableObjectsState(true);
+    }
+
+
+    private void ApplyDataToPlayer(PlayerInitializer initializer, GameObject selectedPlayerPrefab)
+    {
+        // Apply initial stats and properties to the existing player
+        player.maxHealth = initializer.maxHealth;
+        player.health = initializer.startHealth;
+        player.currentXP = initializer.startXP;
+        player.xpToNextLevel = initializer.xpToNextLevel;
+
+        // Update player's sprite to match the selected character
+        SpriteRenderer playerSpriteRenderer = player.GetComponent<SpriteRenderer>();
+        SpriteRenderer selectedSpriteRenderer = selectedPlayerPrefab.GetComponent<SpriteRenderer>();
+
+        if (playerSpriteRenderer != null && selectedSpriteRenderer != null)
+        {
+            playerSpriteRenderer.sprite = selectedSpriteRenderer.sprite;
+        }
+
+        // Update the player's main weapon
+        UpdateMainWeapon(initializer, selectedPlayerPrefab);
+
+        // Update the player's UI
+        player.UpdateUI();
+    }
+
+    private void UpdateMainWeapon(PlayerInitializer initializer, GameObject selectedPlayerPrefab)
+    {
+        // Find the main weapon in the selected prefab
+        Transform mainWeaponTransform = selectedPlayerPrefab.transform.Find("WeaponHand/MainWeapon");
+
+        if (mainWeaponTransform != null)
+        {
+            // Find the main weapon in the existing player
+            Transform existingMainWeaponTransform = player.transform.Find("WeaponHand/MainWeapon");
+
+            if (existingMainWeaponTransform != null)
+            {
+                // Destroy the current main weapon if it exists
+                Destroy(existingMainWeaponTransform.gameObject);
+            }
+
+            // Instantiate a new main weapon as a child of the player
+            GameObject newWeapon = Instantiate(mainWeaponTransform.gameObject, player.transform.Find("WeaponHand"));
+            newWeapon.name = "MainWeapon"; // Ensure the new weapon has the correct name
+        }
+    }
+
+
 
     // ---------------------- Main Menu Functions ---------------------- //
 
@@ -125,13 +282,14 @@ public class GameSceneManager : MonoBehaviour
         {
             mainMenuCanvas.SetActive(false);
         }
-        RestartLevel();
+
+        StartCharacterSelection();
+        //RestartLevel();
 
         if (dieMenuUI != null)
         {
             dieMenuUI.SetActive(false);
         }
-
 
         // Reset player score or any other state necessary to start the game
         if (player != null)
@@ -143,16 +301,13 @@ public class GameSceneManager : MonoBehaviour
             Debug.LogWarning("Player is null in StartGame.");
         }
 
-        // Set game state
-        currentState = GameState.Playing;
-        isPaused = false;
-
-        // Resume all pausable objects
-        SetPausableObjectsState(true);
+        
     }
+
 
     public void ReturnToMainMenu()
     {
+        ResesetAll();
         // Pause the game and show the main menu panel
         currentState = GameState.Paused;
         isPaused = true;
@@ -347,6 +502,32 @@ public class GameSceneManager : MonoBehaviour
         Debug.Log("Game restarted without reloading scene.");
     }
 
+    public void ResesetAll()
+    {
+        // Ensure game state is properly reset to "paused"
+        currentState = GameState.Paused;
+        isPaused = true;
+
+        // Hide any UI panels that shouldn't be visible during the game
+        if (pauseMenuUI != null) pauseMenuUI.SetActive(false);
+        if (dieMenuUI != null) dieMenuUI.SetActive(false);
+        if (mainMenuCanvas != null) mainMenuCanvas.SetActive(true);
+        if (upgradePanel != null) upgradePanel.SetActive(false);
+
+        // Reset upgrades and player/game state through LevelManager's InitalValues()
+        ResetUpgrades();
+
+        // Reset enemies, bullets, or other gameplay objects
+        ResetEnemies(); // Reset all enemies
+        ResetCollectibles(); // Reset any collectibles
+        ResetBullets(); // Reset all bullets
+
+        // Resume all game objects that should start active
+        SetPausableObjectsState(false);
+
+        Debug.Log("Game restarted without reloading scene.");
+    }
+
     private void ResetUpgrades()
     {
         // Reset the upgrade panel if it's active
@@ -368,7 +549,7 @@ public class GameSceneManager : MonoBehaviour
         LevelManager levelManager = FindObjectOfType<LevelManager>();
         if (levelManager != null)
         {
-            levelManager.InitalValues();
+            levelManager.InitializeValues(player);
         }
         else
         {

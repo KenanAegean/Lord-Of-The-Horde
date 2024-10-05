@@ -7,17 +7,16 @@ using TMPro;
 
 public class NewPlayer : PhysicsObject, IPausable
 {
+    [Header("Current Player Stats")]
+    [SerializeField] public float maxHealth = 100f;
+    [SerializeField] public float health = 100f;
+    [SerializeField] public float currentXP = 0f;
+    [SerializeField] public float xpToNextLevel = 100f;
+    [SerializeField] public int playerLevel = 0;
+
     // Configurations
     [SerializeField] public Camera Camera;
 
-    [Header("Inventory")]
-    [SerializeField] public float maxHealth = 100f;
-    [SerializeField] public float health = 100f;
-
-    [Header("XP and Level")]
-    [SerializeField] public int playerLevel = 0;
-    [SerializeField] public float currentXP = 0f;
-    [SerializeField] public float xpToNextLevel = 100f;
     [SerializeField] public float score = 0f;
 
     private UIManager uiManager;
@@ -145,15 +144,55 @@ public class NewPlayer : PhysicsObject, IPausable
     public void ResetPlayerState()
     {
         // Reset player health, XP, and position to initial state
-        health = maxHealth; // Assuming `maxHealth` is the full health value
+        health = maxHealth;
         currentXP = 0f;
-        transform.position = Vector3.zero; // Reset to the initial spawn position
+        transform.position = Vector3.zero;
 
         // Update UI elements
         UIManager.Instance.UpdateHealthUI(health, maxHealth);
         UIManager.Instance.UpdateXPUI(currentXP, xpToNextLevel);
     }
 
+    public void ApplyInitialValues(PlayerInitializer initializer)
+    {
+        // Apply initial stats from PlayerInitializer
+        maxHealth = initializer.maxHealth;
+        health = initializer.startHealth;
+        currentXP = initializer.startXP;
+        xpToNextLevel = initializer.xpToNextLevel;
+
+        // Find and equip the main weapon dynamically
+        Transform mainWeaponTransform = transform.Find("WeaponHand/MainWeapon");
+        if (mainWeaponTransform != null)
+        {
+            Weapon mainWeapon = mainWeaponTransform.GetComponent<Weapon>();
+            if (mainWeapon != null)
+            {
+                EquipMainWeapon(mainWeapon);
+            }
+        }
+
+        // Equip secondary weapons (if available)
+        foreach (var secondaryWeapon in initializer.secondaryWeapons)
+        {
+            EquipSecondaryWeapon(secondaryWeapon);
+        }
+
+        // Update UI with new stats
+        UpdateUI();
+    }
+
+    private void EquipMainWeapon(Weapon weapon)
+    {
+        // Logic to equip the main weapon
+        weapon.gameObject.SetActive(true);
+    }
+
+    private void EquipSecondaryWeapon(Weapon weapon)
+    {
+        // Logic to equip secondary weapons
+        weapon.gameObject.SetActive(true);
+    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
