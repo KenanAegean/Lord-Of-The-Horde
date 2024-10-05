@@ -5,7 +5,8 @@ public enum UpgradeType
     HealthIncrease,
     SpeedIncrease,
     WeaponActivation,
-    SpeedyIncrease
+    OrbitalSpeed,
+    OrbitDirection
 }
 
 [System.Serializable]
@@ -22,6 +23,8 @@ public class UpgradeOption
     private static Sprite defaultHealthIcon;
     private static Sprite defaultSpeedIcon;
     private static Sprite defaultWeaponIcon;
+    private static Sprite defaultOrbitIcon;
+    private static Sprite defaultOrbitDIcon;
 
     // Method to get the correct icon (either the assigned one or a default one based on type)
     public Sprite GetIcon()
@@ -41,20 +44,26 @@ public class UpgradeOption
                 return defaultSpeedIcon;
             case UpgradeType.WeaponActivation:
                 return defaultWeaponIcon;
+            case UpgradeType.OrbitalSpeed:
+                return defaultOrbitIcon;
+            case UpgradeType.OrbitDirection:
+                return defaultOrbitDIcon;
             default:
                 return null;
         }
     }
 
     // Static method to set the default icons (called once during setup)
-    public static void SetDefaultIcons(Sprite healthIcon, Sprite speedIcon, Sprite weaponIcon)
+    public static void SetDefaultIcons(Sprite healthIcon, Sprite speedIcon, Sprite weaponIcon, Sprite orbitIcon, Sprite orbitDIcon)
     {
         defaultHealthIcon = healthIcon;
         defaultSpeedIcon = speedIcon;
         defaultWeaponIcon = weaponIcon;
+        defaultOrbitIcon = orbitIcon;
+        defaultOrbitDIcon = orbitDIcon;
     }
 
-    public void ApplyUpgrade(NewPlayer player)
+    public void ApplyUpgrade(NewPlayer player, Weapon weapon)
     {
         switch (type)
         {
@@ -71,8 +80,11 @@ public class UpgradeOption
                     weaponToActivate.gameObject.SetActive(true);
                 }
                 break;
-            case UpgradeType.SpeedyIncrease:
-                player.ObjectSpeed += value;
+            case UpgradeType.OrbitalSpeed:
+                weapon.rotationSpeed *= value;
+                break;
+            case UpgradeType.OrbitDirection:
+                weapon.rotationSpeed *= value;
                 break;
         }
     }
@@ -95,6 +107,10 @@ public class UpgradeOption
                 return $"Increase player speed by +{value}.";
             case UpgradeType.WeaponActivation:
                 return "Unlock a new weapon!";
+            case UpgradeType.OrbitalSpeed:
+                return $"Increase weapon speed by x{value}.";
+            case UpgradeType.OrbitDirection:
+                return $"Change the weapons direction.";
             default:
                 return "Upgrade your abilities.";
         }

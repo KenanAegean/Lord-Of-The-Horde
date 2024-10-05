@@ -57,10 +57,10 @@ public class LevelManager : MonoBehaviour
         //player.health += 15f;
         //player.ObjectSpeed *= 1.3f;
 
-        weapon.rotationSpeed *= 1.5f;
-        weaponGun.spawnInterval /= 1.5f;
+        //weapon.rotationSpeed *= 1.5f;
+        //weaponGun.spawnInterval /= 1.5f;
 
-        enemySpawner.spawnInterval /= 1.5f;
+        enemySpawner.spawnInterval /= 1.2f;
     }
 
     private void TriggerUpgradeSelection()
@@ -92,7 +92,7 @@ public class LevelManager : MonoBehaviour
 
     private void OnUpgradeSelected(UpgradeOption selectedUpgrade)
     {
-        selectedUpgrade.ApplyUpgrade(player);
+        selectedUpgrade.ApplyUpgrade(player, weapon);
         player.UpdateUI();
     }
 }
