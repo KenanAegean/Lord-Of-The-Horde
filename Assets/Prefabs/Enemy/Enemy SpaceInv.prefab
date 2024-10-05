@@ -108,7 +108,7 @@ MonoBehaviour:
   searchRadius: 10
   patrolRadius: 5
   patrolInterval: 1
-  xpAmount: 25
+  xpAmount: 30
   collectablePrefab: {fileID: 4059571283236773848, guid: a202949c2afebb544a8c16d5a59c9d3e, type: 3}
   damageStatusPrefabs:
   - {fileID: 2424548919708570033, guid: 1c12dc5353c0f644eacc708d8bd7071e, type: 3}
