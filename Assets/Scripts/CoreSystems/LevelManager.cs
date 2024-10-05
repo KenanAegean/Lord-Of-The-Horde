@@ -46,10 +46,11 @@ public class LevelManager : MonoBehaviour
 
     public void UpdatePlayerStats()
     {
-        Effects.LeveltUpFX(player.transform);
+        //Effects.LeveltUpFX(player.transform);
         player.playerLevel++;
 
         TriggerUpgradeSelection();
+        //Effects.LeveltUpFX(player.transform);
 
         player.currentXP -= player.xpToNextLevel;
         player.xpToNextLevel *= 1.5f;
