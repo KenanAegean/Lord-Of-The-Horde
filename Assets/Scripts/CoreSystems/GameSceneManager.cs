@@ -312,9 +312,11 @@ public class GameSceneManager : MonoBehaviour
 
                 // Resume the game after an upgrade is selected
                 ResumeGame();
+                Effects.LeveltUpFX(player.transform);
             });
         }
         SetPausableObjectsState(false);
+        
     }
 
     // ---------------------- Restart and Utility Functions ---------------------- //

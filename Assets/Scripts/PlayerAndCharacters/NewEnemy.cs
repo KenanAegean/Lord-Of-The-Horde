@@ -11,6 +11,7 @@ public class NewEnemy : PhysicsObject, IPausable
     [SerializeField] private float searchRadius = 10.0f;
     [SerializeField] private float patrolRadius = 7.0f;
     [SerializeField] private float patrolInterval = 2.0f;
+    [SerializeField] private float xpAmount = 25.0f;
 
     [Header("Other Attributes")]
     [SerializeField] private GameObject collectablePrefab;
@@ -33,6 +34,8 @@ public class NewEnemy : PhysicsObject, IPausable
         spriteRenderer = GetComponent<SpriteRenderer>();
         FindPlayer();
         StartCoroutine(Patrol());
+        Collectible collectible = collectablePrefab.GetComponent<Collectible>();
+        collectible.SetXPAmount(xpAmount);
     }
 
     public void OnPause() => isPaused = true;

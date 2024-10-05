@@ -8,4 +8,9 @@ public class Collectible : MonoBehaviour
     {
         return xpAmount;
     }
+
+    public void SetXPAmount(float value)
+    { 
+       xpAmount = value; 
+    }
 }
