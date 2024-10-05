@@ -6,13 +6,14 @@ public class LevelManager : MonoBehaviour
     private NewPlayer player;
 
     [SerializeField] private Weapon weapon;
-    [SerializeField] private Weapon weaponGun;
-    [SerializeField] private Weapon weaponPunch;
-    [SerializeField] private Weapon weaponPunchSecond;
+    [SerializeField] private Weapon mainWeapon;
+    [SerializeField] private List<Weapon> secondaryWeapons;
 
     [SerializeField] private List<UpgradeOption> allUpgrades;
 
     [SerializeField] private EnemySpawner enemySpawner;
+
+    private Weapon activeSecondaryWeapon;
 
     private void Start()
     {
@@ -24,9 +25,14 @@ public class LevelManager : MonoBehaviour
     {
         player.transform.position = new Vector3(0, 0, 0);
 
-        weaponPunch.gameObject.SetActive(true);
-        weaponPunchSecond.gameObject.SetActive(false);
-        weaponGun.gameObject.SetActive(false);
+        // Initialize main weapon
+        mainWeapon.gameObject.SetActive(true);
+
+        // Loop through all secondary weapons and set them inactive
+        foreach (Weapon secondaryWeapon in secondaryWeapons)
+        {
+            secondaryWeapon.gameObject.SetActive(false);
+        }
 
         weapon.rotationSpeed = 100.0f;
 
@@ -90,10 +96,38 @@ public class LevelManager : MonoBehaviour
         GameSceneManager.Instance.ShowUpgradeChoices(selectedUpgrades, OnUpgradeSelected);
     }
 
-
     private void OnUpgradeSelected(UpgradeOption selectedUpgrade)
     {
-        selectedUpgrade.ApplyUpgrade(player, weapon);
+        selectedUpgrade.ApplyUpgrade(player, weapon, this);
         player.UpdateUI();
+    }
+
+    // Activates a new secondary weapon, replacing any existing one
+    public void ActivateSecondaryWeapon(Weapon weaponToActivate)
+    {
+        // If there's an active secondary weapon, deactivate it
+        if (activeSecondaryWeapon != null)
+        {
+            activeSecondaryWeapon.StopShooting(); // Stop shooting before deactivating
+            activeSecondaryWeapon.gameObject.SetActive(false);
+        }
+
+        // Activate the new weapon and set it as the active secondary weapon
+        if (secondaryWeapons.Contains(weaponToActivate))
+        {
+            weaponToActivate.gameObject.SetActive(true);
+            weaponToActivate.StartShooting(); // Ensure shooting is started after activation
+            activeSecondaryWeapon = weaponToActivate;
+        }
+    }
+
+    // Optional: Method to deactivate the current active secondary weapon
+    public void DeactivateActiveSecondaryWeapon()
+    {
+        if (activeSecondaryWeapon != null)
+        {
+            activeSecondaryWeapon.gameObject.SetActive(false);
+            activeSecondaryWeapon = null;
+        }
     }
 }
