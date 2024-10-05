@@ -3463,6 +3463,18 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -204.49811
       objectReference: {fileID: 0}
+    - target: {fileID: 688913642061528584, guid: 2958135616889e849ae29f0c83b0f278, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -9.7687
+      objectReference: {fileID: 0}
+    - target: {fileID: 688913642061528584, guid: 2958135616889e849ae29f0c83b0f278, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -4.884308
+      objectReference: {fileID: 0}
+    - target: {fileID: 1853995520980696641, guid: 2958135616889e849ae29f0c83b0f278, type: 3}
+      propertyPath: m_Value
+      value: 83
+      objectReference: {fileID: 0}
     - target: {fileID: 2691535931534796636, guid: 2958135616889e849ae29f0c83b0f278, type: 3}
       propertyPath: m_text
       value: PAUSE
@@ -3611,6 +3623,10 @@ PrefabInstance:
       propertyPath: dieCanvasScoreText
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 6522987181710376743, guid: 2958135616889e849ae29f0c83b0f278, type: 3}
+      propertyPath: m_Value
+      value: 93
+      objectReference: {fileID: 0}
     - target: {fileID: 6602743594222274510, guid: 2958135616889e849ae29f0c83b0f278, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 131.43091
@@ -3642,6 +3658,14 @@ PrefabInstance:
     - target: {fileID: 8213988575465211245, guid: 2958135616889e849ae29f0c83b0f278, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -243.00726
+      objectReference: {fileID: 0}
+    - target: {fileID: 8712336690073240818, guid: 2958135616889e849ae29f0c83b0f278, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -9.7745
+      objectReference: {fileID: 0}
+    - target: {fileID: 8712336690073240818, guid: 2958135616889e849ae29f0c83b0f278, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -4.887207
       objectReference: {fileID: 0}
     - target: {fileID: 8822090818149822985, guid: 2958135616889e849ae29f0c83b0f278, type: 3}
       propertyPath: m_Colors.m_HighlightedColor.b
