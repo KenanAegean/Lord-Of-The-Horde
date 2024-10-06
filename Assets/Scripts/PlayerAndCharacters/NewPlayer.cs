@@ -24,6 +24,7 @@ public class NewPlayer : PhysicsObject, IPausable
 
     public bool isAlive = true;
     private bool isPaused = false;
+    private SpriteRenderer spriteRenderer;
 
     // Singleton instantiation
     private static NewPlayer instance;
@@ -47,6 +48,15 @@ public class NewPlayer : PhysicsObject, IPausable
         {
             Debug.LogError("UIManager not found in the scene!");
             return;
+        }
+
+        // Find the SpriteRenderer component on the parent object
+        spriteRenderer = GetComponent<SpriteRenderer>();
+
+        // Make sure we found the sprite renderer
+        if (spriteRenderer == null)
+        {
+            Debug.LogError("SpriteRenderer could not be found on the parent object!");
         }
 
         // Initialize UI
@@ -75,17 +85,17 @@ public class NewPlayer : PhysicsObject, IPausable
         _target = Camera.ScreenToWorldPoint(Input.mousePosition);
         _target.z = 0;
     
-        // Flip the player sprite based on the cursor position relative to the player
+        // Flip the player's sprite based on the cursor position relative to the player
         Vector3 playerPosition = transform.position;
         if (_target.x < playerPosition.x)
         {
             // Cursor is on the left side of the player
-            transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z); // Mirror without changing size
+            spriteRenderer.flipX = false; // Flip the sprite horizontally
         }
         else
         {
             // Cursor is on the right side of the player
-            transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z); // Default scale
+            spriteRenderer.flipX = true; // Default orientation
         }
     }
 
