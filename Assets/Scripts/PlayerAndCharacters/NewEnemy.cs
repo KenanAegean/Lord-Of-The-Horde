@@ -74,11 +74,11 @@ public class NewEnemy : PhysicsObject, IPausable
                 // Flip the sprite based on the player's position relative to the enemy
                 if (_player.position.x < transform.position.x)
                 {
-                    spriteRenderer.flipX = true; // Player is to the left, flip enemy
+                    spriteRenderer.flipX = false; // Player is to the left, flip enemy
                 }
                 else
                 {
-                    spriteRenderer.flipX = false; // Player is to the right, default facing direction
+                    spriteRenderer.flipX = true; // Player is to the right, default facing direction
                 }
             }
             else if (distance <= searchRadius)
