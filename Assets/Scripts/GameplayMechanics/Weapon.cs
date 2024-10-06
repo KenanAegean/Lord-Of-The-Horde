@@ -76,7 +76,7 @@ public class Weapon : MonoBehaviour, IPausable
 
             GameObject bullet = Instantiate(bulletPrefab, transform.position, transform.rotation);
             Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
-            if (rb != null) rb.velocity = transform.right * bulletSpeed;
+            if (rb != null) rb.velocity = transform.up * bulletSpeed;
 
             Bullet bulletScript = bullet.GetComponent<Bullet>();
             if (bulletScript != null) bulletScript.SetDamage(bulletDamage);
