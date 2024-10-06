@@ -49,7 +49,6 @@ public class Weapon : MonoBehaviour, IPausable
         }
     }
 
-    // Start shooting (start the coroutine)
     public void StartShooting()
     {
         if (isGunWeapon && shootingCoroutine == null)
@@ -58,7 +57,6 @@ public class Weapon : MonoBehaviour, IPausable
         }
     }
 
-    // Stop shooting (stop the coroutine)
     public void StopShooting()
     {
         if (shootingCoroutine != null)
