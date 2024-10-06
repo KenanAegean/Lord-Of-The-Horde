@@ -80,12 +80,12 @@ public class NewPlayer : PhysicsObject, IPausable
         if (_target.x < playerPosition.x)
         {
             // Cursor is on the left side of the player
-            transform.localScale = new Vector3(-1, 1, 1); // Flip horizontally
+            transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z); // Mirror without changing size
         }
         else
         {
             // Cursor is on the right side of the player
-            transform.localScale = new Vector3(1, 1, 1); // Default scale
+            transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z); // Default scale
         }
     }
 
