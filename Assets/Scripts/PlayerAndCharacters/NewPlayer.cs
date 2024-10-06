@@ -71,8 +71,22 @@ public class NewPlayer : PhysicsObject, IPausable
 
     private void FollowMouse()
     {
+        // Get the target position in world space
         _target = Camera.ScreenToWorldPoint(Input.mousePosition);
         _target.z = 0;
+    
+        // Flip the player sprite based on the cursor position relative to the player
+        Vector3 playerPosition = transform.position;
+        if (_target.x < playerPosition.x)
+        {
+            // Cursor is on the left side of the player
+            transform.localScale = new Vector3(-1, 1, 1); // Flip horizontally
+        }
+        else
+        {
+            // Cursor is on the right side of the player
+            transform.localScale = new Vector3(1, 1, 1); // Default scale
+        }
     }
 
     public void TakeDamage(float damage)
