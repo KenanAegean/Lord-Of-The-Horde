@@ -65,12 +65,12 @@ public class NewEnemy : PhysicsObject, IPausable
         if (_player != null)
         {
             float distance = Vector3.Distance(transform.position, _player.position);
-    
+
             // Check if the player is within follow or search distance
             if (distance <= followDistance)
             {
                 _target = _player.position;
-    
+
                 // Flip the sprite based on the player's position relative to the enemy
                 if (_player.position.x < transform.position.x)
                 {
@@ -92,7 +92,7 @@ public class NewEnemy : PhysicsObject, IPausable
             }
         }
     }
-    
+
     private IEnumerator Patrol()
     {
         while (true)
@@ -101,7 +101,7 @@ public class NewEnemy : PhysicsObject, IPausable
             {
                 _nextPatrolPoint = GetRandomPatrolPoint();
                 _target = _nextPatrolPoint;
-    
+
                 // Flip the sprite based on the patrol point relative to the enemy
                 if (_nextPatrolPoint.x < transform.position.x)
                 {
@@ -111,12 +111,13 @@ public class NewEnemy : PhysicsObject, IPausable
                 {
                     spriteRenderer.flipX = true; // Patrol point is to the right, default facing direction
                 }
-    
+
                 yield return new WaitForSeconds(patrolInterval);
             }
             else yield return null;
         }
     }
+
 
     private Vector3 GetRandomPatrolPoint()
     {
