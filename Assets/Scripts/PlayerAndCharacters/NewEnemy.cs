@@ -17,6 +17,8 @@ public class NewEnemy : PhysicsObject, IPausable
 
     [Header("Other Attributes")]
     [SerializeField] private GameObject collectablePrefab;
+    [SerializeField] private Color collectibleColor = Color.white;
+    [SerializeField] private Color deathEffectColor = Color.red; // Serialized color for death effect
     [SerializeField] private List<GameObject> damageStatusPrefabs;
     [SerializeField] private float Damage = 10f;
 
@@ -286,15 +288,30 @@ public class NewEnemy : PhysicsObject, IPausable
 
     public void Die()
     {
+        // Instantiate the collectible
         GameObject collectibleInstance = Instantiate(collectablePrefab, transform.position, Quaternion.identity);
+
+        // Set the XP amount
         Collectible collectible = collectibleInstance.GetComponent<Collectible>();
         if (collectible != null)
         {
             collectible.SetXPAmount(xpAmount);
         }
 
-        Effects.SpawnDeathFX(transform.position);
+        // Set the color of the collectible
+        SpriteRenderer collectibleSpriteRenderer = collectibleInstance.GetComponent<SpriteRenderer>();
+        if (collectibleSpriteRenderer != null)
+        {
+            collectibleSpriteRenderer.color = collectibleColor;
+        }
+
+        // Spawn death effects with the specified color
+        Effects.SpawnDeathFX(transform.position, deathEffectColor);
+
+        // Destroy the enemy
         Destroy(gameObject);
     }
+
+
 
 }

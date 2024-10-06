@@ -112,6 +112,8 @@ MonoBehaviour:
   escapeSpeed: 3
   xpAmount: 5
   collectablePrefab: {fileID: 4059571283236773848, guid: a202949c2afebb544a8c16d5a59c9d3e, type: 3}
+  collectibleColor: {r: 0.8705883, g: 0.4666667, b: 0.22352943, a: 1}
+  deathEffectColor: {r: 0.8705883, g: 0.4666667, b: 0.22352943, a: 1}
   damageStatusPrefabs: []
   Damage: 5
   isMinion: 1
