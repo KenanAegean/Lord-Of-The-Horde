@@ -11,6 +11,8 @@ public class NewEnemy : PhysicsObject, IPausable
     [SerializeField] private float searchRadius = 10.0f;
     [SerializeField] private float patrolRadius = 7.0f;
     [SerializeField] private float patrolInterval = 2.0f;
+    [SerializeField] private float escapeDistance = 5.0f; // Distance within which the enemy escapes from the player
+    [SerializeField] private float escapeSpeed = 3.0f;
     [SerializeField] private float xpAmount = 25.0f;
 
     [Header("Other Attributes")]
@@ -24,7 +26,10 @@ public class NewEnemy : PhysicsObject, IPausable
     private Vector3 _nextPatrolPoint;
     private bool isPaused = false;
 
+    [SerializeField] public bool isMinion = false;
+
     private SpriteRenderer spriteRenderer;
+    private SpriteRenderer playerSpriteRenderer;
 
     public enum CharacterState { Normal, LightDamage, MediumDamage, HeavyDamage }
     private CharacterState currentState;
@@ -34,8 +39,6 @@ public class NewEnemy : PhysicsObject, IPausable
         spriteRenderer = GetComponent<SpriteRenderer>();
         FindPlayer();
         StartCoroutine(Patrol());
-        Collectible collectible = collectablePrefab.GetComponent<Collectible>();
-        collectible.SetXPAmount(xpAmount);
     }
 
     public void OnPause() => isPaused = true;
@@ -46,7 +49,15 @@ public class NewEnemy : PhysicsObject, IPausable
         if (isPaused) return;
 
         if (!_playerFound) FindPlayer();
-        FollowPlayerIfClose();
+        if (isMinion)
+        {
+            EscapeFromPlayerIfClose();
+        }
+        else
+        {
+            FollowPlayerIfClose();
+        }
+        
         base.Update();
     }
 
@@ -56,7 +67,55 @@ public class NewEnemy : PhysicsObject, IPausable
         if (playerObject != null)
         {
             _player = playerObject.transform;
+            playerSpriteRenderer = playerObject.GetComponent<SpriteRenderer>();
             _playerFound = true;
+        }
+    }
+
+    private void EscapeFromPlayerIfClose()
+    {
+        if (_player != null && playerSpriteRenderer != null)
+        {
+            float distance = Vector3.Distance(transform.position, _player.position);
+
+            // Check if player is within escape distance
+            if (distance <= escapeDistance)
+            {
+                // Determine the player's facing direction
+                bool playerFacingRight = !playerSpriteRenderer.flipX;
+
+                // Check if the player is facing towards the enemy
+                bool playerFacingEnemy = (_player.position.x < transform.position.x && !playerFacingRight) ||
+                                         (_player.position.x > transform.position.x && playerFacingRight);
+
+                if (playerFacingEnemy)
+                {
+                    // Move away from the player if they are facing towards the enemy
+                    Vector3 directionAwayFromPlayer = (transform.position - _player.position).normalized;
+                    _target = transform.position + directionAwayFromPlayer * escapeSpeed * Time.deltaTime;
+
+                    // Flip sprite based on the escape direction
+                    if (_target.x < transform.position.x)
+                    {
+                        spriteRenderer.flipX = false; // Escape direction is to the left
+                    }
+                    else
+                    {
+                        spriteRenderer.flipX = true; // Escape direction is to the right
+                    }
+                }
+                else
+                {
+                    // If player is not facing towards the enemy, continue patrolling
+                    //_target = _nextPatrolPoint;
+                    FollowPlayerIfClose();
+                }
+            }
+            else
+            {
+                // Continue patrolling if player is not near
+                FollowPlayerIfClose();
+            }
         }
     }
 
@@ -227,8 +286,15 @@ public class NewEnemy : PhysicsObject, IPausable
 
     public void Die()
     {
-        Instantiate(collectablePrefab, transform.position, Quaternion.identity);
+        GameObject collectibleInstance = Instantiate(collectablePrefab, transform.position, Quaternion.identity);
+        Collectible collectible = collectibleInstance.GetComponent<Collectible>();
+        if (collectible != null)
+        {
+            collectible.SetXPAmount(xpAmount);
+        }
+
         Effects.SpawnDeathFX(transform.position);
         Destroy(gameObject);
     }
+
 }
