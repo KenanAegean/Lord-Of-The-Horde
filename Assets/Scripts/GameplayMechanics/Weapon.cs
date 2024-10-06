@@ -18,11 +18,11 @@ public class Weapon : MonoBehaviour, IPausable
     [SerializeField] private float bulletDamage = 10f;
 
     private bool isPaused = false;
-    //private bool canShoot = true;
+    private Coroutine shootingCoroutine;
 
     void Start()
     {
-        if (isGunWeapon) StartCoroutine(SpawnBullet());
+        if (isGunWeapon) StartShooting();
     }
 
     public void OnPause() => isPaused = true;
@@ -49,6 +49,25 @@ public class Weapon : MonoBehaviour, IPausable
         }
     }
 
+    // Start shooting (start the coroutine)
+    public void StartShooting()
+    {
+        if (isGunWeapon && shootingCoroutine == null)
+        {
+            shootingCoroutine = StartCoroutine(SpawnBullet());
+        }
+    }
+
+    // Stop shooting (stop the coroutine)
+    public void StopShooting()
+    {
+        if (shootingCoroutine != null)
+        {
+            StopCoroutine(shootingCoroutine);
+            shootingCoroutine = null;
+        }
+    }
+
     IEnumerator SpawnBullet()
     {
         while (true)
@@ -57,7 +76,7 @@ public class Weapon : MonoBehaviour, IPausable
 
             GameObject bullet = Instantiate(bulletPrefab, transform.position, transform.rotation);
             Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
-            if (rb != null) rb.velocity = transform.right * bulletSpeed;
+            if (rb != null) rb.velocity = transform.up * bulletSpeed;
 
             Bullet bulletScript = bullet.GetComponent<Bullet>();
             if (bulletScript != null) bulletScript.SetDamage(bulletDamage);

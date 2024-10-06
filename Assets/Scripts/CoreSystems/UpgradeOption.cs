@@ -63,7 +63,7 @@ public class UpgradeOption
         defaultOrbitDIcon = orbitDIcon;
     }
 
-    public void ApplyUpgrade(NewPlayer player, Weapon weapon)
+    public void ApplyUpgrade(NewPlayer player, Weapon weapon, LevelManager levelManager)
     {
         switch (type)
         {
@@ -77,7 +77,7 @@ public class UpgradeOption
             case UpgradeType.WeaponActivation:
                 if (weaponToActivate != null)
                 {
-                    weaponToActivate.gameObject.SetActive(true);
+                    levelManager.ActivateSecondaryWeapon(weaponToActivate);
                 }
                 break;
             case UpgradeType.OrbitalSpeed:
