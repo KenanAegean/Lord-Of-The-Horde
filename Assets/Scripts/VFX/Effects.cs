@@ -4,9 +4,24 @@ using UnityEngine;
 
 public class Effects : MonoBehaviour
 {
-    public static void SpawnDeathFX(Vector3 aPosition)
+    public static void SpawnDeathFX(Vector3 position)
     {
-        Instantiate(Resources.Load<GameObject>("DeathEffect"), aPosition, Quaternion.identity);
+        SpawnDeathFX(position, Color.white);
+    }
+
+    public static void SpawnDeathFX(Vector3 position, Color effectColor)
+    {
+        // Instantiate the effect
+        GameObject deathEffect = Instantiate(Resources.Load<GameObject>("DeathEffect"), position, Quaternion.identity);
+
+        // Get the ParticleSystem component
+        ParticleSystem particleSystem = deathEffect.GetComponent<ParticleSystem>();
+        if (particleSystem != null)
+        {
+            // Access the main module to change the start color
+            var mainModule = particleSystem.main;
+            mainModule.startColor = effectColor;
+        }
     }
 
     public static GameObject LeveltUpFX(Transform playerTransform)

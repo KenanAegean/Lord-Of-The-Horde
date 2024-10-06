@@ -109,14 +109,19 @@ MonoBehaviour:
   searchRadius: 10
   patrolRadius: 5
   patrolInterval: 1
+  escapeDistance: 5
+  escapeSpeed: 3
   xpAmount: 100
   collectablePrefab: {fileID: 4059571283236773848, guid: a202949c2afebb544a8c16d5a59c9d3e, type: 3}
+  collectibleColor: {r: 0.9803922, g: 0.9803922, b: 0.9803922, a: 1}
+  deathEffectColor: {r: 0.9803922, g: 0.9803922, b: 0.9803922, a: 1}
   damageStatusPrefabs:
   - {fileID: 2424548919708570033, guid: 73b2ef8aa4accef42a46d539d582472b, type: 3}
   - {fileID: 2424548919708570033, guid: 20668135324ffdc49866ab3982955eed, type: 3}
   - {fileID: 2424548919708570033, guid: bb246d855db7d4049b4d29bf7b206c5b, type: 3}
   - {fileID: 2424548919708570033, guid: be2d467d0bf512449a4ae3a832da70bf, type: 3}
   Damage: 30
+  isMinion: 0
 --- !u!61 &1909141102533873565
 BoxCollider2D:
   m_ObjectHideFlags: 0
