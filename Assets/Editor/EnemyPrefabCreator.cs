@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class EnemyPrefabCreator : EditorWindow
 {
-    private GameObject enemyPrefab; // Reference to the original enemy prefab
+    private GameObject enemyPrefab;
     private string prefabName = "NewEnemyPrefab";
 
     // Enemy Stats

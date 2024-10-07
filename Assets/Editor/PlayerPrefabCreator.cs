@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class PlayerPrefabCreator : EditorWindow
 {
-    private GameObject playerPrefab; // Reference to the original player prefab
+    private GameObject playerPrefab; 
     private string prefabName = "NewPlayerPrefab";
 
     // Player Stats
