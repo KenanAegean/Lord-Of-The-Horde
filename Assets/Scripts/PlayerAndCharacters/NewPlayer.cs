@@ -50,10 +50,8 @@ public class NewPlayer : PhysicsObject, IPausable
             return;
         }
 
-        // Find the SpriteRenderer component on the parent object
         spriteRenderer = GetComponent<SpriteRenderer>();
 
-        // Make sure we found the sprite renderer
         if (spriteRenderer == null)
         {
             Debug.LogError("SpriteRenderer could not be found on the parent object!");
@@ -81,21 +79,17 @@ public class NewPlayer : PhysicsObject, IPausable
 
     private void FollowMouse()
     {
-        // Get the target position in world space
         _target = Camera.ScreenToWorldPoint(Input.mousePosition);
         _target.z = 0;
     
-        // Flip the player's sprite based on the cursor position relative to the player
         Vector3 playerPosition = transform.position;
         if (_target.x < playerPosition.x)
         {
-            // Cursor is on the left side of the player
-            spriteRenderer.flipX = false; // Flip the sprite horizontally
+            spriteRenderer.flipX = false;
         }
         else
         {
-            // Cursor is on the right side of the player
-            spriteRenderer.flipX = true; // Default orientation
+            spriteRenderer.flipX = true;
         }
     }
 
@@ -149,13 +143,11 @@ public class NewPlayer : PhysicsObject, IPausable
         // Update the score on the die screen directly from NewPlayer's score
         ScoreManager.Instance.UpdateDieCanvasScore(score);
 
-        // Activate the die menu
         if (GameSceneManager.Instance.dieMenuUI != null)
         {
             GameSceneManager.Instance.dieMenuUI.SetActive(true);
         }
 
-        // Optionally, stop all movement or interactions
         GameSceneManager.Instance.SetPausableObjectsState(false);
     }
 
@@ -167,25 +159,22 @@ public class NewPlayer : PhysicsObject, IPausable
 
     public void ResetPlayerState()
     {
-        // Reset player health, XP, and position to initial state
+        // Reset player to initial state
         health = maxHealth;
         currentXP = 0f;
         transform.position = Vector3.zero;
 
-        // Update UI elements
         UIManager.Instance.UpdateHealthUI(health, maxHealth);
         UIManager.Instance.UpdateXPUI(currentXP, xpToNextLevel);
     }
 
     public void ApplyInitialValues(PlayerInitializer initializer)
     {
-        // Apply initial stats from PlayerInitializer
         maxHealth = initializer.maxHealth;
         health = initializer.startHealth;
         currentXP = initializer.startXP;
         xpToNextLevel = initializer.xpToNextLevel;
 
-        // Find and equip the main weapon dynamically
         Transform mainWeaponTransform = transform.Find("WeaponHand/MainWeapon");
         if (mainWeaponTransform != null)
         {
@@ -202,19 +191,16 @@ public class NewPlayer : PhysicsObject, IPausable
             EquipSecondaryWeapon(secondaryWeapon);
         }
 
-        // Update UI with new stats
         UpdateUI();
     }
 
     private void EquipMainWeapon(Weapon weapon)
     {
-        // Logic to equip the main weapon
         weapon.gameObject.SetActive(true);
     }
 
     private void EquipSecondaryWeapon(Weapon weapon)
     {
-        // Logic to equip secondary weapons
         weapon.gameObject.SetActive(true);
     }
 

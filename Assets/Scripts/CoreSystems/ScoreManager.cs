@@ -22,7 +22,6 @@ public class ScoreManager : MonoBehaviour
         }
     }
 
-    // Method to update the die canvas score directly
     public void UpdateDieCanvasScore(float score)
     {
         if (dieCanvasScoreText != null)

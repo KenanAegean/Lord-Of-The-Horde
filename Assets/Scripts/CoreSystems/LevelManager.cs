@@ -17,12 +17,11 @@ public class LevelManager : MonoBehaviour
     private void Start()
     {
         player = NewPlayer.Instance;
-        InitializeValues(player); // Initialize values when the game starts
+        InitializeValues(player); 
     }
 
     public void InitializeValues(NewPlayer player)
     {
-        // Find the PlayerInitializer on the player to get initial values
         PlayerInitializer initializer = player.GetComponent<PlayerInitializer>();
 
         if (initializer == null)
@@ -66,29 +65,19 @@ public class LevelManager : MonoBehaviour
 
         player.playerLevel = 0;
 
-        // Reset player score and other stats
         player.ResetPlayerScore();
 
-        // Update the UI after resetting values
         player.UpdateUI();
     }
 
     public void UpdatePlayerStats()
     {
-        // Effects.LeveltUpFX(player.transform);
         player.playerLevel++;
 
         TriggerUpgradeSelection();
-        // Effects.LeveltUpFX(player.transform);
 
         player.currentXP -= player.xpToNextLevel;
         player.xpToNextLevel *= 1.5f;
-        // player.maxHealth += 10f;
-        // player.health += 15f;
-        // player.ObjectSpeed *= 1.3f;
-
-        // weapon.rotationSpeed *= 1.5f;
-        // weaponGun.spawnInterval /= 1.5f;
 
         enemySpawner.spawnInterval /= 1.2f;
     }
@@ -128,23 +117,20 @@ public class LevelManager : MonoBehaviour
     // Activates a new secondary weapon, replacing any existing one
     public void ActivateSecondaryWeapon(Weapon weaponToActivate)
     {
-        // If there's an active secondary weapon, deactivate it
         if (activeSecondaryWeapon != null)
         {
-            activeSecondaryWeapon.StopShooting(); // Stop shooting before deactivating
+            activeSecondaryWeapon.StopShooting();
             activeSecondaryWeapon.gameObject.SetActive(false);
         }
 
-        // Activate the new weapon and set it as the active secondary weapon
         if (secondaryWeapons.Contains(weaponToActivate))
         {
             weaponToActivate.gameObject.SetActive(true);
-            weaponToActivate.StartShooting(); // Ensure shooting is started after activation
+            weaponToActivate.StartShooting();
             activeSecondaryWeapon = weaponToActivate;
         }
     }
 
-    // Optional: Method to deactivate the current active secondary weapon
     public void DeactivateActiveSecondaryWeapon()
     {
         if (activeSecondaryWeapon != null)

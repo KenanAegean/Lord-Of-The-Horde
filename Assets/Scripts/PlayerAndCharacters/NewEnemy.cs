@@ -5,22 +5,22 @@ using UnityEngine;
 public class NewEnemy : PhysicsObject, IPausable
 {
     [Header("Inventory")]
-    [SerializeField] private float maxHealth = 100f;
-    [SerializeField] private float health = 100f;
-    [SerializeField] private float followDistance = 5.0f;
-    [SerializeField] private float searchRadius = 10.0f;
-    [SerializeField] private float patrolRadius = 7.0f;
-    [SerializeField] private float patrolInterval = 2.0f;
-    [SerializeField] private float escapeDistance = 5.0f; // Distance within which the enemy escapes from the player
-    [SerializeField] private float escapeSpeed = 3.0f;
-    [SerializeField] private float xpAmount = 25.0f;
+    [SerializeField] public float maxHealth = 100f;
+    [SerializeField] public float health = 100f;
+    [SerializeField] public float followDistance = 5.0f;
+    [SerializeField] public float searchRadius = 10.0f;
+    [SerializeField] public float patrolRadius = 7.0f;
+    [SerializeField] public float patrolInterval = 2.0f;
+    [SerializeField] public float escapeDistance = 5.0f;
+    [SerializeField] public float escapeSpeed = 3.0f;
+    [SerializeField] public float xpAmount = 25.0f;
 
     [Header("Other Attributes")]
-    [SerializeField] private GameObject collectablePrefab;
-    [SerializeField] private Color collectibleColor = Color.white;
-    [SerializeField] private Color deathEffectColor = Color.red; // Serialized color for death effect
-    [SerializeField] private List<GameObject> damageStatusPrefabs;
-    [SerializeField] private float Damage = 10f;
+    [SerializeField] public GameObject collectablePrefab;
+    [SerializeField] public Color collectibleColor = Color.white;
+    [SerializeField] public Color deathEffectColor = Color.red;
+    [SerializeField] public List<GameObject> damageStatusPrefabs;
+    [SerializeField] public float Damage = 10f;
 
     private bool isDealingDamage = false;
     private Transform _player;
@@ -80,13 +80,10 @@ public class NewEnemy : PhysicsObject, IPausable
         {
             float distance = Vector3.Distance(transform.position, _player.position);
 
-            // Check if player is within escape distance
             if (distance <= escapeDistance)
-            {
-                // Determine the player's facing direction
+            { 
                 bool playerFacingRight = !playerSpriteRenderer.flipX;
 
-                // Check if the player is facing towards the enemy
                 bool playerFacingEnemy = (_player.position.x < transform.position.x && !playerFacingRight) ||
                                          (_player.position.x > transform.position.x && playerFacingRight);
 
@@ -96,26 +93,22 @@ public class NewEnemy : PhysicsObject, IPausable
                     Vector3 directionAwayFromPlayer = (transform.position - _player.position).normalized;
                     _target = transform.position + directionAwayFromPlayer * escapeSpeed * Time.deltaTime;
 
-                    // Flip sprite based on the escape direction
                     if (_target.x < transform.position.x)
                     {
-                        spriteRenderer.flipX = false; // Escape direction is to the left
+                        spriteRenderer.flipX = false;
                     }
                     else
                     {
-                        spriteRenderer.flipX = true; // Escape direction is to the right
+                        spriteRenderer.flipX = true;
                     }
                 }
                 else
                 {
-                    // If player is not facing towards the enemy, continue patrolling
-                    //_target = _nextPatrolPoint;
                     FollowPlayerIfClose();
                 }
             }
             else
             {
-                // Continue patrolling if player is not near
                 FollowPlayerIfClose();
             }
         }
@@ -127,7 +120,6 @@ public class NewEnemy : PhysicsObject, IPausable
         {
             float distance = Vector3.Distance(transform.position, _player.position);
 
-            // Check if the player is within follow or search distance
             if (distance <= followDistance)
             {
                 _target = _player.position;
@@ -135,11 +127,11 @@ public class NewEnemy : PhysicsObject, IPausable
                 // Flip the sprite based on the player's position relative to the enemy
                 if (_player.position.x < transform.position.x)
                 {
-                    spriteRenderer.flipX = false; // Player is to the left, flip enemy
+                    spriteRenderer.flipX = false;
                 }
                 else
                 {
-                    spriteRenderer.flipX = true; // Player is to the right, default facing direction
+                    spriteRenderer.flipX = true;
                 }
             }
             else if (distance <= searchRadius)
@@ -166,11 +158,11 @@ public class NewEnemy : PhysicsObject, IPausable
                 // Flip the sprite based on the patrol point relative to the enemy
                 if (_nextPatrolPoint.x < transform.position.x)
                 {
-                    spriteRenderer.flipX = false; // Patrol point is to the left, flip enemy
+                    spriteRenderer.flipX = false;
                 }
                 else
                 {
-                    spriteRenderer.flipX = true; // Patrol point is to the right, default facing direction
+                    spriteRenderer.flipX = true;
                 }
 
                 yield return new WaitForSeconds(patrolInterval);
@@ -288,27 +280,22 @@ public class NewEnemy : PhysicsObject, IPausable
 
     public void Die()
     {
-        // Instantiate the collectible
         GameObject collectibleInstance = Instantiate(collectablePrefab, transform.position, Quaternion.identity);
 
-        // Set the XP amount
         Collectible collectible = collectibleInstance.GetComponent<Collectible>();
         if (collectible != null)
         {
             collectible.SetXPAmount(xpAmount);
         }
 
-        // Set the color of the collectible
         SpriteRenderer collectibleSpriteRenderer = collectibleInstance.GetComponent<SpriteRenderer>();
         if (collectibleSpriteRenderer != null)
         {
             collectibleSpriteRenderer.color = collectibleColor;
         }
 
-        // Spawn death effects with the specified color
         Effects.SpawnDeathFX(transform.position, deathEffectColor);
 
-        // Destroy the enemy
         Destroy(gameObject);
     }
 
