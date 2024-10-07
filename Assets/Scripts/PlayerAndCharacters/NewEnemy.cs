@@ -5,22 +5,22 @@ using UnityEngine;
 public class NewEnemy : PhysicsObject, IPausable
 {
     [Header("Inventory")]
-    [SerializeField] private float maxHealth = 100f;
-    [SerializeField] private float health = 100f;
-    [SerializeField] private float followDistance = 5.0f;
-    [SerializeField] private float searchRadius = 10.0f;
-    [SerializeField] private float patrolRadius = 7.0f;
-    [SerializeField] private float patrolInterval = 2.0f;
-    [SerializeField] private float escapeDistance = 5.0f;
-    [SerializeField] private float escapeSpeed = 3.0f;
-    [SerializeField] private float xpAmount = 25.0f;
+    [SerializeField] public float maxHealth = 100f;
+    [SerializeField] public float health = 100f;
+    [SerializeField] public float followDistance = 5.0f;
+    [SerializeField] public float searchRadius = 10.0f;
+    [SerializeField] public float patrolRadius = 7.0f;
+    [SerializeField] public float patrolInterval = 2.0f;
+    [SerializeField] public float escapeDistance = 5.0f;
+    [SerializeField] public float escapeSpeed = 3.0f;
+    [SerializeField] public float xpAmount = 25.0f;
 
     [Header("Other Attributes")]
-    [SerializeField] private GameObject collectablePrefab;
-    [SerializeField] private Color collectibleColor = Color.white;
-    [SerializeField] private Color deathEffectColor = Color.red;
-    [SerializeField] private List<GameObject> damageStatusPrefabs;
-    [SerializeField] private float Damage = 10f;
+    [SerializeField] public GameObject collectablePrefab;
+    [SerializeField] public Color collectibleColor = Color.white;
+    [SerializeField] public Color deathEffectColor = Color.red;
+    [SerializeField] public List<GameObject> damageStatusPrefabs;
+    [SerializeField] public float Damage = 10f;
 
     private bool isDealingDamage = false;
     private Transform _player;
