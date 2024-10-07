@@ -299,6 +299,56 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8241333196742415208, guid: 752788777f5ae9141be25fed6efe212a, type: 3}
   m_PrefabInstance: {fileID: 8125913285299742030}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &268368363
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 268368365}
+  - component: {fileID: 268368364}
+  m_Layer: 0
+  m_Name: Weapon Gun
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &268368364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 268368363}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12f786895e0f2e640bb5efffe9fd8f3b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  upgradeName: WeaponGun
+  type: 2
+  description: 
+  value: 0
+  weaponToActivate: {fileID: 528674783584455477, guid: 38134a5052f70e745b2dcbf17c721d11, type: 3}
+  icon: {fileID: 21300000, guid: 4f690d45f4028904a97db653ba42b3f9, type: 3}
+--- !u!4 &268368365
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 268368363}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &287665430 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5656294502844402233, guid: a0bc6af287b946040ad0eb2c95202fdb, type: 3}
@@ -3595,6 +3645,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7374623756225094040, guid: 870f96a6a8c69cd408a401c3d7574439, type: 3}
+      propertyPath: allUpgradePrefabs.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7374623756225094040, guid: 870f96a6a8c69cd408a401c3d7574439, type: 3}
       propertyPath: seondaryWeapons.Array.data[0]
       value: 
       objectReference: {fileID: 1051672499}
@@ -3626,6 +3680,30 @@ PrefabInstance:
       propertyPath: secondaryWeapons.Array.data[1]
       value: 
       objectReference: {fileID: 1975619091}
+    - target: {fileID: 7374623756225094040, guid: 870f96a6a8c69cd408a401c3d7574439, type: 3}
+      propertyPath: allUpgradePrefabs.Array.data[0]
+      value: 
+      objectReference: {fileID: 8203385634339628469, guid: e3449bd16c39dc543a6259224d289447, type: 3}
+    - target: {fileID: 7374623756225094040, guid: 870f96a6a8c69cd408a401c3d7574439, type: 3}
+      propertyPath: allUpgradePrefabs.Array.data[1]
+      value: 
+      objectReference: {fileID: 7032898524612790294, guid: cd3f114a731750245b0feef3809e0956, type: 3}
+    - target: {fileID: 7374623756225094040, guid: 870f96a6a8c69cd408a401c3d7574439, type: 3}
+      propertyPath: allUpgradePrefabs.Array.data[2]
+      value: 
+      objectReference: {fileID: 1656306996768242567, guid: 157d2c6c42fc30249b928b1f778b7389, type: 3}
+    - target: {fileID: 7374623756225094040, guid: 870f96a6a8c69cd408a401c3d7574439, type: 3}
+      propertyPath: allUpgradePrefabs.Array.data[3]
+      value: 
+      objectReference: {fileID: 4409344131978521398, guid: 9a1c13df8f52e8d429ac18b356596b78, type: 3}
+    - target: {fileID: 7374623756225094040, guid: 870f96a6a8c69cd408a401c3d7574439, type: 3}
+      propertyPath: allUpgradePrefabs.Array.data[4]
+      value: 
+      objectReference: {fileID: 2798089315682826196, guid: 58da2cf7975972a49a991272d9351954, type: 3}
+    - target: {fileID: 7374623756225094040, guid: 870f96a6a8c69cd408a401c3d7574439, type: 3}
+      propertyPath: allUpgradePrefabs.Array.data[5]
+      value: 
+      objectReference: {fileID: 956251848434061342, guid: ccacbf7f76cbc9c43ad7f7383f543d05, type: 3}
     - target: {fileID: 7374623756225094040, guid: 870f96a6a8c69cd408a401c3d7574439, type: 3}
       propertyPath: allUpgrades.Array.data[4].value
       value: 1.5
@@ -4742,3 +4820,4 @@ SceneRoots:
   - {fileID: 7423543174188943905}
   - {fileID: 1415162873593745682}
   - {fileID: 5412218250231054506}
+  - {fileID: 268368365}
