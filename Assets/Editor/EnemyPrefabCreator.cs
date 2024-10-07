@@ -4,19 +4,19 @@ using System.Collections.Generic;
 
 public class EnemyPrefabCreator : EditorWindow
 {
-    private GameObject enemyPrefab;
+    private GameObject enemyPrefab; // Reference to the original enemy prefab
     private string prefabName = "NewEnemyPrefab";
 
     // Enemy Stats
-    private float maxHealth = 100f;
-    private float damage = 10f;
-    private float followDistance = 5.0f;
-    private float searchRadius = 10.0f;
-    private float patrolRadius = 7.0f;
-    private float patrolInterval = 2.0f;
-    private float escapeDistance = 5.0f;
-    private float escapeSpeed = 3.0f;
-    private float xpAmount = 25.0f;
+    private float maxHealth = -1f;
+    private float damage = -1f;
+    private float followDistance = -1f;
+    private float searchRadius = -1f;
+    private float patrolRadius = -1f;
+    private float patrolInterval = -1f;
+    private float escapeDistance = -1f;
+    private float escapeSpeed = -1f;
+    private float xpAmount = -1f;
 
     // Enemy Appearance
     private Sprite enemySprite;
@@ -24,13 +24,13 @@ public class EnemyPrefabCreator : EditorWindow
 
     // Enemy Collectible Drops
     private GameObject collectiblePrefab;
-    private Color collectibleColor = Color.white;
+    private Color collectibleColor = Color.clear;
 
     // Death Effect
-    private Color deathEffectColor = Color.red;
+    private Color deathEffectColor = Color.clear;
 
     // Other Attributes
-    private bool isMinion = false;
+    private bool? isMinion = null;
 
     [MenuItem("Tools/Enemy Prefab Creator")]
     public static void ShowWindow()
@@ -84,7 +84,7 @@ public class EnemyPrefabCreator : EditorWindow
         deathEffectColor = EditorGUILayout.ColorField("Death Effect Color:", deathEffectColor);
 
         // Other attributes
-        isMinion = EditorGUILayout.Toggle("Is Minion", isMinion);
+        isMinion = EditorGUILayout.Toggle("Is Minion", isMinion ?? false);
 
         if (GUILayout.Button("Create Enemy Prefab"))
         {
@@ -107,24 +107,39 @@ public class EnemyPrefabCreator : EditorWindow
         NewEnemy enemyScript = enemyInstance.GetComponent<NewEnemy>();
         if (enemyScript != null)
         {
-            enemyScript.maxHealth = maxHealth;
-            enemyScript.health = maxHealth; // Set initial health to max health
-            enemyScript.Damage = damage;
-            enemyScript.followDistance = followDistance;
-            enemyScript.searchRadius = searchRadius;
-            enemyScript.patrolRadius = patrolRadius;
-            enemyScript.patrolInterval = patrolInterval;
-            enemyScript.escapeDistance = escapeDistance;
-            enemyScript.escapeSpeed = escapeSpeed;
-            enemyScript.xpAmount = xpAmount;
-            enemyScript.damageStatusPrefabs = damageStatusPrefabs;
-            enemyScript.collectablePrefab = collectiblePrefab;
-            enemyScript.collectibleColor = collectibleColor;
-            enemyScript.deathEffectColor = deathEffectColor;
-            enemyScript.isMinion = isMinion;
+            // If any value is unset (-1 for float, null for objects), use the value from the reference prefab
+            enemyScript.maxHealth = maxHealth >= 0 ? maxHealth : enemyScript.maxHealth;
+            enemyScript.health = enemyScript.maxHealth; // Set initial health to max health
+            enemyScript.Damage = damage >= 0 ? damage : enemyScript.Damage;
+            enemyScript.followDistance = followDistance >= 0 ? followDistance : enemyScript.followDistance;
+            enemyScript.searchRadius = searchRadius >= 0 ? searchRadius : enemyScript.searchRadius;
+            enemyScript.patrolRadius = patrolRadius >= 0 ? patrolRadius : enemyScript.patrolRadius;
+            enemyScript.patrolInterval = patrolInterval >= 0 ? patrolInterval : enemyScript.patrolInterval;
+            enemyScript.escapeDistance = escapeDistance >= 0 ? escapeDistance : enemyScript.escapeDistance;
+            enemyScript.escapeSpeed = escapeSpeed >= 0 ? escapeSpeed : enemyScript.escapeSpeed;
+            enemyScript.xpAmount = xpAmount >= 0 ? xpAmount : enemyScript.xpAmount;
+
+            if (damageStatusPrefabs.Count > 0)
+            {
+                enemyScript.damageStatusPrefabs = damageStatusPrefabs;
+            }
+
+            enemyScript.collectablePrefab = collectiblePrefab != null ? collectiblePrefab : enemyScript.collectablePrefab;
+
+            if (collectibleColor != Color.clear)
+            {
+                enemyScript.collectibleColor = collectibleColor;
+            }
+
+            if (deathEffectColor != Color.clear)
+            {
+                enemyScript.deathEffectColor = deathEffectColor;
+            }
+
+            enemyScript.isMinion = isMinion.HasValue ? isMinion.Value : enemyScript.isMinion;
         }
 
-        // Update the enemy's sprite
+        // Update the enemy's sprite only if a new one is assigned
         SpriteRenderer spriteRenderer = enemyInstance.GetComponent<SpriteRenderer>();
         if (spriteRenderer != null && enemySprite != null)
         {

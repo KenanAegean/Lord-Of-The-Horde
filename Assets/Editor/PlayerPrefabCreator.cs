@@ -4,14 +4,18 @@ using System.Collections.Generic;
 
 public class PlayerPrefabCreator : EditorWindow
 {
-    private GameObject playerPrefab; 
+    private GameObject playerPrefab; // Reference to the original player prefab
     private string prefabName = "NewPlayerPrefab";
 
+    // Player Details
+    private string playerName = "PlayerName";
+    private string playerDescription = "";
+
     // Player Stats
-    private float maxHealth = 100f;
-    private float startHealth = 100f;
-    private float startXP = 0f;
-    private float xpToNextLevel = 100f;
+    private float maxHealth = -1f; // Use -1 as an indicator to take default
+    private float startHealth = -1f;
+    private float startXP = -1f;
+    private float xpToNextLevel = -1f;
 
     // Player Appearance
     private Sprite playerSprite;
@@ -34,6 +38,11 @@ public class PlayerPrefabCreator : EditorWindow
         playerPrefab = (GameObject)EditorGUILayout.ObjectField("Base Player Prefab:", playerPrefab, typeof(GameObject), false);
 
         prefabName = EditorGUILayout.TextField("Prefab Name:", prefabName);
+
+        // Set player details
+        GUILayout.Label("Player Details", EditorStyles.boldLabel);
+        playerName = EditorGUILayout.TextField("Player Name:", playerName);
+        playerDescription = EditorGUILayout.TextField("Player Description:", playerDescription);
 
         // Set player stats
         GUILayout.Label("Initial Player Stats", EditorStyles.boldLabel);
@@ -83,14 +92,23 @@ public class PlayerPrefabCreator : EditorWindow
         PlayerInitializer initializer = playerInstance.GetComponent<PlayerInitializer>();
         if (initializer != null)
         {
-            initializer.maxHealth = maxHealth;
-            initializer.startHealth = startHealth;
-            initializer.startXP = startXP;
-            initializer.xpToNextLevel = xpToNextLevel;
-            initializer.secondaryWeapons = secondaryWeapons;
+            // If any value is empty or unset, use the value from the reference prefab
+            initializer.playerName = string.IsNullOrEmpty(playerName) ? initializer.playerName : playerName;
+            initializer.playerDescription = string.IsNullOrEmpty(playerDescription) ? initializer.playerDescription : playerDescription;
+
+            initializer.maxHealth = maxHealth >= 0 ? maxHealth : initializer.maxHealth;
+            initializer.startHealth = startHealth >= 0 ? startHealth : initializer.startHealth;
+            initializer.startXP = startXP >= 0 ? startXP : initializer.startXP;
+            initializer.xpToNextLevel = xpToNextLevel >= 0 ? xpToNextLevel : initializer.xpToNextLevel;
+
+            // If secondary weapons list is empty, keep the original list from the reference prefab
+            if (secondaryWeapons.Count > 0)
+            {
+                initializer.secondaryWeapons = secondaryWeapons;
+            }
         }
 
-        // Update the player's sprite
+        // Update the player's sprite only if a new one is assigned
         SpriteRenderer spriteRenderer = playerInstance.GetComponent<SpriteRenderer>();
         if (spriteRenderer != null && playerSprite != null)
         {
