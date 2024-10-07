@@ -357,10 +357,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerName: EviltWin
   playerDescription: This is Player Description. Here Will Be Updated Soon
-  maxHealth: 100
-  startHealth: 100
+  maxHealth: 1000
+  startHealth: 1000
   startXP: 0
-  xpToNextLevel: 100
+  xpToNextLevel: 50
   secondaryWeapons: []
 --- !u!1 &6253477280077650258
 GameObject:
