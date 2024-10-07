@@ -8,7 +8,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private Weapon weapon;
     [SerializeField] private List<Weapon> secondaryWeapons;
 
-    [SerializeField] private List<UpgradeOption> allUpgrades;
+    [SerializeField] private List<UpgradePrefab> allUpgradePrefabs; // Use a list of upgrade prefabs
 
     [SerializeField] private EnemySpawner enemySpawner;
 
@@ -17,7 +17,7 @@ public class LevelManager : MonoBehaviour
     private void Start()
     {
         player = NewPlayer.Instance;
-        InitializeValues(player); 
+        InitializeValues(player);
     }
 
     public void InitializeValues(NewPlayer player)
@@ -84,21 +84,21 @@ public class LevelManager : MonoBehaviour
 
     private void TriggerUpgradeSelection()
     {
-        // Ensure the allUpgrades list has enough items
-        if (allUpgrades == null || allUpgrades.Count < 3)
+        // Ensure the allUpgradePrefabs list has enough items
+        if (allUpgradePrefabs == null || allUpgradePrefabs.Count < 3)
         {
-            Debug.LogError("Not enough upgrades available in the allUpgrades list.");
+            Debug.LogError("Not enough upgrade prefabs available in the allUpgradePrefabs list.");
             return;
         }
 
-        // Randomly pick 3 upgrades
-        List<UpgradeOption> selectedUpgrades = new List<UpgradeOption>();
+        // Randomly pick 3 upgrade prefabs
+        List<UpgradePrefab> selectedUpgrades = new List<UpgradePrefab>();
         while (selectedUpgrades.Count < 3)
         {
-            int randomIndex = Random.Range(0, allUpgrades.Count);
+            int randomIndex = Random.Range(0, allUpgradePrefabs.Count);
 
             // Make sure the upgrade is not already in the selected list
-            UpgradeOption randomUpgrade = allUpgrades[randomIndex];
+            UpgradePrefab randomUpgrade = allUpgradePrefabs[randomIndex];
             if (!selectedUpgrades.Contains(randomUpgrade))
             {
                 selectedUpgrades.Add(randomUpgrade);
@@ -108,7 +108,7 @@ public class LevelManager : MonoBehaviour
         GameSceneManager.Instance.ShowUpgradeChoices(selectedUpgrades, OnUpgradeSelected);
     }
 
-    private void OnUpgradeSelected(UpgradeOption selectedUpgrade)
+    private void OnUpgradeSelected(UpgradePrefab selectedUpgrade)
     {
         selectedUpgrade.ApplyUpgrade(player, weapon, this);
         player.UpdateUI();

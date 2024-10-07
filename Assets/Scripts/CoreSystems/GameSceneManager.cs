@@ -26,7 +26,7 @@ public class GameSceneManager : MonoBehaviour
     public GameObject upgradePanel; // The panel containing the upgrade buttons
     public List<Button> upgradeButtons; // A list of buttons for the upgrades
     public TextMeshProUGUI upgradeDescriptionText; // The text field for showing descriptions
-    private System.Action<UpgradeOption> onUpgradeSelectedCallback;
+    private System.Action<UpgradePrefab> onUpgradeSelectedCallback;
 
     public Sprite defaultHealthIcon;
     public Sprite defaultSpeedIcon;
@@ -388,7 +388,7 @@ public class GameSceneManager : MonoBehaviour
 
     // ---------------------- Upgrade Functions ---------------------- //
 
-    public void ShowUpgradeChoices(List<UpgradeOption> upgrades, System.Action<UpgradeOption> onUpgradeSelected)
+    public void ShowUpgradeChoices(List<UpgradePrefab> upgrades, System.Action<UpgradePrefab> onUpgradeSelected)
     {
         upgradePanel.SetActive(true);
         onUpgradeSelectedCallback = onUpgradeSelected;
@@ -399,11 +399,11 @@ public class GameSceneManager : MonoBehaviour
         for (int i = 0; i < upgradeButtons.Count; i++)
         {
             int index = i;
-            UpgradeOption upgrade = upgrades[i];
+            UpgradePrefab upgrade = upgrades[i];
 
             var card = upgradeButtons[i].transform.parent;
             var icon = card.Find("Image").GetComponent<Image>();
-            var description = card.Find("Upgrade Desc").GetComponent<TextMeshProUGUI>(); 
+            var description = card.Find("Upgrade Desc").GetComponent<TextMeshProUGUI>();
 
             // Check for nulls
             if (icon == null)
@@ -432,8 +432,8 @@ public class GameSceneManager : MonoBehaviour
             });
         }
         SetPausableObjectsState(false);
-        
     }
+
 
     // ---------------------- Restart and Utility Functions ---------------------- //
 
