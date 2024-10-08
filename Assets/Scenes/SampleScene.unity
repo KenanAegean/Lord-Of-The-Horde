@@ -1430,17 +1430,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3422727151947485857, guid: 752788777f5ae9141be25fed6efe212a, type: 3}
   m_PrefabInstance: {fileID: 8125913285299742030}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1051672499 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 674797887086065061, guid: 7f227cb61eff10141b8e5fe266b2aa1c, type: 3}
-  m_PrefabInstance: {fileID: 796554439372856199}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0f19d5375b22b4478e064bc82941103, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1073825784
 GameObject:
   m_ObjectHideFlags: 0
@@ -2904,17 +2893,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.9722481, y: 0.98612595}
   m_EdgeRadius: 0
---- !u!114 &1975619091 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6866188885996624781, guid: 7f227cb61eff10141b8e5fe266b2aa1c, type: 3}
-  m_PrefabInstance: {fileID: 796554439372856199}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0f19d5375b22b4478e064bc82941103, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &2053946762
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3465,7 +3443,9 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1828910329}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 3145174595765526784, guid: 7f227cb61eff10141b8e5fe266b2aa1c, type: 3}
+    - {fileID: 4921658076379191784, guid: 7f227cb61eff10141b8e5fe266b2aa1c, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 5373959594647340460, guid: 7f227cb61eff10141b8e5fe266b2aa1c, type: 3}
@@ -3565,7 +3545,7 @@ PrefabInstance:
     - target: {fileID: 7374623756225094040, guid: 870f96a6a8c69cd408a401c3d7574439, type: 3}
       propertyPath: weaponGun
       value: 
-      objectReference: {fileID: 1975619091}
+      objectReference: {fileID: 0}
     - target: {fileID: 7374623756225094040, guid: 870f96a6a8c69cd408a401c3d7574439, type: 3}
       propertyPath: mainWeapon
       value: 
@@ -3581,7 +3561,7 @@ PrefabInstance:
     - target: {fileID: 7374623756225094040, guid: 870f96a6a8c69cd408a401c3d7574439, type: 3}
       propertyPath: weaponPunchSecond
       value: 
-      objectReference: {fileID: 1051672499}
+      objectReference: {fileID: 0}
     - target: {fileID: 7374623756225094040, guid: 870f96a6a8c69cd408a401c3d7574439, type: 3}
       propertyPath: allUpgrades.Array.size
       value: 6
@@ -3595,13 +3575,17 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7374623756225094040, guid: 870f96a6a8c69cd408a401c3d7574439, type: 3}
+      propertyPath: allUpgradePrefabs.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7374623756225094040, guid: 870f96a6a8c69cd408a401c3d7574439, type: 3}
       propertyPath: seondaryWeapons.Array.data[0]
       value: 
-      objectReference: {fileID: 1051672499}
+      objectReference: {fileID: 0}
     - target: {fileID: 7374623756225094040, guid: 870f96a6a8c69cd408a401c3d7574439, type: 3}
       propertyPath: seondaryWeapons.Array.data[1]
       value: 
-      objectReference: {fileID: 1975619091}
+      objectReference: {fileID: 0}
     - target: {fileID: 7374623756225094040, guid: 870f96a6a8c69cd408a401c3d7574439, type: 3}
       propertyPath: allUpgrades.Array.data[1].icon
       value: 
@@ -3621,11 +3605,35 @@ PrefabInstance:
     - target: {fileID: 7374623756225094040, guid: 870f96a6a8c69cd408a401c3d7574439, type: 3}
       propertyPath: secondaryWeapons.Array.data[0]
       value: 
-      objectReference: {fileID: 1051672499}
+      objectReference: {fileID: 0}
     - target: {fileID: 7374623756225094040, guid: 870f96a6a8c69cd408a401c3d7574439, type: 3}
       propertyPath: secondaryWeapons.Array.data[1]
       value: 
-      objectReference: {fileID: 1975619091}
+      objectReference: {fileID: 0}
+    - target: {fileID: 7374623756225094040, guid: 870f96a6a8c69cd408a401c3d7574439, type: 3}
+      propertyPath: allUpgradePrefabs.Array.data[0]
+      value: 
+      objectReference: {fileID: 8203385634339628469, guid: e3449bd16c39dc543a6259224d289447, type: 3}
+    - target: {fileID: 7374623756225094040, guid: 870f96a6a8c69cd408a401c3d7574439, type: 3}
+      propertyPath: allUpgradePrefabs.Array.data[1]
+      value: 
+      objectReference: {fileID: 7032898524612790294, guid: cd3f114a731750245b0feef3809e0956, type: 3}
+    - target: {fileID: 7374623756225094040, guid: 870f96a6a8c69cd408a401c3d7574439, type: 3}
+      propertyPath: allUpgradePrefabs.Array.data[2]
+      value: 
+      objectReference: {fileID: 1656306996768242567, guid: 157d2c6c42fc30249b928b1f778b7389, type: 3}
+    - target: {fileID: 7374623756225094040, guid: 870f96a6a8c69cd408a401c3d7574439, type: 3}
+      propertyPath: allUpgradePrefabs.Array.data[3]
+      value: 
+      objectReference: {fileID: 4409344131978521398, guid: 9a1c13df8f52e8d429ac18b356596b78, type: 3}
+    - target: {fileID: 7374623756225094040, guid: 870f96a6a8c69cd408a401c3d7574439, type: 3}
+      propertyPath: allUpgradePrefabs.Array.data[4]
+      value: 
+      objectReference: {fileID: 2798089315682826196, guid: 58da2cf7975972a49a991272d9351954, type: 3}
+    - target: {fileID: 7374623756225094040, guid: 870f96a6a8c69cd408a401c3d7574439, type: 3}
+      propertyPath: allUpgradePrefabs.Array.data[5]
+      value: 
+      objectReference: {fileID: 956251848434061342, guid: ccacbf7f76cbc9c43ad7f7383f543d05, type: 3}
     - target: {fileID: 7374623756225094040, guid: 870f96a6a8c69cd408a401c3d7574439, type: 3}
       propertyPath: allUpgrades.Array.data[4].value
       value: 1.5
@@ -3645,11 +3653,11 @@ PrefabInstance:
     - target: {fileID: 7374623756225094040, guid: 870f96a6a8c69cd408a401c3d7574439, type: 3}
       propertyPath: allUpgrades.Array.data[1].weaponToActivate
       value: 
-      objectReference: {fileID: 1975619091}
+      objectReference: {fileID: 0}
     - target: {fileID: 7374623756225094040, guid: 870f96a6a8c69cd408a401c3d7574439, type: 3}
       propertyPath: allUpgrades.Array.data[3].weaponToActivate
       value: 
-      objectReference: {fileID: 1051672499}
+      objectReference: {fileID: 0}
     - target: {fileID: 7374623756225094040, guid: 870f96a6a8c69cd408a401c3d7574439, type: 3}
       propertyPath: allUpgrades.Array.data[4].weaponToActivate
       value: 
@@ -4442,7 +4450,7 @@ PrefabInstance:
       objectReference: {fileID: 400308345}
     - target: {fileID: 153538774416761914, guid: 3f2d230bf79b23242814eb4df82f6dbd, type: 3}
       propertyPath: playerPrefabs.Array.size
-      value: 9
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 153538774416761914, guid: 3f2d230bf79b23242814eb4df82f6dbd, type: 3}
       propertyPath: upgradeButtons.Array.size
@@ -4467,23 +4475,35 @@ PrefabInstance:
     - target: {fileID: 153538774416761914, guid: 3f2d230bf79b23242814eb4df82f6dbd, type: 3}
       propertyPath: playerPrefabs.Array.data[4]
       value: 
-      objectReference: {fileID: 8794884062547641445, guid: 6d5a352ffb500fa489db782bc7f204ba, type: 3}
+      objectReference: {fileID: 6718466515168443797, guid: 96e28319b3fea444eb33657ecdbe9e1e, type: 3}
     - target: {fileID: 153538774416761914, guid: 3f2d230bf79b23242814eb4df82f6dbd, type: 3}
       propertyPath: playerPrefabs.Array.data[5]
       value: 
-      objectReference: {fileID: 5526260965688737769, guid: 028bdfae929609e498b8f9e28e14b6dc, type: 3}
+      objectReference: {fileID: 7852853692822690395, guid: 1d14aa612cbb5524e8643181ef1407d3, type: 3}
     - target: {fileID: 153538774416761914, guid: 3f2d230bf79b23242814eb4df82f6dbd, type: 3}
       propertyPath: playerPrefabs.Array.data[6]
       value: 
-      objectReference: {fileID: 3273643642964964946, guid: 75b4fc308a0714144aba492f9b727b00, type: 3}
+      objectReference: {fileID: 8794884062547641445, guid: 6d5a352ffb500fa489db782bc7f204ba, type: 3}
     - target: {fileID: 153538774416761914, guid: 3f2d230bf79b23242814eb4df82f6dbd, type: 3}
       propertyPath: playerPrefabs.Array.data[7]
       value: 
-      objectReference: {fileID: 8794884062547641445, guid: 04dbcdca1979f594ea09b7e0537b1695, type: 3}
+      objectReference: {fileID: 5526260965688737769, guid: 028bdfae929609e498b8f9e28e14b6dc, type: 3}
     - target: {fileID: 153538774416761914, guid: 3f2d230bf79b23242814eb4df82f6dbd, type: 3}
       propertyPath: playerPrefabs.Array.data[8]
       value: 
+      objectReference: {fileID: 3273643642964964946, guid: 75b4fc308a0714144aba492f9b727b00, type: 3}
+    - target: {fileID: 153538774416761914, guid: 3f2d230bf79b23242814eb4df82f6dbd, type: 3}
+      propertyPath: playerPrefabs.Array.data[9]
+      value: 
+      objectReference: {fileID: 8794884062547641445, guid: 04dbcdca1979f594ea09b7e0537b1695, type: 3}
+    - target: {fileID: 153538774416761914, guid: 3f2d230bf79b23242814eb4df82f6dbd, type: 3}
+      propertyPath: playerPrefabs.Array.data[10]
+      value: 
       objectReference: {fileID: 5373959594647340460, guid: 4a4e6619bf5ffec40aa2a840da4b3098, type: 3}
+    - target: {fileID: 153538774416761914, guid: 3f2d230bf79b23242814eb4df82f6dbd, type: 3}
+      propertyPath: playerPrefabs.Array.data[11]
+      value: 
+      objectReference: {fileID: 6217550187207283380, guid: 17ce8adb73f11c24b918e82631fc1ecc, type: 3}
     - target: {fileID: 153538774416761914, guid: 3f2d230bf79b23242814eb4df82f6dbd, type: 3}
       propertyPath: upgradeButtons.Array.data[0]
       value: 

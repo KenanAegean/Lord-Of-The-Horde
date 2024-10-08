@@ -5,19 +5,17 @@ public class LevelManager : MonoBehaviour
 {
     private NewPlayer player;
 
-    [SerializeField] private Weapon weapon;
-    [SerializeField] private List<Weapon> secondaryWeapons;
-
-    [SerializeField] private List<UpgradeOption> allUpgrades;
+    [SerializeField] private Weapon weapon; // Main weapon
+    [SerializeField] private List<UpgradePrefab> allUpgradePrefabs; // List of upgrade prefabs
 
     [SerializeField] private EnemySpawner enemySpawner;
 
-    private Weapon activeSecondaryWeapon;
+    private GameObject activeSecondaryWeapon; // Keep track of the active secondary weapon
 
     private void Start()
     {
         player = NewPlayer.Instance;
-        InitializeValues(player); 
+        InitializeValues(player);
     }
 
     public void InitializeValues(NewPlayer player)
@@ -49,24 +47,11 @@ public class LevelManager : MonoBehaviour
             }
         }
 
-        // Deactivate all secondary weapons, then activate initial ones
-        foreach (Weapon secondaryWeapon in secondaryWeapons)
-        {
-            secondaryWeapon.gameObject.SetActive(false);
-        }
-        foreach (Weapon startingSecondaryWeapon in initializer.secondaryWeapons)
-        {
-            startingSecondaryWeapon.gameObject.SetActive(true);
-        }
-
         weapon.rotationSpeed = 100.0f;
-
         enemySpawner.spawnInterval = 1.2f;
 
         player.playerLevel = 0;
-
         player.ResetPlayerScore();
-
         player.UpdateUI();
     }
 
@@ -84,21 +69,21 @@ public class LevelManager : MonoBehaviour
 
     private void TriggerUpgradeSelection()
     {
-        // Ensure the allUpgrades list has enough items
-        if (allUpgrades == null || allUpgrades.Count < 3)
+        // Ensure the allUpgradePrefabs list has enough items
+        if (allUpgradePrefabs == null || allUpgradePrefabs.Count < 3)
         {
-            Debug.LogError("Not enough upgrades available in the allUpgrades list.");
+            Debug.LogError("Not enough upgrade prefabs available in the allUpgradePrefabs list.");
             return;
         }
 
-        // Randomly pick 3 upgrades
-        List<UpgradeOption> selectedUpgrades = new List<UpgradeOption>();
+        // Randomly pick 3 upgrade prefabs
+        List<UpgradePrefab> selectedUpgrades = new List<UpgradePrefab>();
         while (selectedUpgrades.Count < 3)
         {
-            int randomIndex = Random.Range(0, allUpgrades.Count);
+            int randomIndex = Random.Range(0, allUpgradePrefabs.Count);
 
             // Make sure the upgrade is not already in the selected list
-            UpgradeOption randomUpgrade = allUpgrades[randomIndex];
+            UpgradePrefab randomUpgrade = allUpgradePrefabs[randomIndex];
             if (!selectedUpgrades.Contains(randomUpgrade))
             {
                 selectedUpgrades.Add(randomUpgrade);
@@ -108,34 +93,49 @@ public class LevelManager : MonoBehaviour
         GameSceneManager.Instance.ShowUpgradeChoices(selectedUpgrades, OnUpgradeSelected);
     }
 
-    private void OnUpgradeSelected(UpgradeOption selectedUpgrade)
+    private void OnUpgradeSelected(UpgradePrefab selectedUpgrade)
     {
         selectedUpgrade.ApplyUpgrade(player, weapon, this);
         player.UpdateUI();
     }
 
-    // Activates a new secondary weapon, replacing any existing one
-    public void ActivateSecondaryWeapon(Weapon weaponToActivate)
+    public void EquipSecondaryWeapon(GameObject weaponPrefab)
     {
-        if (activeSecondaryWeapon != null)
+        if (weaponPrefab == null)
         {
-            activeSecondaryWeapon.StopShooting();
-            activeSecondaryWeapon.gameObject.SetActive(false);
+            Debug.LogError("Weapon prefab is null. Ensure a valid prefab is passed.");
+            return;
         }
 
-        if (secondaryWeapons.Contains(weaponToActivate))
+        if (activeSecondaryWeapon != null)
         {
-            weaponToActivate.gameObject.SetActive(true);
-            weaponToActivate.StartShooting();
-            activeSecondaryWeapon = weaponToActivate;
+            // If there's an active secondary weapon, destroy it
+            Destroy(activeSecondaryWeapon);
+        }
+
+        // Instantiate the new secondary weapon and attach it to the player
+        Transform weaponHand = player.transform.Find("WeaponHand");
+        if (weaponHand == null)
+        {
+            Debug.LogError("WeaponHand transform not found on the player.");
+            return;
+        }
+
+        activeSecondaryWeapon = Instantiate(weaponPrefab, weaponHand);
+
+        // If the new weapon has shooting functionality, start shooting
+        Weapon weaponScript = activeSecondaryWeapon.GetComponent<Weapon>();
+        if (weaponScript != null)
+        {
+            weaponScript.StartShooting();
         }
     }
 
-    public void DeactivateActiveSecondaryWeapon()
+    public void RemoveActiveSecondaryWeapon()
     {
         if (activeSecondaryWeapon != null)
         {
-            activeSecondaryWeapon.gameObject.SetActive(false);
+            Destroy(activeSecondaryWeapon);
             activeSecondaryWeapon = null;
         }
     }
