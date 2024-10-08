@@ -26,6 +26,10 @@ public class NewPlayer : PhysicsObject, IPausable
     private bool isPaused = false;
     private SpriteRenderer spriteRenderer;
 
+    // Weapon slots
+    public GameObject[] weaponSlots = new GameObject[4]; // Main weapon in slot 0, upgrades in slot 1-3
+    private Weapon[] weaponsInSlots = new Weapon[4]; // Array to hold actual weapon instances
+
     // Singleton instantiation
     private static NewPlayer instance;
     public static NewPlayer Instance
@@ -81,7 +85,7 @@ public class NewPlayer : PhysicsObject, IPausable
     {
         _target = Camera.ScreenToWorldPoint(Input.mousePosition);
         _target.z = 0;
-    
+
         Vector3 playerPosition = transform.position;
         if (_target.x < playerPosition.x)
         {
@@ -150,7 +154,7 @@ public class NewPlayer : PhysicsObject, IPausable
 
         GameSceneManager.Instance.SetPausableObjectsState(false);
     }
-
+    
     public void ResetPlayerScore()
     {
         score = 0;
@@ -168,41 +172,49 @@ public class NewPlayer : PhysicsObject, IPausable
         UIManager.Instance.UpdateXPUI(currentXP, xpToNextLevel);
     }
 
-    public void ApplyInitialValues(PlayerInitializer initializer)
+    public bool AreWeaponSlotsFull()
     {
-        maxHealth = initializer.maxHealth;
-        health = initializer.startHealth;
-        currentXP = initializer.startXP;
-        xpToNextLevel = initializer.xpToNextLevel;
-
-        Transform mainWeaponTransform = transform.Find("WeaponHand/MainWeapon");
-        if (mainWeaponTransform != null)
+        // Check if all upgrade slots (slots 1-3) are filled
+        for (int i = 1; i < weaponsInSlots.Length; i++)
         {
-            Weapon mainWeapon = mainWeaponTransform.GetComponent<Weapon>();
-            if (mainWeapon != null)
+            if (weaponsInSlots[i] == null)
+                return false; // There is at least one empty slot
+        }
+        return true; // All upgrade slots are filled
+    }
+
+    public bool TryAddWeaponToSlot(Weapon weapon)
+    {
+        // Try to add the weapon to an available slot (slots 1-3 for upgrades)
+        for (int i = 1; i < weaponSlots.Length; i++)
+        {
+            if (weaponsInSlots[i] == null)
             {
-                EquipMainWeapon(mainWeapon);
+                PlaceWeaponInSlot(weapon, i);
+                return true;
             }
         }
-
-        // Equip secondary weapons (if available)
-        foreach (var secondaryWeapon in initializer.secondaryWeapons)
-        {
-            EquipSecondaryWeapon(secondaryWeapon);
-        }
-
-        UpdateUI();
+        return false; // No empty slot found
     }
 
-    private void EquipMainWeapon(Weapon weapon)
+    private void PlaceWeaponInSlot(Weapon weapon, int slotIndex)
     {
-        weapon.gameObject.SetActive(true);
+        // Get the transform of the slot where the weapon will be placed
+        Transform slotTransform = weaponSlots[slotIndex].transform;
+
+        // Set the weapon's position to match the slot's position
+        weapon.transform.position = slotTransform.position;
+
+        // Reset the weapon's rotation to match the slot's rotation
+        weapon.transform.rotation = slotTransform.rotation;
+
+        // Parent the weapon to the slot so it follows the slot's movement
+        weapon.transform.SetParent(slotTransform);
+
+        // Store the weapon in the corresponding slot for future reference
+        weaponsInSlots[slotIndex] = weapon;
     }
 
-    private void EquipSecondaryWeapon(Weapon weapon)
-    {
-        weapon.gameObject.SetActive(true);
-    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
