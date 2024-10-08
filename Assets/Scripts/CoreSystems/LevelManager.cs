@@ -7,10 +7,7 @@ public class LevelManager : MonoBehaviour
 
     [SerializeField] private Weapon weapon; // Main weapon
     [SerializeField] private List<UpgradePrefab> allUpgradePrefabs; // List of upgrade prefabs
-
     [SerializeField] private EnemySpawner enemySpawner;
-
-    private GameObject activeSecondaryWeapon; // Keep track of the active secondary weapon
 
     private void Start()
     {
@@ -76,14 +73,26 @@ public class LevelManager : MonoBehaviour
             return;
         }
 
-        // Randomly pick 3 upgrade prefabs
-        List<UpgradePrefab> selectedUpgrades = new List<UpgradePrefab>();
-        while (selectedUpgrades.Count < 3)
+        // Filter upgrades if weapon slots are full
+        List<UpgradePrefab> filteredUpgrades = new List<UpgradePrefab>();
+        foreach (var upgrade in allUpgradePrefabs)
         {
-            int randomIndex = Random.Range(0, allUpgradePrefabs.Count);
+            if (upgrade.type == UpgradeType.WeaponActivation && player.AreWeaponSlotsFull())
+            {
+                // Skip weapon upgrades if all slots are full
+                continue;
+            }
+            filteredUpgrades.Add(upgrade);
+        }
+
+        // Randomly pick 3 upgrade prefabs from the filtered list
+        List<UpgradePrefab> selectedUpgrades = new List<UpgradePrefab>();
+        while (selectedUpgrades.Count < 3 && filteredUpgrades.Count > 0)
+        {
+            int randomIndex = Random.Range(0, filteredUpgrades.Count);
 
             // Make sure the upgrade is not already in the selected list
-            UpgradePrefab randomUpgrade = allUpgradePrefabs[randomIndex];
+            UpgradePrefab randomUpgrade = filteredUpgrades[randomIndex];
             if (!selectedUpgrades.Contains(randomUpgrade))
             {
                 selectedUpgrades.Add(randomUpgrade);
@@ -99,44 +108,42 @@ public class LevelManager : MonoBehaviour
         player.UpdateUI();
     }
 
-    public void EquipSecondaryWeapon(GameObject weaponPrefab)
+    public void EquipWeaponInSlot(GameObject weaponPrefab)
     {
         if (weaponPrefab == null)
         {
-            Debug.LogError("Weapon prefab is null. Ensure a valid prefab is passed.");
+            Debug.LogError("Weapon prefab is null.");
             return;
         }
 
-        if (activeSecondaryWeapon != null)
-        {
-            // If there's an active secondary weapon, destroy it
-            Destroy(activeSecondaryWeapon);
-        }
+        // Instantiate the new weapon
+        GameObject newWeaponInstance = Instantiate(weaponPrefab);
 
-        // Instantiate the new secondary weapon and attach it to the player
-        Transform weaponHand = player.transform.Find("WeaponHand");
-        if (weaponHand == null)
-        {
-            Debug.LogError("WeaponHand transform not found on the player.");
-            return;
-        }
-
-        activeSecondaryWeapon = Instantiate(weaponPrefab, weaponHand);
-
-        // If the new weapon has shooting functionality, start shooting
-        Weapon weaponScript = activeSecondaryWeapon.GetComponent<Weapon>();
+        // Get the weapon script from the instance
+        Weapon weaponScript = newWeaponInstance.GetComponent<Weapon>();
         if (weaponScript != null)
         {
-            weaponScript.StartShooting();
+            // Try to add the weapon to a free slot in the player
+            if (player.TryAddWeaponToSlot(weaponScript))
+            {
+                Debug.Log("Weapon added to a free slot.");
+            }
+            else
+            {
+                Debug.LogError("No free slots available.");
+                Destroy(newWeaponInstance); // Destroy the weapon if no slot is available
+            }
+        }
+        else
+        {
+            Debug.LogError("Weapon script not found on the prefab.");
+            Destroy(newWeaponInstance);
         }
     }
 
     public void RemoveActiveSecondaryWeapon()
     {
-        if (activeSecondaryWeapon != null)
-        {
-            Destroy(activeSecondaryWeapon);
-            activeSecondaryWeapon = null;
-        }
+        // Not applicable with the new slot system, as we can remove by individual slots.
+        // Implement logic to handle weapon removal from specific slots if needed.
     }
 }

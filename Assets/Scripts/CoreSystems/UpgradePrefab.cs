@@ -99,7 +99,7 @@ public class UpgradePrefab : MonoBehaviour
             case UpgradeType.WeaponActivation:
                 if (weaponPrefab != null)
                 {
-                    levelManager.EquipSecondaryWeapon(weaponPrefab);
+                    levelManager.EquipWeaponInSlot(weaponPrefab);
                 }
                 break;
             case UpgradeType.OrbitalSpeed:

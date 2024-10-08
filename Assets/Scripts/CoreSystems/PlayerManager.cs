@@ -122,11 +122,23 @@ public class PlayerManager : MonoBehaviour
             Weapon mainWeapon = mainWeaponTransform.GetComponent<Weapon>();
             if (mainWeapon != null)
             {
-                existingPlayer.ApplyInitialValues(initializer); // Use ApplyInitialValues to set stats and weapons
+                ApplyInitialValues(initializer); // Use ApplyInitialValues to set stats and weapons
             }
         }
 
         // Update the player's UI
         existingPlayer.UpdateUI();
     }
+
+    public void ApplyInitialValues(PlayerInitializer initializer)
+    {
+        existingPlayer.maxHealth = initializer.maxHealth;
+        existingPlayer.health = initializer.startHealth;
+        existingPlayer.currentXP = initializer.startXP;
+        existingPlayer.xpToNextLevel = initializer.xpToNextLevel;
+
+
+        UpdateUI();
+    }
+
 }
