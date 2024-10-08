@@ -48,5 +48,5 @@ MonoBehaviour:
   type: 3
   description: 
   value: 1.5
-  weaponToActivate: {fileID: 0}
-  icon: {fileID: 0}
+  weaponPrefab: {fileID: 0}
+  icon: {fileID: 21300000, guid: ece41c4593d1d4a4abafb72ba86f94f8, type: 3}

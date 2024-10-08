@@ -77,7 +77,7 @@ public class UpgradeOption
             case UpgradeType.WeaponActivation:
                 if (weaponToActivate != null)
                 {
-                    levelManager.ActivateSecondaryWeapon(weaponToActivate);
+                    //levelManager.ActivateSecondaryWeapon(weaponToActivate);
                 }
                 break;
             case UpgradeType.OrbitalSpeed:

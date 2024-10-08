@@ -6,23 +6,67 @@ public class UpgradePrefab : MonoBehaviour
     public string upgradeName;
     public UpgradeType type;
     [TextArea] public string description;
-    public float value; // The amount for health, speed, or weapon effects
-    public Weapon weaponToActivate; // The weapon to activate for WeaponActivation type
-    public Sprite icon; // The icon for the upgrade
+    public float value;
 
-    // Returns the icon for this upgrade
-    public Sprite GetIcon()
+    [Header("Weapon Upgrade (Optional)")]
+    public GameObject weaponPrefab;
+
+    public Sprite icon; // The icon for this upgrade
+
+    // Default icons for different upgrade types
+    public static Sprite defaultHealthIcon;
+    public static Sprite defaultSpeedIcon;
+    public static Sprite defaultWeaponIcon;
+    public static Sprite defaultOrbitIcon;
+    public static Sprite defaultOrbitDIcon;
+
+    // Assign default icons during initialization (static method to be called when setting defaults)
+    public static void SetDefaultIcons(Sprite healthIcon, Sprite speedIcon, Sprite weaponIcon, Sprite orbitIcon, Sprite orbitDIcon)
     {
-        return icon;
+        defaultHealthIcon = healthIcon;
+        defaultSpeedIcon = speedIcon;
+        defaultWeaponIcon = weaponIcon;
+        defaultOrbitIcon = orbitIcon;
+        defaultOrbitDIcon = orbitDIcon;
     }
 
-    // Returns a description for the upgrade
+    // Method to get the correct icon (either the assigned one or a default one based on type)
+    public Sprite GetIcon()
+    {
+        // If a custom icon is assigned, use it
+        if (icon != null)
+        {
+            return icon;
+        }
+
+        // Use default icons based on upgrade type
+        switch (type)
+        {
+            case UpgradeType.HealthIncrease:
+                return defaultHealthIcon;
+            case UpgradeType.SpeedIncrease:
+                return defaultSpeedIcon;
+            case UpgradeType.WeaponActivation:
+                return defaultWeaponIcon;
+            case UpgradeType.OrbitalSpeed:
+                return defaultOrbitIcon;
+            case UpgradeType.OrbitDirection:
+                return defaultOrbitDIcon;
+            default:
+                return null; // Return null if no matching type or default icon exists
+        }
+    }
+
+    // Method to get the description dynamically if not manually provided
     public string GetDescription()
     {
+        // If a manual description is provided, return it
         if (!string.IsNullOrEmpty(description))
+        {
             return description;
+        }
 
-        // Generate a default description based on the type and value
+        // Generate a description based on the upgrade type
         switch (type)
         {
             case UpgradeType.HealthIncrease:
@@ -34,7 +78,7 @@ public class UpgradePrefab : MonoBehaviour
             case UpgradeType.OrbitalSpeed:
                 return $"Increase weapon speed by x{value}.";
             case UpgradeType.OrbitDirection:
-                return $"Change the weapons direction.";
+                return $"Change the weapon's orbit direction.";
             default:
                 return "Upgrade your abilities.";
         }
@@ -53,9 +97,9 @@ public class UpgradePrefab : MonoBehaviour
                 player.ObjectSpeed += value;
                 break;
             case UpgradeType.WeaponActivation:
-                if (weaponToActivate != null)
+                if (weaponPrefab != null)
                 {
-                    levelManager.ActivateSecondaryWeapon(weaponToActivate);
+                    levelManager.EquipSecondaryWeapon(weaponPrefab);
                 }
                 break;
             case UpgradeType.OrbitalSpeed:

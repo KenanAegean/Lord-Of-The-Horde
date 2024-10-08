@@ -96,7 +96,7 @@ public class GameSceneManager : MonoBehaviour
             DontDestroyOnLoad(dieMenuUI.transform.root.gameObject);
         }
 
-        UpgradeOption.SetDefaultIcons(defaultHealthIcon, defaultSpeedIcon, defaultWeaponIcon, defaultOrbitIcon, defaultOrbitDIcon);
+        UpgradePrefab.SetDefaultIcons(defaultHealthIcon, defaultSpeedIcon, defaultWeaponIcon, defaultOrbitIcon, defaultOrbitDIcon);
 
         ShowMainMenu();
     }
@@ -396,10 +396,11 @@ public class GameSceneManager : MonoBehaviour
         currentState = GameState.Paused;
         isPaused = true;
 
+        // Loop through the list of upgrade buttons and assign values
         for (int i = 0; i < upgradeButtons.Count; i++)
         {
             int index = i;
-            UpgradePrefab upgrade = upgrades[i];
+            UpgradePrefab upgrade = upgrades[i]; // Get the upgrade prefab
 
             var card = upgradeButtons[i].transform.parent;
             var icon = card.Find("Image").GetComponent<Image>();
@@ -417,11 +418,14 @@ public class GameSceneManager : MonoBehaviour
                 continue;
             }
 
+            // Use the GetIcon() method to assign either a custom or default icon to the button
             icon.sprite = upgrade.GetIcon();
+
+            // Set the description
             description.text = $"{upgrade.upgradeName}\n{upgrade.GetDescription()}";
 
+            // Set up the button click listener for the upgrade
             upgradeButtons[i].onClick.RemoveAllListeners();
-
             upgradeButtons[i].onClick.AddListener(() =>
             {
                 onUpgradeSelectedCallback(upgrade);
@@ -431,8 +435,10 @@ public class GameSceneManager : MonoBehaviour
                 Effects.LeveltUpFX(player.transform);
             });
         }
+
         SetPausableObjectsState(false);
     }
+
 
 
     // ---------------------- Restart and Utility Functions ---------------------- //

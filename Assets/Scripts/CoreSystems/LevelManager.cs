@@ -5,14 +5,12 @@ public class LevelManager : MonoBehaviour
 {
     private NewPlayer player;
 
-    [SerializeField] private Weapon weapon;
-    [SerializeField] private List<Weapon> secondaryWeapons;
-
-    [SerializeField] private List<UpgradePrefab> allUpgradePrefabs; // Use a list of upgrade prefabs
+    [SerializeField] private Weapon weapon; // Main weapon
+    [SerializeField] private List<UpgradePrefab> allUpgradePrefabs; // List of upgrade prefabs
 
     [SerializeField] private EnemySpawner enemySpawner;
 
-    private Weapon activeSecondaryWeapon;
+    private GameObject activeSecondaryWeapon; // Keep track of the active secondary weapon
 
     private void Start()
     {
@@ -49,24 +47,11 @@ public class LevelManager : MonoBehaviour
             }
         }
 
-        // Deactivate all secondary weapons, then activate initial ones
-        foreach (Weapon secondaryWeapon in secondaryWeapons)
-        {
-            secondaryWeapon.gameObject.SetActive(false);
-        }
-        foreach (Weapon startingSecondaryWeapon in initializer.secondaryWeapons)
-        {
-            startingSecondaryWeapon.gameObject.SetActive(true);
-        }
-
         weapon.rotationSpeed = 100.0f;
-
         enemySpawner.spawnInterval = 1.2f;
 
         player.playerLevel = 0;
-
         player.ResetPlayerScore();
-
         player.UpdateUI();
     }
 
@@ -114,28 +99,43 @@ public class LevelManager : MonoBehaviour
         player.UpdateUI();
     }
 
-    // Activates a new secondary weapon, replacing any existing one
-    public void ActivateSecondaryWeapon(Weapon weaponToActivate)
+    public void EquipSecondaryWeapon(GameObject weaponPrefab)
     {
-        if (activeSecondaryWeapon != null)
+        if (weaponPrefab == null)
         {
-            activeSecondaryWeapon.StopShooting();
-            activeSecondaryWeapon.gameObject.SetActive(false);
+            Debug.LogError("Weapon prefab is null. Ensure a valid prefab is passed.");
+            return;
         }
 
-        if (secondaryWeapons.Contains(weaponToActivate))
+        if (activeSecondaryWeapon != null)
         {
-            weaponToActivate.gameObject.SetActive(true);
-            weaponToActivate.StartShooting();
-            activeSecondaryWeapon = weaponToActivate;
+            // If there's an active secondary weapon, destroy it
+            Destroy(activeSecondaryWeapon);
+        }
+
+        // Instantiate the new secondary weapon and attach it to the player
+        Transform weaponHand = player.transform.Find("WeaponHand");
+        if (weaponHand == null)
+        {
+            Debug.LogError("WeaponHand transform not found on the player.");
+            return;
+        }
+
+        activeSecondaryWeapon = Instantiate(weaponPrefab, weaponHand);
+
+        // If the new weapon has shooting functionality, start shooting
+        Weapon weaponScript = activeSecondaryWeapon.GetComponent<Weapon>();
+        if (weaponScript != null)
+        {
+            weaponScript.StartShooting();
         }
     }
 
-    public void DeactivateActiveSecondaryWeapon()
+    public void RemoveActiveSecondaryWeapon()
     {
         if (activeSecondaryWeapon != null)
         {
-            activeSecondaryWeapon.gameObject.SetActive(false);
+            Destroy(activeSecondaryWeapon);
             activeSecondaryWeapon = null;
         }
     }
