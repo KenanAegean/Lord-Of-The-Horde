@@ -4432,11 +4432,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1847416906879105417, guid: 163ac61782f94464fb0a919d87004c38, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 400
+      value: 350
       objectReference: {fileID: 0}
     - target: {fileID: 2564790585748178516, guid: 163ac61782f94464fb0a919d87004c38, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -400
+      value: -350
       objectReference: {fileID: 0}
     - target: {fileID: 5046936804526740254, guid: 163ac61782f94464fb0a919d87004c38, type: 3}
       propertyPath: m_Name
