@@ -3718,6 +3718,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 956251848434061342, guid: ccacbf7f76cbc9c43ad7f7383f543d05, type: 3}
     - target: {fileID: 7374623756225094040, guid: 870f96a6a8c69cd408a401c3d7574439, type: 3}
+      propertyPath: allUpgradePrefabs.Array.data[6]
+      value: 
+      objectReference: {fileID: 2798089315682826196, guid: 1854c74744e8dcd4ebb4f538dcd4fe32, type: 3}
+    - target: {fileID: 7374623756225094040, guid: 870f96a6a8c69cd408a401c3d7574439, type: 3}
       propertyPath: allUpgrades.Array.data[4].value
       value: 1.5
       objectReference: {fileID: 0}
@@ -4849,11 +4853,11 @@ SceneRoots:
   - {fileID: 48092270750940205}
   - {fileID: 1087309658}
   - {fileID: 5813537805364286314}
-  - {fileID: 796554439372856199}
-  - {fileID: 4863415680013138208}
   - {fileID: 2053946762}
   - {fileID: 555135850}
   - {fileID: 200658152}
+  - {fileID: 796554439372856199}
+  - {fileID: 4863415680013138208}
   - {fileID: 7423543174188943905}
   - {fileID: 1415162873593745682}
   - {fileID: 5412218250231054506}
