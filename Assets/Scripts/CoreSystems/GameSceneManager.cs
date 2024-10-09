@@ -275,7 +275,7 @@ public class GameSceneManager : MonoBehaviour
 
     public void ReturnToMainMenu()
     {
-        ResesetAll();
+        ResetAll();
 
         currentState = GameState.Paused;
         isPaused = true;
@@ -457,14 +457,15 @@ public class GameSceneManager : MonoBehaviour
 
         ResetEnemies(); 
         ResetCollectibles(); 
-        ResetBullets(); 
+        ResetBullets();
+        player.ResetPlayerState();
 
         SetPausableObjectsState(true);
 
         Debug.Log("Game restarted without reloading scene.");
     }
 
-    public void ResesetAll()
+    public void ResetAll()
     {
         currentState = GameState.Paused;
         isPaused = true;
@@ -479,6 +480,7 @@ public class GameSceneManager : MonoBehaviour
         ResetEnemies(); 
         ResetCollectibles(); 
         ResetBullets();
+        player.ResetPlayerState();
 
         SetPausableObjectsState(false);
 
@@ -537,6 +539,7 @@ public class GameSceneManager : MonoBehaviour
             Destroy(bullet.gameObject);
         }
     }
+
 
     public void SetPausableObjectsState(bool isResuming)
     {

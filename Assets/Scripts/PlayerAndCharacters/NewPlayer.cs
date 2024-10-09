@@ -168,6 +168,8 @@ public class NewPlayer : PhysicsObject, IPausable
         currentXP = 0f;
         transform.position = Vector3.zero;
 
+        ResetWeaponSlots();
+
         UIManager.Instance.UpdateHealthUI(health, maxHealth);
         UIManager.Instance.UpdateXPUI(currentXP, xpToNextLevel);
     }
@@ -213,6 +215,20 @@ public class NewPlayer : PhysicsObject, IPausable
 
         // Store the weapon in the corresponding slot for future reference
         weaponsInSlots[slotIndex] = weapon;
+    }
+
+    public void ResetWeaponSlots()
+    {
+        // Loop through all weapon slots and remove any weapons present
+        for (int i = 0; i < weaponsInSlots.Length; i++)
+        {
+            if (weaponsInSlots[i] != null)
+            {
+                // Destroy the weapon game object if it's present
+                Destroy(weaponsInSlots[i].gameObject);
+                weaponsInSlots[i] = null;
+            }
+        }
     }
 
 
