@@ -170,6 +170,10 @@ public class GameSceneManager : MonoBehaviour
                 {
                     playerMainWeaponImage.sprite = weaponSpriteRenderer.sprite;
                 }
+                // Build the description dynamically using string interpolation
+                playerDescriptionText.text = $"Health: {initializer.maxHealth}\n" +
+                                             $"Speed: {initializer.speed}\n" +
+                                             $"Orbital Speed: {initializer.orbitalSpeed}";
             }
         }
     }
@@ -193,10 +197,15 @@ public class GameSceneManager : MonoBehaviour
 
     private void ApplyDataToPlayer(PlayerInitializer initializer, GameObject selectedPlayerPrefab)
     {
+        Weapon weapon = player.GetComponentInChildren<Weapon>();
+
+
         player.maxHealth = initializer.maxHealth;
         player.health = initializer.startHealth;
         player.currentXP = initializer.startXP;
         player.xpToNextLevel = initializer.xpToNextLevel;
+        player.ObjectSpeed = initializer.speed;
+        weapon.rotationSpeed = initializer.orbitalSpeed;
 
         SpriteRenderer playerSpriteRenderer = player.GetComponent<SpriteRenderer>();
         SpriteRenderer selectedSpriteRenderer = selectedPlayerPrefab.GetComponent<SpriteRenderer>();

@@ -144,6 +144,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  weaponName: 
   rotationSpeed: 120
   isGunWeapon: 0
   meleeDamage: 50
@@ -197,6 +198,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 4383264656693818730}
+  weaponName: 
   rotationSpeed: 120
   isGunWeapon: 0
   meleeDamage: 10
@@ -410,8 +412,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerName: tofi
   playerDescription: This is Player Description. Here Will Be Updated Soon
-  maxHealth: 1000
-  startHealth: 1000
+  maxHealth: 1200
+  startHealth: 1200
   startXP: 0
   xpToNextLevel: 50
+  speed: 2
+  orbitalSpeed: 120
   secondaryWeapons: []

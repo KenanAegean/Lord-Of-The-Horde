@@ -221,6 +221,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  weaponName: 
   rotationSpeed: 120
   isGunWeapon: 1
   meleeDamage: 50
@@ -274,6 +275,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 5022395745223941791}
+  weaponName: 
   rotationSpeed: 120
   isGunWeapon: 0
   meleeDamage: 10
@@ -414,4 +416,6 @@ MonoBehaviour:
   startHealth: 1000
   startXP: 0
   xpToNextLevel: 50
+  speed: 2
+  orbitalSpeed: 120
   secondaryWeapons: []

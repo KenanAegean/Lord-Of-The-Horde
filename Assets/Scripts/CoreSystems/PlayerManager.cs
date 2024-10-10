@@ -87,7 +87,15 @@ public class PlayerManager : MonoBehaviour
                     playerMainWeaponImage.sprite = weaponSpriteRenderer.sprite;
                 }
             }
+            // Build the description dynamically using string interpolation
+            playerDescriptionText.text = $"Starts with:\n" +
+                                         $"{mainWeapon.weaponName} Weapon\n" +
+                                         $"{initializer.maxHealth} HP\n" +
+                                         $"{initializer.speed} Speed\n" +
+                                         $"{initializer.orbitalSpeed} Orbital Speed";
         }
+
+        
     }
 
     public void ConfirmSelection()

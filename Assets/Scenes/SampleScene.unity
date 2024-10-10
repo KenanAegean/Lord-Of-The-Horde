@@ -3633,6 +3633,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2013705695736615647, guid: 7f227cb61eff10141b8e5fe266b2aa1c, type: 3}
+      propertyPath: weaponName
+      value: WeaponName
+      objectReference: {fileID: 0}
     - target: {fileID: 5373959594647340460, guid: 7f227cb61eff10141b8e5fe266b2aa1c, type: 3}
       propertyPath: m_Name
       value: Player
@@ -4644,6 +4648,10 @@ PrefabInstance:
     - target: {fileID: 2564790585748178516, guid: 163ac61782f94464fb0a919d87004c38, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -350
+      objectReference: {fileID: 0}
+    - target: {fileID: 4491511282419430869, guid: 163ac61782f94464fb0a919d87004c38, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -345
       objectReference: {fileID: 0}
     - target: {fileID: 5046936804526740254, guid: 163ac61782f94464fb0a919d87004c38, type: 3}
       propertyPath: m_Name

@@ -144,6 +144,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  weaponName: GunHand
   rotationSpeed: 120
   isGunWeapon: 1
   meleeDamage: 50

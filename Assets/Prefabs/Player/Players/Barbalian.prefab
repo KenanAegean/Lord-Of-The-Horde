@@ -144,6 +144,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  weaponName: 
   rotationSpeed: 120
   isGunWeapon: 1
   meleeDamage: 50
@@ -357,10 +358,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerName: Barbalian
   playerDescription: This is Player Description. Here Will Be Updated Soon
-  maxHealth: 1000
-  startHealth: 1000
+  maxHealth: 990
+  startHealth: 990
   startXP: 0
   xpToNextLevel: 50
+  speed: 2
+  orbitalSpeed: 120
   secondaryWeapons: []
 --- !u!1 &8746988366034816594
 GameObject:
@@ -408,6 +411,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 7236208721858518757}
+  weaponName: 
   rotationSpeed: 120
   isGunWeapon: 0
   meleeDamage: 10

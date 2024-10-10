@@ -129,10 +129,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerName: WhiteShine
   playerDescription: This is Player Description. Here Will Be Updated Soon
-  maxHealth: 1000
-  startHealth: 1000
+  maxHealth: 1200
+  startHealth: 1200
   startXP: 0
   xpToNextLevel: 50
+  speed: 2
+  orbitalSpeed: 140
   secondaryWeapons: []
 --- !u!1 &5878970779049818174
 GameObject:
@@ -257,6 +259,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 6293396020924622152}
+  weaponName: 
   rotationSpeed: 120
   isGunWeapon: 0
   meleeDamage: 10
@@ -408,6 +411,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  weaponName: 
   rotationSpeed: 120
   isGunWeapon: 0
   meleeDamage: 50
