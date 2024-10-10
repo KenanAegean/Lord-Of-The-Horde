@@ -265,6 +265,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  weaponName: AxeHand
   rotationSpeed: 120
   isGunWeapon: 0
   meleeDamage: 50

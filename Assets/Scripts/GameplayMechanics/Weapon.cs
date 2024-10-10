@@ -5,6 +5,7 @@ public class Weapon : MonoBehaviour, IPausable
 {
     [Header("General Settings")]
     [SerializeField] private Transform player;
+    [SerializeField] public string weaponName;
     [SerializeField] public float rotationSpeed = 120f;
     [SerializeField] private bool isGunWeapon = false;
 
