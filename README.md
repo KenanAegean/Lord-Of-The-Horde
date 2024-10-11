@@ -5,6 +5,11 @@ Game Project of Game Programming With C# Course
 - (5 September 2024)
 - Teacher referance: <a href="https://www.linkedin.com/in/martin-andersson-20424420a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app">Martin Andersson</a>
 
+<p align="center">
+  <img src="Assets/Art/Logo/Logo White.png" width="350" title="hover text"><br>
+  <a href="https://kenanaegean.github.io/Lord-Of-The-Horde/">Try Game On Browser</a>
+</p>
+
 ## First Assigment
 ### First Assigment Description
 ```
@@ -91,6 +96,10 @@ Screenshots           |  Screenshots
 ![](Assets/Other/Assigment2/Screenshots/2.png)  |  ![](Assets/Other/Assigment2/Screenshots/5.png)
 ![](Assets/Other/Assigment2/Screenshots/3.png)  |  ![](Assets/Other/Assigment2/Screenshots/6.png)
 
+Github           |  Pages 
+:-------------------------:|:-------------------------:
+![](Assets/Other/Assigment2/Screenshots/7.png)  |  ![](Assets/Other/Assigment2/Screenshots/8.png)
+
 <br><b>Video - Second Assigment:</b>  
 <video src="https://github.com/user-attachments/assets/f09a2e4a-8c23-4129-a670-da74cd73c8a2" width=180/></video>
 
@@ -134,8 +143,8 @@ Screenshots           |  Screenshots
 :-------------------------:|:-------------------------:
 ![](Assets/Other/Assigment3/Screenshots/1.png)  |  ![](Assets/Other/Assigment3/Screenshots/5.png)
 ![](Assets/Other/Assigment3/Screenshots/2.png)  |  ![](Assets/Other/Assigment3/Screenshots/6.png)
-![](Assets/Other/Assigmen3/Screenshots/3.png)  |  ![](Assets/Other/Assigment3/Screenshots/7.png)
-![](Assets/Other/Assigmen3/Screenshots/4.png)  |  ![](Assets/Other/Assigment3/Screenshots/8.png)
+![](Assets/Other/Assigment3/Screenshots/3.png)  |  ![](Assets/Other/Assigment3/Screenshots/7.png)
+![](Assets/Other/Assigment3/Screenshots/4.png)  |  ![](Assets/Other/Assigment3/Screenshots/8.png)
 
 <br><b>Video - Third Assigment:</b>  
 <video src="" width=180/></video>
