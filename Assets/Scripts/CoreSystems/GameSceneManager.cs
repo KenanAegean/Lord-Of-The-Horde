@@ -8,37 +8,37 @@ using System.Collections.Generic;
 
 public class GameSceneManager : MonoBehaviour
 {
-    public static GameSceneManager Instance;
+    [SerializeField] public static GameSceneManager Instance;
 
     [Header("Main Menu Panels")]
-    public GameObject mainMenuCanvas;
-    public GameObject settingsPanel;
-    public GameObject creditsPanel;
-    public TextMeshProUGUI lastRunScoreText;
+    [SerializeField] public GameObject mainMenuCanvas;
+    [SerializeField] public GameObject settingsPanel;
+    [SerializeField] public GameObject creditsPanel;
+    [SerializeField] public TextMeshProUGUI lastRunScoreText;
 
     [Header("Pause Menu")]
-    public GameObject pauseMenuUI;
+    [SerializeField] public GameObject pauseMenuUI;
 
     [Header("Die Menu")]
-    public GameObject dieMenuUI;
+    [SerializeField] public GameObject dieMenuUI;
 
     [Header("Upgrade System")]
-    public GameObject upgradePanel; // The panel containing the upgrade buttons
-    public List<Button> upgradeButtons; // A list of buttons for the upgrades
-    public TextMeshProUGUI upgradeDescriptionText; // The text field for showing descriptions
+    [SerializeField] public GameObject upgradePanel;
+    [SerializeField] public List<Button> upgradeButtons;
+    [SerializeField] public TextMeshProUGUI upgradeDescriptionText;
     private System.Action<UpgradePrefab> onUpgradeSelectedCallback;
 
-    public Sprite defaultHealthIcon;
-    public Sprite defaultSpeedIcon;
-    public Sprite defaultWeaponIcon;
-    public Sprite defaultOrbitIcon;
-    public Sprite defaultOrbitDIcon;
+    [SerializeField] public Sprite defaultHealthIcon;
+    [SerializeField] public Sprite defaultSpeedIcon;
+    [SerializeField] public Sprite defaultWeaponIcon;
+    [SerializeField] public Sprite defaultOrbitIcon;
+    [SerializeField] public Sprite defaultOrbitDIcon;
 
-    public MapGenerator mapGenerator; 
+    [SerializeField] public MapGenerator mapGenerator; 
 
 
     private bool isPaused = false;
-    public GameState currentState = GameState.Playing;
+    [SerializeField] public GameState currentState = GameState.Playing;
     private NewPlayer player;
     private float lastRunScore = 0f;
 
@@ -281,9 +281,7 @@ public class GameSceneManager : MonoBehaviour
         else
         {
             Debug.LogWarning("Player is null in StartGame.");
-        }
-
-        
+        }    
 
     }
 
@@ -328,7 +326,6 @@ public class GameSceneManager : MonoBehaviour
     {
         lastRunScore = score;
 
-        // Update the main menu's last score display if it's already active
         if (lastRunScoreText != null)
         {
             lastRunScoreText.text = "Last Run Score: " + lastRunScore.ToString("F0");
@@ -415,13 +412,12 @@ public class GameSceneManager : MonoBehaviour
         for (int i = 0; i < upgradeButtons.Count; i++)
         {
             int index = i;
-            UpgradePrefab upgrade = upgrades[i]; // Get the upgrade prefab
+            UpgradePrefab upgrade = upgrades[i]; 
 
             var card = upgradeButtons[i].transform.parent;
             var icon = card.Find("Image").GetComponent<Image>();
             var description = card.Find("Upgrade Desc").GetComponent<TextMeshProUGUI>();
 
-            // Check for nulls
             if (icon == null)
             {
                 Debug.LogError($"Icon Image component missing for upgrade {i}");
@@ -433,13 +429,10 @@ public class GameSceneManager : MonoBehaviour
                 continue;
             }
 
-            // Use the GetIcon() method to assign either a custom or default icon to the button
             icon.sprite = upgrade.GetIcon();
 
-            // Set the description
             description.text = $"{upgrade.upgradeName}\n{upgrade.GetDescription()}";
 
-            // Set up the button click listener for the upgrade
             upgradeButtons[i].onClick.RemoveAllListeners();
             upgradeButtons[i].onClick.AddListener(() =>
             {

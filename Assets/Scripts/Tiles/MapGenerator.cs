@@ -3,15 +3,15 @@ using System.Collections.Generic;
 
 public class MapGenerator : MonoBehaviour
 {
-    public TileType[] tileTypes;          // Array of different tile types (set in the Inspector)
-    public int chunkSize = 10;            // Size of each chunk (e.g., 10x10 tiles)
-    public float tileSize = 1f;           // Size of each tile in the world
-    public Transform mapParent;           // Parent object for the map (set in the Inspector)
+    [SerializeField] public TileType[] tileTypes;         
+    [SerializeField] public int chunkSize = 10;            
+    [SerializeField] public float tileSize = 1f;           
+    [SerializeField] public Transform mapParent;           
 
-    public float unloadDistance = 30f;    // Distance at which chunks are unloaded (in chunk units)
+    [SerializeField] public float unloadDistance = 30f;    
 
     private Dictionary<Vector2, GameObject> spawnedChunks = new Dictionary<Vector2, GameObject>();
-    public Transform player;              // Reference to the player transform
+    [SerializeField] public Transform player;              
 
     void Update()
     {
@@ -23,7 +23,7 @@ public class MapGenerator : MonoBehaviour
 
         Vector2 currentChunk = new Vector2(Mathf.Floor(player.position.x / chunkSize), Mathf.Floor(player.position.y / chunkSize));
         GenerateChunksAroundPlayer(currentChunk);
-        UnloadDistantChunks(currentChunk);  // Check for chunks to unload
+        UnloadDistantChunks(currentChunk); 
     }
 
     public void GenerateMap()
@@ -67,21 +67,19 @@ public class MapGenerator : MonoBehaviour
 
             if (distance > unloadDistance)
             {
-                // Mark chunk for removal (can also deactivate if preferred)
+                // Mark chunk for removal
                 chunksToRemove.Add(chunkPos);
             }
         }
 
-        // Destroy or deactivate the chunks that are too far
         foreach (Vector2 chunkPos in chunksToRemove)
         {
             GameObject chunkToDestroy = spawnedChunks[chunkPos];
-            Destroy(chunkToDestroy);  // Destroy the chunk and its tiles
+            Destroy(chunkToDestroy);
             spawnedChunks.Remove(chunkPos);
         }
     }
 
-    // Generate a chunk at a given chunk position
     GameObject GenerateChunk(Vector2 chunkPos)
     {
         GameObject chunk = new GameObject("Chunk " + chunkPos);
@@ -99,18 +97,17 @@ public class MapGenerator : MonoBehaviour
         return chunk;
     }
 
-    // Spawns an individual tile at the given position as a child of the given chunk
     void SpawnTile(Vector2 position, Transform chunkParent)
     {
-        TileType selectedTile = SelectTileType();  // Randomly select a tile type
+        TileType selectedTile = SelectTileType();  
         if (selectedTile != null)
         {
-            Vector3 tilePosition = new Vector3(position.x * tileSize, position.y * tileSize, 10f);  // Set Z position for tiles to ensure they appear behind objects
+            Vector3 tilePosition = new Vector3(position.x * tileSize, position.y * tileSize, 10f);
             GameObject tile = Instantiate(selectedTile.tilePrefab, tilePosition, Quaternion.identity, chunkParent);
         }
     }
 
-    // Selects a tile type based on their spawn chances
+ 
     TileType SelectTileType()
     {
         float totalChance = 0f;

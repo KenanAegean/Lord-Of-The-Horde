@@ -10,7 +10,7 @@ public class UpgradePrefabCreator : EditorWindow
     private UpgradeType upgradeType = UpgradeType.HealthIncrease;
     private string upgradeDescription = "";
     private float upgradeValue = 1f;
-    public GameObject weaponPrefab; // Correctly cast as GameObject
+    public GameObject weaponPrefab; 
     private Sprite upgradeIcon;
 
     [MenuItem("Tools/Upgrade Prefab Creator")]
@@ -23,7 +23,6 @@ public class UpgradePrefabCreator : EditorWindow
     {
         GUILayout.Label("Create a New Upgrade Prefab", EditorStyles.boldLabel);
 
-        // Set upgrade prefab name
         prefabName = EditorGUILayout.TextField("Prefab Name:", prefabName);
 
         // Set upgrade details
@@ -63,9 +62,9 @@ public class UpgradePrefabCreator : EditorWindow
         upgradePrefab.weaponPrefab = weaponPrefab;
         upgradePrefab.icon = upgradeIcon;
 
-        // Define the path and make sure it exists
+        // Define the path
         string path = $"Assets/Prefabs/Upgrade/{prefabName}.prefab";
-        System.IO.Directory.CreateDirectory("Assets/Prefabs/Upgrade"); // Ensure directory exists
+        System.IO.Directory.CreateDirectory("Assets/Prefabs/Upgrade");
 
         // Save the GameObject as a prefab
         PrefabUtility.SaveAsPrefabAsset(upgradeGO, path);

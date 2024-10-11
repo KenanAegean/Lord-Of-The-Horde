@@ -176,18 +176,18 @@ public class NewPlayer : PhysicsObject, IPausable
 
     public bool AreWeaponSlotsFull()
     {
-        // Check if all upgrade slots (slots 1-3) are filled
+        // Check all upgrade slots 
         for (int i = 1; i < weaponsInSlots.Length; i++)
         {
             if (weaponsInSlots[i] == null)
-                return false; // There is at least one empty slot
+                return false;
         }
-        return true; // All upgrade slots are filled
+        return true;
     }
 
     public bool TryAddWeaponToSlot(Weapon weapon)
     {
-        // Try to add the weapon to an available slot (slots 1-3 for upgrades)
+        // Try to add the weapon
         for (int i = 1; i < weaponSlots.Length; i++)
         {
             if (weaponsInSlots[i] == null)
@@ -196,35 +196,26 @@ public class NewPlayer : PhysicsObject, IPausable
                 return true;
             }
         }
-        return false; // No empty slot found
+        return false;
     }
 
     private void PlaceWeaponInSlot(Weapon weapon, int slotIndex)
     {
-        // Get the transform of the slot where the weapon will be placed
         Transform slotTransform = weaponSlots[slotIndex].transform;
 
-        // Set the weapon's position to match the slot's position
         weapon.transform.position = slotTransform.position;
-
-        // Reset the weapon's rotation to match the slot's rotation
         weapon.transform.rotation = slotTransform.rotation;
-
-        // Parent the weapon to the slot so it follows the slot's movement
         weapon.transform.SetParent(slotTransform);
 
-        // Store the weapon in the corresponding slot for future reference
         weaponsInSlots[slotIndex] = weapon;
     }
 
     public void ResetWeaponSlots()
     {
-        // Loop through all weapon slots and remove any weapons present
         for (int i = 0; i < weaponsInSlots.Length; i++)
         {
             if (weaponsInSlots[i] != null)
             {
-                // Destroy the weapon game object if it's present
                 Destroy(weaponsInSlots[i].gameObject);
                 weaponsInSlots[i] = null;
             }

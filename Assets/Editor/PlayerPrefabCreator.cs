@@ -108,7 +108,7 @@ public class PlayerPrefabCreator : EditorWindow
             }
         }
 
-        // Update the player's sprite only if a new one is assigned
+        // Update the player's sprite
         SpriteRenderer spriteRenderer = playerInstance.GetComponent<SpriteRenderer>();
         if (spriteRenderer != null && playerSprite != null)
         {
@@ -119,7 +119,7 @@ public class PlayerPrefabCreator : EditorWindow
         Transform weaponHand = playerInstance.transform.Find("WeaponHand");
         if (weaponHand != null && mainWeapon != null)
         {
-            // Check if there's an existing main weapon and destroy it
+            // Check if there's an existing main weapon
             Transform existingMainWeapon = weaponHand.Find("MainWeapon");
             if (existingMainWeapon != null)
             {
