@@ -34,6 +34,9 @@ public class GameSceneManager : MonoBehaviour
     public Sprite defaultOrbitIcon;
     public Sprite defaultOrbitDIcon;
 
+    public MapGenerator mapGenerator; 
+
+
     private bool isPaused = false;
     public GameState currentState = GameState.Playing;
     private NewPlayer player;
@@ -187,6 +190,8 @@ public class GameSceneManager : MonoBehaviour
         ApplyDataToPlayer(initializer, selectedPlayerPrefab);
 
         characterSelectionCanvas.SetActive(false);
+        
+        mapGenerator.GenerateMap();
 
         currentState = GameState.Playing;
         isPaused = false;
@@ -279,6 +284,7 @@ public class GameSceneManager : MonoBehaviour
         }
 
         
+
     }
 
 
@@ -470,6 +476,8 @@ public class GameSceneManager : MonoBehaviour
         player.ResetPlayerState();
 
         SetPausableObjectsState(true);
+
+        mapGenerator.GenerateMap();
 
         Debug.Log("Game restarted without reloading scene.");
     }

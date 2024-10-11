@@ -10,9 +10,12 @@ public class EnemySpawner : MonoBehaviour, IPausable
     [SerializeField] private List<float> spawnWeights;
     [SerializeField] public float spawnInterval = 1.0f;
 
-    [Header("Boundaries")]
-    [SerializeField] private Transform topLeftBoundary;
-    [SerializeField] private Transform bottomRightBoundary;
+    [Header("Dynamic Boundaries")]
+    [SerializeField] private Transform player;       // Reference to the player
+    [SerializeField] private float spawnRadius = 20f; // Radius around the player where enemies can spawn
+
+    [Header("Enemies Parent")]
+    [SerializeField] private Transform enemiesParent; // Reference to the "Enemies" GameObject
 
     private float totalWeight;
     private bool isPaused = false;
@@ -41,13 +44,11 @@ public class EnemySpawner : MonoBehaviour, IPausable
         {
             while (isPaused) yield return null;
 
-            Vector2 spawnPosition = new Vector2(
-                Random.Range(topLeftBoundary.position.x, bottomRightBoundary.position.x),
-                Random.Range(bottomRightBoundary.position.y, topLeftBoundary.position.y)
-            );
-
+            Vector2 spawnPosition = GetRandomSpawnPositionAroundPlayer();
             GameObject selectedEnemyPrefab = GetRandomEnemyPrefab();
-            Instantiate(selectedEnemyPrefab, spawnPosition, Quaternion.identity);
+
+            // Spawn the enemy and set its parent to the "Enemies" GameObject
+            GameObject enemy = Instantiate(selectedEnemyPrefab, spawnPosition, Quaternion.identity, enemiesParent);
 
             float elapsedTime = 0f;
             while (elapsedTime < spawnInterval)
@@ -57,6 +58,18 @@ public class EnemySpawner : MonoBehaviour, IPausable
                 yield return null;
             }
         }
+    }
+
+    // Get a random spawn position around the player within a defined radius
+    private Vector2 GetRandomSpawnPositionAroundPlayer()
+    {
+        float angle = Random.Range(0f, 2f * Mathf.PI);  // Random angle in radians
+        float distance = Random.Range(0f, spawnRadius); // Random distance from the player within the spawn radius
+        Vector2 spawnPosition = new Vector2(
+            player.position.x + Mathf.Cos(angle) * distance,
+            player.position.y + Mathf.Sin(angle) * distance
+        );
+        return spawnPosition;
     }
 
     // Selects an enemy prefab based on spawn weights
