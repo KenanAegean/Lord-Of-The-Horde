@@ -15,4 +15,4 @@ MonoBehaviour:
   tileName: 
   tilePrefab: {fileID: 2411566443367399462, guid: 6721af8c6bb86b94cb76899bc7cf2be7, type: 3}
   isWalkable: 0
-  spawnChance: 0.005
+  spawnChance: 0.001

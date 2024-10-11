@@ -2035,6 +2035,18 @@ PrefabInstance:
       propertyPath: mapParent
       value: 
       objectReference: {fileID: 1448793884}
+    - target: {fileID: 526324411769095939, guid: aed5c0f62070f6c459288fba647c01d5, type: 3}
+      propertyPath: tileTypes.Array.size
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 526324411769095939, guid: aed5c0f62070f6c459288fba647c01d5, type: 3}
+      propertyPath: tileTypes.Array.data[6]
+      value: 
+      objectReference: {fileID: 11400000, guid: 74c2ca14fd1cb1242863517a3dc47642, type: 2}
+    - target: {fileID: 526324411769095939, guid: aed5c0f62070f6c459288fba647c01d5, type: 3}
+      propertyPath: tileTypes.Array.data[7]
+      value: 
+      objectReference: {fileID: 11400000, guid: c59c05c2ba2b41f4ba195f4a9758283d, type: 2}
     - target: {fileID: 1740535543089553800, guid: aed5c0f62070f6c459288fba647c01d5, type: 3}
       propertyPath: m_Name
       value: MapGenerator
