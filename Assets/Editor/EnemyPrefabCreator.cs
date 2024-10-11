@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class EnemyPrefabCreator : EditorWindow
 {
-    private GameObject enemyPrefab; // Reference to the original enemy prefab
+    private GameObject enemyPrefab;
     private string prefabName = "NewEnemyPrefab";
 
     // Enemy Stats
@@ -109,7 +109,7 @@ public class EnemyPrefabCreator : EditorWindow
         {
             // If any value is unset (-1 for float, null for objects), use the value from the reference prefab
             enemyScript.maxHealth = maxHealth >= 0 ? maxHealth : enemyScript.maxHealth;
-            enemyScript.health = enemyScript.maxHealth; // Set initial health to max health
+            enemyScript.health = enemyScript.maxHealth;
             enemyScript.Damage = damage >= 0 ? damage : enemyScript.Damage;
             enemyScript.followDistance = followDistance >= 0 ? followDistance : enemyScript.followDistance;
             enemyScript.searchRadius = searchRadius >= 0 ? searchRadius : enemyScript.searchRadius;
@@ -139,7 +139,7 @@ public class EnemyPrefabCreator : EditorWindow
             enemyScript.isMinion = isMinion.HasValue ? isMinion.Value : enemyScript.isMinion;
         }
 
-        // Update the enemy's sprite only if a new one is assigned
+        // Update the enemy's sprite
         SpriteRenderer spriteRenderer = enemyInstance.GetComponent<SpriteRenderer>();
         if (spriteRenderer != null && enemySprite != null)
         {

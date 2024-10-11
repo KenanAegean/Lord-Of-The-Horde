@@ -5,8 +5,8 @@ public class LevelManager : MonoBehaviour
 {
     private NewPlayer player;
 
-    [SerializeField] private Weapon weapon; // Main weapon
-    [SerializeField] private List<UpgradePrefab> allUpgradePrefabs; // List of upgrade prefabs
+    [SerializeField] private Weapon weapon;
+    [SerializeField] private List<UpgradePrefab> allUpgradePrefabs;
     [SerializeField] private EnemySpawner enemySpawner;
 
     private void Start()
@@ -79,19 +79,18 @@ public class LevelManager : MonoBehaviour
         {
             if (upgrade.type == UpgradeType.WeaponActivation && player.AreWeaponSlotsFull())
             {
-                // Skip weapon upgrades if all slots are full
                 continue;
             }
             filteredUpgrades.Add(upgrade);
         }
 
-        // Randomly pick 3 upgrade prefabs from the filtered list
+        // Randomly pick 3 upgrade
         List<UpgradePrefab> selectedUpgrades = new List<UpgradePrefab>();
         while (selectedUpgrades.Count < 3 && filteredUpgrades.Count > 0)
         {
             int randomIndex = Random.Range(0, filteredUpgrades.Count);
 
-            // Make sure the upgrade is not already in the selected list
+            // Make sure the upgrade is not already in
             UpgradePrefab randomUpgrade = filteredUpgrades[randomIndex];
             if (!selectedUpgrades.Contains(randomUpgrade))
             {
@@ -116,14 +115,11 @@ public class LevelManager : MonoBehaviour
             return;
         }
 
-        // Instantiate the new weapon
         GameObject newWeaponInstance = Instantiate(weaponPrefab);
 
-        // Get the weapon script from the instance
         Weapon weaponScript = newWeaponInstance.GetComponent<Weapon>();
         if (weaponScript != null)
         {
-            // Try to add the weapon to a free slot in the player
             if (player.TryAddWeaponToSlot(weaponScript))
             {
                 Debug.Log("Weapon added to a free slot.");
@@ -131,7 +127,7 @@ public class LevelManager : MonoBehaviour
             else
             {
                 Debug.LogError("No free slots available.");
-                Destroy(newWeaponInstance); // Destroy the weapon if no slot is available
+                Destroy(newWeaponInstance);
             }
         }
         else
@@ -143,7 +139,6 @@ public class LevelManager : MonoBehaviour
 
     public void RemoveActiveSecondaryWeapon()
     {
-        // Not applicable with the new slot system, as we can remove by individual slots.
-        // Implement logic to handle weapon removal from specific slots if needed.
+        // Could be need in Future :) 
     }
 }

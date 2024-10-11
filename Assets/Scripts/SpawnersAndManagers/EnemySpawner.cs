@@ -11,11 +11,11 @@ public class EnemySpawner : MonoBehaviour, IPausable
     [SerializeField] public float spawnInterval = 1.0f;
 
     [Header("Dynamic Boundaries")]
-    [SerializeField] private Transform player;       // Reference to the player
-    [SerializeField] private float spawnRadius = 20f; // Radius around the player where enemies can spawn
+    [SerializeField] private Transform player;       
+    [SerializeField] private float spawnRadius = 20f; 
 
     [Header("Enemies Parent")]
-    [SerializeField] private Transform enemiesParent; // Reference to the "Enemies" GameObject
+    [SerializeField] private Transform enemiesParent; 
 
     private float totalWeight;
     private bool isPaused = false;
@@ -28,7 +28,6 @@ public class EnemySpawner : MonoBehaviour, IPausable
             return;
         }
 
-        // Calculate total weight
         totalWeight = spawnWeights.Sum();
 
         StartCoroutine(SpawnEnemy());
@@ -60,11 +59,11 @@ public class EnemySpawner : MonoBehaviour, IPausable
         }
     }
 
-    // Get a random spawn position around the player within a defined radius
+    // Get a random spawn position around the player
     private Vector2 GetRandomSpawnPositionAroundPlayer()
     {
-        float angle = Random.Range(0f, 2f * Mathf.PI);  // Random angle in radians
-        float distance = Random.Range(0f, spawnRadius); // Random distance from the player within the spawn radius
+        float angle = Random.Range(0f, 2f * Mathf.PI); 
+        float distance = Random.Range(0f, spawnRadius); 
         Vector2 spawnPosition = new Vector2(
             player.position.x + Mathf.Cos(angle) * distance,
             player.position.y + Mathf.Sin(angle) * distance
@@ -72,7 +71,6 @@ public class EnemySpawner : MonoBehaviour, IPausable
         return spawnPosition;
     }
 
-    // Selects an enemy prefab based on spawn weights
     private GameObject GetRandomEnemyPrefab()
     {
         float randomValue = Random.Range(0, totalWeight);
@@ -84,6 +82,6 @@ public class EnemySpawner : MonoBehaviour, IPausable
             if (randomValue < cumulativeWeight) return enemyPrefabs[i];
         }
 
-        return enemyPrefabs[0]; // Fallback
+        return enemyPrefabs[0];
     }
 }

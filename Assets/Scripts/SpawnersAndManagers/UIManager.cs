@@ -8,10 +8,10 @@ public class UIManager : MonoBehaviour
     public static UIManager Instance;
 
     [Header("UI Elements")]
-    public Slider healthBar;
-    public Slider xpBar;
-    public TextMeshProUGUI levelText;
-    public TextMeshProUGUI scoreText;
+    [SerializeField] public Slider healthBar;
+    [SerializeField] public Slider xpBar;
+    [SerializeField] public TextMeshProUGUI levelText;
+    [SerializeField] public TextMeshProUGUI scoreText;
 
     // Pop-up texts
     public TextMeshProUGUI xpPopupText;

@@ -44,7 +44,6 @@ public class Bullet : MonoBehaviour, IPausable
     private void Update()
     {
         if (isPaused) return;
-        // Additional update logic (if any) goes here
     }
 
     public void SetDamage(float newDamage)
