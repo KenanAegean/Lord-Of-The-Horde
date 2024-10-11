@@ -14,6 +14,8 @@ public class Bullet : MonoBehaviour, IPausable
         {
             Debug.LogError("No Rigidbody2D found on Bullet!");
         }
+
+        Destroy(gameObject, 3f);
     }
 
     public void OnPause()
