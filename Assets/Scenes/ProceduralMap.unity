@@ -377,11 +377,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1254042548149187223, guid: 8ab2cb88669422743b3d888058c6bbf9, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -157
+      value: -100
       objectReference: {fileID: 0}
     - target: {fileID: 1254042548149187223, guid: 8ab2cb88669422743b3d888058c6bbf9, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -67
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1525763589191370860, guid: 8ab2cb88669422743b3d888058c6bbf9, type: 3}
       propertyPath: m_AnchorMax.x
@@ -411,6 +411,30 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -180
       objectReference: {fileID: 0}
+    - target: {fileID: 2335346070582731440, guid: 8ab2cb88669422743b3d888058c6bbf9, type: 3}
+      propertyPath: m_text
+      value: "USED KENNEY ASSETS PACKS\r\n\t-kenney_cursor-pixel-pack\r\n\t-kenney_micro-roguelike\r\n\t-kenney_monochrome-pirates\r\n\t-kenney_platformer-art-extended-enemies\r\n\t-kenney_platformer-characters\r\n\t-kenney_toon-characters-1\r\n\r\nSFX\r\n\t-https://dagurasusk.itch.io/retrosounds"
+      objectReference: {fileID: 0}
+    - target: {fileID: 2335346070582731440, guid: 8ab2cb88669422743b3d888058c6bbf9, type: 3}
+      propertyPath: m_fontSize
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2335346070582731440, guid: 8ab2cb88669422743b3d888058c6bbf9, type: 3}
+      propertyPath: m_fontSizeMax
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 2335346070582731440, guid: 8ab2cb88669422743b3d888058c6bbf9, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2335346070582731440, guid: 8ab2cb88669422743b3d888058c6bbf9, type: 3}
+      propertyPath: m_enableAutoSizing
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2335346070582731440, guid: 8ab2cb88669422743b3d888058c6bbf9, type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
+      objectReference: {fileID: 0}
     - target: {fileID: 2423814006467240537, guid: 8ab2cb88669422743b3d888058c6bbf9, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0.5
@@ -427,13 +451,17 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -347
       objectReference: {fileID: 0}
+    - target: {fileID: 2450792043777868738, guid: 8ab2cb88669422743b3d888058c6bbf9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3679596426912893956, guid: 8ab2cb88669422743b3d888058c6bbf9, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3679596426912893956, guid: 8ab2cb88669422743b3d888058c6bbf9, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -180
+      value: -292
       objectReference: {fileID: 0}
     - target: {fileID: 4244227188683495978, guid: 8ab2cb88669422743b3d888058c6bbf9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -615,6 +643,14 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 907856664}
+    - target: {fileID: 7910468802846570880, guid: 8ab2cb88669422743b3d888058c6bbf9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OpenCredits
+      objectReference: {fileID: 0}
+    - target: {fileID: 8811376023148286699, guid: 8ab2cb88669422743b3d888058c6bbf9, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8957316090004083330, guid: 8ab2cb88669422743b3d888058c6bbf9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -2157,53 +2193,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5116518313637765095, guid: 0bfe216c11692334d940df7117e9d95e, type: 3}
-      propertyPath: m_Volume
-      value: 0.2
-      objectReference: {fileID: 0}
     - target: {fileID: 5824667016958263368, guid: 0bfe216c11692334d940df7117e9d95e, type: 3}
       propertyPath: m_Name
       value: AudioManager
-      objectReference: {fileID: 0}
-    - target: {fileID: 8277447112574947672, guid: 0bfe216c11692334d940df7117e9d95e, type: 3}
-      propertyPath: hitClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 701f1e3b09c2b9b44a2057da0dd707ab, type: 3}
-    - target: {fileID: 8277447112574947672, guid: 0bfe216c11692334d940df7117e9d95e, type: 3}
-      propertyPath: clickClip
-      value: 
-      objectReference: {fileID: 8300000, guid: e9d8ecb522011f945a1cab0d025e8de7, type: 3}
-    - target: {fileID: 8277447112574947672, guid: 0bfe216c11692334d940df7117e9d95e, type: 3}
-      propertyPath: gameMusic
-      value: 
-      objectReference: {fileID: 8300000, guid: c48af44846f546f48b790d525d14ac25, type: 3}
-    - target: {fileID: 8277447112574947672, guid: 0bfe216c11692334d940df7117e9d95e, type: 3}
-      propertyPath: menuMusic
-      value: 
-      objectReference: {fileID: 8300000, guid: 11d97fbaf37a86142922fa4b2c98e77f, type: 3}
-    - target: {fileID: 8277447112574947672, guid: 0bfe216c11692334d940df7117e9d95e, type: 3}
-      propertyPath: shootClip
-      value: 
-      objectReference: {fileID: 8300000, guid: bb681342c49be7c4791dec798deeb056, type: 3}
-    - target: {fileID: 8277447112574947672, guid: 0bfe216c11692334d940df7117e9d95e, type: 3}
-      propertyPath: collectClip
-      value: 
-      objectReference: {fileID: 8300000, guid: c4f15c271d482ef40a00e162b613ba60, type: 3}
-    - target: {fileID: 8277447112574947672, guid: 0bfe216c11692334d940df7117e9d95e, type: 3}
-      propertyPath: levelUpClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 6e37f3bc9d64f26499ef6b56d6a5f06b, type: 3}
-    - target: {fileID: 8277447112574947672, guid: 0bfe216c11692334d940df7117e9d95e, type: 3}
-      propertyPath: enemyDeathClip
-      value: 
-      objectReference: {fileID: 8300000, guid: ea8db451060e15f4dbcfe2939ac99aae, type: 3}
-    - target: {fileID: 8277447112574947672, guid: 0bfe216c11692334d940df7117e9d95e, type: 3}
-      propertyPath: playerDeathClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 9dd0fb9541f81b54c919a4cc81fc3a00, type: 3}
-    - target: {fileID: 8728045467792086526, guid: 0bfe216c11692334d940df7117e9d95e, type: 3}
-      propertyPath: m_Volume
-      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2974,6 +2966,10 @@ PrefabInstance:
     - target: {fileID: 7860935205532938887, guid: c55299371efd2b74caac5e0b8cc34e7b, type: 3}
       propertyPath: m_Name
       value: PauseMenuCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 7860935205532938887, guid: c55299371efd2b74caac5e0b8cc34e7b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

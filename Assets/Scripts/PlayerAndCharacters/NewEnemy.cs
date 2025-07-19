@@ -21,6 +21,15 @@ public class NewEnemy : PhysicsObject, IPausable
     [SerializeField] public Color deathEffectColor = Color.red;
     [SerializeField] public List<GameObject> damageStatusPrefabs;
     [SerializeField] public float Damage = 10f;
+    
+    [Header("Hit Feedback")]
+    [SerializeField] private Color hitColor = Color.red;
+    [SerializeField] private float flashDuration = 0.2f;
+    [SerializeField] private float shakeMagnitude = 0.1f;
+    [SerializeField] private int shakeVibrato = 10;
+    
+    private Color originalColor;
+    private bool isFlashing = false;
 
     private bool isDealingDamage = false;
     private Transform _player;
@@ -39,6 +48,7 @@ public class NewEnemy : PhysicsObject, IPausable
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        originalColor = spriteRenderer.color;
         FindPlayer();
         StartCoroutine(Patrol());
     }
@@ -202,12 +212,49 @@ public class NewEnemy : PhysicsObject, IPausable
 
         float healthPercentage = health / maxHealth;
 
-        if (healthPercentage > 0.8f) ChangeDamagedSprite(CharacterState.Normal);
-        else if (healthPercentage > 0.6f) ChangeDamagedSprite(CharacterState.LightDamage);
-        else if (healthPercentage > 0.4f) ChangeDamagedSprite(CharacterState.MediumDamage);
-        else if (healthPercentage > 0.2f) ChangeDamagedSprite(CharacterState.HeavyDamage);
-        else if (health <= 0) Die();
+        if (health > 0f)
+        {
+            // Start flash+shake feedback
+            if (!isFlashing)
+                StartCoroutine(FlashAndShake());
+        
+            // Update sprite based on health thresholds
+            if (healthPercentage > 0.8f)      ChangeDamagedSprite(CharacterState.Normal);
+            else if (healthPercentage > 0.6f) ChangeDamagedSprite(CharacterState.LightDamage);
+            else if (healthPercentage > 0.4f) ChangeDamagedSprite(CharacterState.MediumDamage);
+            else if (healthPercentage > 0.2f) ChangeDamagedSprite(CharacterState.HeavyDamage);
+        }
+        else
+        {
+            // Die if no health left
+            Die();
+        }
     }
+    
+    
+    private IEnumerator FlashAndShake()
+    {
+        isFlashing = true;
+        float elapsed = 0f;
+        Vector3 originalPos = transform.position;
+
+        while (elapsed < flashDuration)
+        {
+            // Flash red
+            spriteRenderer.color = hitColor;
+            // Shake: random offset around original position
+            transform.position = originalPos + (Vector3)(Random.insideUnitCircle * shakeMagnitude);
+
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        // Restore
+        spriteRenderer.color   = originalColor;
+        transform.position     = originalPos;
+        isFlashing             = false;
+    }
+
 
     private void ChangeDamagedSprite(CharacterState newState)
     {
