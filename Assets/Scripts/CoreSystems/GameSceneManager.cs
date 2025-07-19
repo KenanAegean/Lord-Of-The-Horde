@@ -55,6 +55,8 @@ public class GameSceneManager : MonoBehaviour
 
     private void Awake()
     {
+        //AudioManager.Instance.PlayMusic(AudioManager.Instance.menuMusic);
+        
         if (Instance == null)
         {
             Instance = this;
@@ -76,7 +78,8 @@ public class GameSceneManager : MonoBehaviour
 
     private void Start()
     {
-
+        AudioManager.Instance.PlayMusic(AudioManager.Instance.menuMusic);
+        
         if (mainMenuCanvas != null)
         {
             mainMenuCanvas.SetActive(false);
@@ -184,6 +187,11 @@ public class GameSceneManager : MonoBehaviour
 
     public void ConfirmCharacterSelection()
     {
+        AudioManager.Instance.StopMusic();
+        AudioManager.Instance.PlayMusic(AudioManager.Instance.gameMusic);
+        
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.clickClip);
+        
         GameObject selectedPlayerPrefab = playerPrefabs[currentIndex];
         PlayerInitializer initializer = selectedPlayerPrefab.GetComponent<PlayerInitializer>();
         if (initializer == null) return;
@@ -263,6 +271,8 @@ public class GameSceneManager : MonoBehaviour
 
     public void StartGame()
     {
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.clickClip);
+        
         if (mainMenuCanvas != null)
         {
             mainMenuCanvas.SetActive(false);
@@ -289,6 +299,11 @@ public class GameSceneManager : MonoBehaviour
 
     public void ReturnToMainMenu()
     {
+        AudioManager.Instance.StopMusic();
+        AudioManager.Instance.PlayMusic(AudioManager.Instance.menuMusic);
+        
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.clickClip);
+        
         ResetAll();
 
         currentState = GameState.Paused;
@@ -304,21 +319,25 @@ public class GameSceneManager : MonoBehaviour
 
     public void OpenSettings()
     {
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.clickClip);
         settingsPanel.SetActive(true);
     }
 
     public void OpenCredits()
     {
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.clickClip);
         creditsPanel.SetActive(true);
     }
 
     public void ClosePanel(GameObject panel)
     {
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.clickClip);
         panel.SetActive(false);
     }
 
     public void ExitGame()
     {
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.clickClip);
         Debug.Log("Exiting game...");
         Application.Quit();
     }
@@ -355,6 +374,8 @@ public class GameSceneManager : MonoBehaviour
 
     public void PauseGame()
     {
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.clickClip);
+        
         currentState = GameState.Paused;
         isPaused = true;
 
@@ -368,6 +389,8 @@ public class GameSceneManager : MonoBehaviour
 
     public void ResumeGame()
     {
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.clickClip);
+        
         currentState = GameState.Playing;
         isPaused = false;
 
@@ -454,6 +477,8 @@ public class GameSceneManager : MonoBehaviour
 
     public void RestartLevel()
     {
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.clickClip);
+        
         currentState = GameState.Playing;
         isPaused = false;
 

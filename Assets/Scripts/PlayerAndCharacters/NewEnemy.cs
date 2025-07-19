@@ -196,6 +196,8 @@ public class NewEnemy : PhysicsObject, IPausable
 
     public void TakeDamage(float someDamage)
     {
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.hitClip);
+        
         health -= someDamage;
 
         float healthPercentage = health / maxHealth;
@@ -280,6 +282,8 @@ public class NewEnemy : PhysicsObject, IPausable
 
     public void Die()
     {
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.enemyDeathClip);
+        
         GameObject collectibleInstance = Instantiate(collectablePrefab, transform.position, Quaternion.identity);
 
         Collectible collectible = collectibleInstance.GetComponent<Collectible>();

@@ -2109,6 +2109,99 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aed5c0f62070f6c459288fba647c01d5, type: 3}
+--- !u!1001 &3919485618628526893
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3509637607016252319, guid: 0bfe216c11692334d940df7117e9d95e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3509637607016252319, guid: 0bfe216c11692334d940df7117e9d95e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3509637607016252319, guid: 0bfe216c11692334d940df7117e9d95e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3509637607016252319, guid: 0bfe216c11692334d940df7117e9d95e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3509637607016252319, guid: 0bfe216c11692334d940df7117e9d95e, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3509637607016252319, guid: 0bfe216c11692334d940df7117e9d95e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3509637607016252319, guid: 0bfe216c11692334d940df7117e9d95e, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3509637607016252319, guid: 0bfe216c11692334d940df7117e9d95e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3509637607016252319, guid: 0bfe216c11692334d940df7117e9d95e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3509637607016252319, guid: 0bfe216c11692334d940df7117e9d95e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5824667016958263368, guid: 0bfe216c11692334d940df7117e9d95e, type: 3}
+      propertyPath: m_Name
+      value: AudioManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 8277447112574947672, guid: 0bfe216c11692334d940df7117e9d95e, type: 3}
+      propertyPath: hitClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 701f1e3b09c2b9b44a2057da0dd707ab, type: 3}
+    - target: {fileID: 8277447112574947672, guid: 0bfe216c11692334d940df7117e9d95e, type: 3}
+      propertyPath: clickClip
+      value: 
+      objectReference: {fileID: 8300000, guid: e9d8ecb522011f945a1cab0d025e8de7, type: 3}
+    - target: {fileID: 8277447112574947672, guid: 0bfe216c11692334d940df7117e9d95e, type: 3}
+      propertyPath: gameMusic
+      value: 
+      objectReference: {fileID: 8300000, guid: c48af44846f546f48b790d525d14ac25, type: 3}
+    - target: {fileID: 8277447112574947672, guid: 0bfe216c11692334d940df7117e9d95e, type: 3}
+      propertyPath: menuMusic
+      value: 
+      objectReference: {fileID: 8300000, guid: 11d97fbaf37a86142922fa4b2c98e77f, type: 3}
+    - target: {fileID: 8277447112574947672, guid: 0bfe216c11692334d940df7117e9d95e, type: 3}
+      propertyPath: shootClip
+      value: 
+      objectReference: {fileID: 8300000, guid: bb681342c49be7c4791dec798deeb056, type: 3}
+    - target: {fileID: 8277447112574947672, guid: 0bfe216c11692334d940df7117e9d95e, type: 3}
+      propertyPath: collectClip
+      value: 
+      objectReference: {fileID: 8300000, guid: c4f15c271d482ef40a00e162b613ba60, type: 3}
+    - target: {fileID: 8277447112574947672, guid: 0bfe216c11692334d940df7117e9d95e, type: 3}
+      propertyPath: levelUpClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 6e37f3bc9d64f26499ef6b56d6a5f06b, type: 3}
+    - target: {fileID: 8277447112574947672, guid: 0bfe216c11692334d940df7117e9d95e, type: 3}
+      propertyPath: enemyDeathClip
+      value: 
+      objectReference: {fileID: 8300000, guid: ea8db451060e15f4dbcfe2939ac99aae, type: 3}
+    - target: {fileID: 8277447112574947672, guid: 0bfe216c11692334d940df7117e9d95e, type: 3}
+      propertyPath: playerDeathClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 9dd0fb9541f81b54c919a4cc81fc3a00, type: 3}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 0bfe216c11692334d940df7117e9d95e, type: 3}
 --- !u!1001 &4245475389041196667
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2896,6 +2989,7 @@ SceneRoots:
   - {fileID: 7423543174188943905}
   - {fileID: 1415162873593745682}
   - {fileID: 5412218250231054506}
+  - {fileID: 3919485618628526893}
   - {fileID: 3801448191256159679}
   - {fileID: 200658152}
   - {fileID: 1448793884}

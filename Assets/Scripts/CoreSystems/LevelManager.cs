@@ -54,6 +54,7 @@ public class LevelManager : MonoBehaviour
 
     public void UpdatePlayerStats()
     {
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.levelUpClip);
         player.playerLevel++;
 
         TriggerUpgradeSelection();

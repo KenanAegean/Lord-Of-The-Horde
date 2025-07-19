@@ -107,6 +107,8 @@ public class NewPlayer : PhysicsObject, IPausable
 
     public void TakeDamage(float damage)
     {
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.hitClip);
+        
         health -= damage;
         uiManager.UpdateHealthUI(health, maxHealth);
         uiManager.ShowDamagePopup(damage);
@@ -116,6 +118,7 @@ public class NewPlayer : PhysicsObject, IPausable
 
     public void CollectXP(float xpAmount)
     {
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.clickClip);
         currentXP += xpAmount;
         score += xpAmount;
 
@@ -143,6 +146,8 @@ public class NewPlayer : PhysicsObject, IPausable
 
     private void Die()
     {
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.playerDeathClip);
+        
         isAlive = false;
         Debug.Log("Player died");
 
@@ -234,25 +239,6 @@ public class NewPlayer : PhysicsObject, IPausable
     {
         magnetRadius += radiusIncrement;
         magnetSpeed  += speedIncrement;
-    }
-    
-    private void TryMagnetCollectOLD()
-    {
-        magnetTimer -= Time.deltaTime;
-        if (magnetTimer > 0f) return;
-        magnetTimer = magnetCooldown;
-
-        // Find all nearby collectibles
-        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, magnetRadius);
-        foreach (var hit in Physics2D.OverlapCircleAll(transform.position, magnetRadius))
-        {
-            if (hit.CompareTag("Collectible"))
-            {
-                var c = hit.GetComponent<Collectible>();
-                if (c != null)
-                    c.StartMagnet(transform, magnetSpeed, magnetRadius);
-            }
-        }
     }
     
     private void TryMagnetCollect()

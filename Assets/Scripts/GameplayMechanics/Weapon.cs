@@ -71,6 +71,7 @@ public class Weapon : MonoBehaviour, IPausable
     {
         while (true)
         {
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.shootClip);
             while (isPaused) yield return null;
 
             GameObject bullet = Instantiate(bulletPrefab, transform.position, transform.rotation);
