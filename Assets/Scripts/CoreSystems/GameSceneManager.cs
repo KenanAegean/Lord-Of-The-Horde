@@ -33,6 +33,7 @@ public class GameSceneManager : MonoBehaviour
     [SerializeField] public Sprite defaultWeaponIcon;
     [SerializeField] public Sprite defaultOrbitIcon;
     [SerializeField] public Sprite defaultOrbitDIcon;
+    [SerializeField] public Sprite defaultMagnetIcon;
 
     [SerializeField] public MapGenerator mapGenerator; 
 
@@ -99,7 +100,7 @@ public class GameSceneManager : MonoBehaviour
             DontDestroyOnLoad(dieMenuUI.transform.root.gameObject);
         }
 
-        UpgradePrefab.SetDefaultIcons(defaultHealthIcon, defaultSpeedIcon, defaultWeaponIcon, defaultOrbitIcon, defaultOrbitDIcon);
+        UpgradePrefab.SetDefaultIcons(defaultHealthIcon, defaultSpeedIcon, defaultWeaponIcon, defaultOrbitIcon, defaultOrbitDIcon, defaultMagnetIcon);
 
         ShowMainMenu();
     }
@@ -328,7 +329,7 @@ public class GameSceneManager : MonoBehaviour
 
         if (lastRunScoreText != null)
         {
-            lastRunScoreText.text = "Last Run Score: " + lastRunScore.ToString("F0");
+            lastRunScoreText.text = "Power Gained in Last Run: " + lastRunScore.ToString("F0");
         }
     }
 

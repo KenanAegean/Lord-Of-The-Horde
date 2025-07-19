@@ -29,6 +29,11 @@ public class NewPlayer : PhysicsObject, IPausable
     // Weapon slots
     public GameObject[] weaponSlots = new GameObject[4]; // Main weapon in slot 0, upgrades in slot 1-3
     private Weapon[] weaponsInSlots = new Weapon[4]; // Array to hold actual weapon instances
+    
+    private float magnetRadius = 0f;
+    private float magnetSpeed  = 0f;
+    private float magnetCooldown = 0.1f;
+    private float magnetTimer    = 0f;
 
     // Singleton instantiation
     private static NewPlayer instance;
@@ -79,6 +84,9 @@ public class NewPlayer : PhysicsObject, IPausable
 
         FollowMouse();
         base.Update();
+        
+        if (magnetRadius > 0f)
+            TryMagnetCollect();
     }
 
     private void FollowMouse()
@@ -219,6 +227,47 @@ public class NewPlayer : PhysicsObject, IPausable
                 Destroy(weaponsInSlots[i].gameObject);
                 weaponsInSlots[i] = null;
             }
+        }
+    }
+    
+    public void EnableMagnet(float radiusIncrement, float speedIncrement)
+    {
+        magnetRadius += radiusIncrement;
+        magnetSpeed  += speedIncrement;
+    }
+    
+    private void TryMagnetCollectOLD()
+    {
+        magnetTimer -= Time.deltaTime;
+        if (magnetTimer > 0f) return;
+        magnetTimer = magnetCooldown;
+
+        // Find all nearby collectibles
+        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, magnetRadius);
+        foreach (var hit in Physics2D.OverlapCircleAll(transform.position, magnetRadius))
+        {
+            if (hit.CompareTag("Collectible"))
+            {
+                var c = hit.GetComponent<Collectible>();
+                if (c != null)
+                    c.StartMagnet(transform, magnetSpeed, magnetRadius);
+            }
+        }
+    }
+    
+    private void TryMagnetCollect()
+    {
+        magnetTimer -= Time.deltaTime;
+        if (magnetTimer > 0f) return;
+        magnetTimer = magnetCooldown;
+
+        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, magnetRadius);
+        foreach (var hit in hits)
+        {
+            if (!hit.CompareTag("Collectible")) continue;
+            var c = hit.GetComponent<Collectible>();
+            if (c != null)
+                c.StartMagnet(transform, magnetSpeed, magnetRadius);
         }
     }
 

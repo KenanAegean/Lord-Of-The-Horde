@@ -26,7 +26,7 @@ public class ScoreManager : MonoBehaviour
     {
         if (dieCanvasScoreText != null)
         {
-            dieCanvasScoreText.text = "SCORE: " + score;
+            dieCanvasScoreText.text = "POWER: " + score;
         }
     }
 }

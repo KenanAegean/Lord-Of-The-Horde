@@ -123,7 +123,7 @@ public class UIManager : MonoBehaviour
     {
         if (scoreText != null)
         {
-            scoreText.text = "SCORE: " + playerScore;
+            scoreText.text = "POWER: " + playerScore;
             Debug.Log("Score Updated: " + playerScore);
         }
         
@@ -132,6 +132,6 @@ public class UIManager : MonoBehaviour
 
     public void ShowLastScore(float playerScore)
     {
-        scoreText.text = "SCORE: " + playerScore;
+        scoreText.text = "POWER: " + playerScore;
     }
 }

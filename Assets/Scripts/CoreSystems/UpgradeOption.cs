@@ -4,5 +4,6 @@ public enum UpgradeType
     SpeedIncrease,
     WeaponActivation,
     OrbitalSpeed,
-    OrbitDirection
+    OrbitDirection,
+    Magnet  
 }
