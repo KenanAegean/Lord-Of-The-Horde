@@ -1,4 +1,4 @@
-repository "Lord Of The Horde@kenanegee@cloud"
+repository "Cloud Repositories/Lord Of The Horde@18966857677828@cloud"
   path "/"
     br "/main"
     co "/main"

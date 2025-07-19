@@ -1,0 +1,754 @@
+fileFormatVersion: 2
+guid: 5d0db5c3c60fea945908fec8932b7df8
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -6663259205633866877
+    second: soldier_tilesheet_0
+  - first:
+      213: -4579362104849367244
+    second: soldier_tilesheet_1
+  - first:
+      213: 5861045168978595651
+    second: soldier_tilesheet_2
+  - first:
+      213: -5164361827846720121
+    second: soldier_tilesheet_3
+  - first:
+      213: 6849006530703894086
+    second: soldier_tilesheet_4
+  - first:
+      213: -6376171762187863040
+    second: soldier_tilesheet_5
+  - first:
+      213: 3560086650971734113
+    second: soldier_tilesheet_6
+  - first:
+      213: -3630118766806856252
+    second: soldier_tilesheet_7
+  - first:
+      213: -8708266140324013027
+    second: soldier_tilesheet_8
+  - first:
+      213: 7967936626119294284
+    second: soldier_tilesheet_9
+  - first:
+      213: 3794234576319258998
+    second: soldier_tilesheet_10
+  - first:
+      213: 5920867415670940764
+    second: soldier_tilesheet_11
+  - first:
+      213: -1341022170784618979
+    second: soldier_tilesheet_12
+  - first:
+      213: 8312265840102477695
+    second: soldier_tilesheet_13
+  - first:
+      213: 601290092805488381
+    second: soldier_tilesheet_14
+  - first:
+      213: 3437519965128870942
+    second: soldier_tilesheet_15
+  - first:
+      213: -3606755879605679920
+    second: soldier_tilesheet_16
+  - first:
+      213: 8278047062401298193
+    second: soldier_tilesheet_17
+  - first:
+      213: -3315683045428043120
+    second: soldier_tilesheet_18
+  - first:
+      213: 839525434841961411
+    second: soldier_tilesheet_19
+  - first:
+      213: 3218725032453258582
+    second: soldier_tilesheet_20
+  - first:
+      213: -3808914893709968262
+    second: soldier_tilesheet_21
+  - first:
+      213: 3918261720675979842
+    second: soldier_tilesheet_22
+  - first:
+      213: -7885437402381390753
+    second: soldier_tilesheet_23
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: soldier_tilesheet_0
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 219
+        width: 65
+        height: 94
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 38387d15e095783a0800000000000000
+      internalID: -6663259205633866877
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soldier_tilesheet_1
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 219
+        width: 73
+        height: 99
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 43f719a9d66d270c0800000000000000
+      internalID: -4579362104849367244
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soldier_tilesheet_2
+      rect:
+        serializedVersion: 2
+        x: 161
+        y: 221
+        width: 80
+        height: 95
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 34f0d7d278d965150800000000000000
+      internalID: 5861045168978595651
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soldier_tilesheet_3
+      rect:
+        serializedVersion: 2
+        x: 247
+        y: 219
+        width: 68
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 785fb9f87408458b0800000000000000
+      internalID: -5164361827846720121
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soldier_tilesheet_4
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 222
+        width: 81
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 646afeee62f8c0f50800000000000000
+      internalID: 6849006530703894086
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soldier_tilesheet_5
+      rect:
+        serializedVersion: 2
+        x: 408
+        y: 223
+        width: 61
+        height: 94
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 00c7aef80994387a0800000000000000
+      internalID: -6376171762187863040
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soldier_tilesheet_6
+      rect:
+        serializedVersion: 2
+        x: 491
+        y: 223
+        width: 61
+        height: 94
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 160c7c862f7f76130800000000000000
+      internalID: 3560086650971734113
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soldier_tilesheet_7
+      rect:
+        serializedVersion: 2
+        x: 561
+        y: 219
+        width: 78
+        height: 94
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4cd8ffbf63a3f9dc0800000000000000
+      internalID: -3630118766806856252
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soldier_tilesheet_8
+      rect:
+        serializedVersion: 2
+        x: 642
+        y: 219
+        width: 77
+        height: 93
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d1cdc607516062780800000000000000
+      internalID: -8708266140324013027
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soldier_tilesheet_9
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 109
+        width: 74
+        height: 94
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c4d3aa0452cc39e60800000000000000
+      internalID: 7967936626119294284
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soldier_tilesheet_10
+      rect:
+        serializedVersion: 2
+        x: 92
+        y: 109
+        width: 58
+        height: 95
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 671a3049e34d7a430800000000000000
+      internalID: 3794234576319258998
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soldier_tilesheet_11
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 109
+        width: 79
+        height: 93
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c5460416b852b2250800000000000000
+      internalID: 5920867415670940764
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soldier_tilesheet_12
+      rect:
+        serializedVersion: 2
+        x: 245
+        y: 109
+        width: 57
+        height: 93
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d16a572d07bb36de0800000000000000
+      internalID: -1341022170784618979
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soldier_tilesheet_13
+      rect:
+        serializedVersion: 2
+        x: 319
+        y: 109
+        width: 71
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f7f0ce5cdb91b5370800000000000000
+      internalID: 8312265840102477695
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soldier_tilesheet_14
+      rect:
+        serializedVersion: 2
+        x: 399
+        y: 109
+        width: 80
+        height: 92
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dfef1a45726385800800000000000000
+      internalID: 601290092805488381
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soldier_tilesheet_15
+      rect:
+        serializedVersion: 2
+        x: 481
+        y: 109
+        width: 79
+        height: 95
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e1cc1dd023684bf20800000000000000
+      internalID: 3437519965128870942
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soldier_tilesheet_16
+      rect:
+        serializedVersion: 2
+        x: 559
+        y: 113
+        width: 81
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0d84d8c03aa32fdc0800000000000000
+      internalID: -3606755879605679920
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soldier_tilesheet_17
+      rect:
+        serializedVersion: 2
+        x: 641
+        y: 111
+        width: 78
+        height: 98
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 11f256cb1f781e270800000000000000
+      internalID: 8278047062401298193
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soldier_tilesheet_18
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 76
+        height: 93
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 092e97166d35cf1d0800000000000000
+      internalID: -3315683045428043120
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soldier_tilesheet_19
+      rect:
+        serializedVersion: 2
+        x: 78
+        y: 0
+        width: 82
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3c319ab5fe796ab00800000000000000
+      internalID: 839525434841961411
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soldier_tilesheet_20
+      rect:
+        serializedVersion: 2
+        x: 164
+        y: 0
+        width: 77
+        height: 101
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 65db80d0d553bac20800000000000000
+      internalID: 3218725032453258582
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soldier_tilesheet_21
+      rect:
+        serializedVersion: 2
+        x: 251
+        y: 0
+        width: 67
+        height: 93
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a7cf8bca514042bc0800000000000000
+      internalID: -3808914893709968262
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soldier_tilesheet_22
+      rect:
+        serializedVersion: 2
+        x: 328
+        y: 0
+        width: 65
+        height: 91
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 24217ed6646706630800000000000000
+      internalID: 3918261720675979842
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soldier_tilesheet_23
+      rect:
+        serializedVersion: 2
+        x: 409
+        y: 0
+        width: 62
+        height: 92
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f5c6a7c167c419290800000000000000
+      internalID: -7885437402381390753
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      soldier_tilesheet_0: -6663259205633866877
+      soldier_tilesheet_1: -4579362104849367244
+      soldier_tilesheet_10: 3794234576319258998
+      soldier_tilesheet_11: 5920867415670940764
+      soldier_tilesheet_12: -1341022170784618979
+      soldier_tilesheet_13: 8312265840102477695
+      soldier_tilesheet_14: 601290092805488381
+      soldier_tilesheet_15: 3437519965128870942
+      soldier_tilesheet_16: -3606755879605679920
+      soldier_tilesheet_17: 8278047062401298193
+      soldier_tilesheet_18: -3315683045428043120
+      soldier_tilesheet_19: 839525434841961411
+      soldier_tilesheet_2: 5861045168978595651
+      soldier_tilesheet_20: 3218725032453258582
+      soldier_tilesheet_21: -3808914893709968262
+      soldier_tilesheet_22: 3918261720675979842
+      soldier_tilesheet_23: -7885437402381390753
+      soldier_tilesheet_3: -5164361827846720121
+      soldier_tilesheet_4: 6849006530703894086
+      soldier_tilesheet_5: -6376171762187863040
+      soldier_tilesheet_6: 3560086650971734113
+      soldier_tilesheet_7: -3630118766806856252
+      soldier_tilesheet_8: -8708266140324013027
+      soldier_tilesheet_9: 7967936626119294284
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -24,8 +24,8 @@ public class Bullet : MonoBehaviour, IPausable
 
         if (rb != null)
         {
-            storedVelocity = rb.velocity;
-            rb.velocity = Vector2.zero;
+            storedVelocity = rb.linearVelocity;
+            rb.linearVelocity = Vector2.zero;
             rb.isKinematic = true;
         }
     }
@@ -37,7 +37,7 @@ public class Bullet : MonoBehaviour, IPausable
         if (rb != null)
         {
             rb.isKinematic = false;
-            rb.velocity = storedVelocity;
+            rb.linearVelocity = storedVelocity;
         }
     }
 

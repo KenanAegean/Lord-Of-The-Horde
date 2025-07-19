@@ -1,0 +1,754 @@
+fileFormatVersion: 2
+guid: e8411cd4bb0ffc443ba48a531ffc1148
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -2240331397610851084
+    second: zombie_tilesheet_0
+  - first:
+      213: -3883605644601859268
+    second: zombie_tilesheet_1
+  - first:
+      213: -8705077556956619041
+    second: zombie_tilesheet_2
+  - first:
+      213: 3562207803371887300
+    second: zombie_tilesheet_3
+  - first:
+      213: -9185438766412413912
+    second: zombie_tilesheet_4
+  - first:
+      213: -5390322055574218052
+    second: zombie_tilesheet_5
+  - first:
+      213: 8784327029183798177
+    second: zombie_tilesheet_6
+  - first:
+      213: 5026179357354115288
+    second: zombie_tilesheet_7
+  - first:
+      213: 7956452117759604075
+    second: zombie_tilesheet_8
+  - first:
+      213: -8294697879514352471
+    second: zombie_tilesheet_9
+  - first:
+      213: -4080834747062874032
+    second: zombie_tilesheet_10
+  - first:
+      213: -5421515508682518197
+    second: zombie_tilesheet_11
+  - first:
+      213: -8328268865440478453
+    second: zombie_tilesheet_12
+  - first:
+      213: -4727207223768349634
+    second: zombie_tilesheet_13
+  - first:
+      213: 5176146722895605129
+    second: zombie_tilesheet_14
+  - first:
+      213: -6778872786586104091
+    second: zombie_tilesheet_15
+  - first:
+      213: -419742932524956704
+    second: zombie_tilesheet_16
+  - first:
+      213: -8736058758269633355
+    second: zombie_tilesheet_17
+  - first:
+      213: 1069876644797024106
+    second: zombie_tilesheet_18
+  - first:
+      213: -2653836900646033470
+    second: zombie_tilesheet_19
+  - first:
+      213: -7936697918496546768
+    second: zombie_tilesheet_20
+  - first:
+      213: -4883736162575166160
+    second: zombie_tilesheet_21
+  - first:
+      213: 1224916243285470554
+    second: zombie_tilesheet_22
+  - first:
+      213: -1373654704941304000
+    second: zombie_tilesheet_23
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: zombie_tilesheet_0
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 219
+        width: 65
+        height: 92
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4f43042b67eb8e0e0800000000000000
+      internalID: -2240331397610851084
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: zombie_tilesheet_1
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 219
+        width: 73
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c33edc11e39aa1ac0800000000000000
+      internalID: -3883605644601859268
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: zombie_tilesheet_2
+      rect:
+        serializedVersion: 2
+        x: 161
+        y: 221
+        width: 80
+        height: 94
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fde106b551a513780800000000000000
+      internalID: -8705077556956619041
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: zombie_tilesheet_3
+      rect:
+        serializedVersion: 2
+        x: 247
+        y: 219
+        width: 68
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4ca1b10bf118f6130800000000000000
+      internalID: 3562207803371887300
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: zombie_tilesheet_4
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 222
+        width: 81
+        height: 95
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 824c2e5cb14c68080800000000000000
+      internalID: -9185438766412413912
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: zombie_tilesheet_5
+      rect:
+        serializedVersion: 2
+        x: 409
+        y: 223
+        width: 60
+        height: 91
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cba9b8c46aab135b0800000000000000
+      internalID: -5390322055574218052
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: zombie_tilesheet_6
+      rect:
+        serializedVersion: 2
+        x: 491
+        y: 223
+        width: 60
+        height: 91
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1abdc5544e238e970800000000000000
+      internalID: 8784327029183798177
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: zombie_tilesheet_7
+      rect:
+        serializedVersion: 2
+        x: 561
+        y: 219
+        width: 78
+        height: 92
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8d04e74ee7390c540800000000000000
+      internalID: 5026179357354115288
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: zombie_tilesheet_8
+      rect:
+        serializedVersion: 2
+        x: 642
+        y: 219
+        width: 77
+        height: 91
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b653777cb0ffa6e60800000000000000
+      internalID: 7956452117759604075
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: zombie_tilesheet_9
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 109
+        width: 74
+        height: 92
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9a47c5cc93053ec80800000000000000
+      internalID: -8294697879514352471
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: zombie_tilesheet_10
+      rect:
+        serializedVersion: 2
+        x: 92
+        y: 109
+        width: 60
+        height: 93
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0501f323b66fd57c0800000000000000
+      internalID: -4080834747062874032
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: zombie_tilesheet_11
+      rect:
+        serializedVersion: 2
+        x: 159
+        y: 109
+        width: 80
+        height: 91
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b4115b88e58e2c4b0800000000000000
+      internalID: -5421515508682518197
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: zombie_tilesheet_12
+      rect:
+        serializedVersion: 2
+        x: 247
+        y: 109
+        width: 55
+        height: 91
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b0b8979879b0c6c80800000000000000
+      internalID: -8328268865440478453
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: zombie_tilesheet_13
+      rect:
+        serializedVersion: 2
+        x: 318
+        y: 109
+        width: 72
+        height: 93
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e3480a76316956eb0800000000000000
+      internalID: -4727207223768349634
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: zombie_tilesheet_14
+      rect:
+        serializedVersion: 2
+        x: 399
+        y: 109
+        width: 80
+        height: 92
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 98dae73250e55d740800000000000000
+      internalID: 5176146722895605129
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: zombie_tilesheet_15
+      rect:
+        serializedVersion: 2
+        x: 481
+        y: 109
+        width: 79
+        height: 93
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5ee09f9dd1b9ce1a0800000000000000
+      internalID: -6778872786586104091
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: zombie_tilesheet_16
+      rect:
+        serializedVersion: 2
+        x: 559
+        y: 113
+        width: 81
+        height: 94
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0e38ed9d606cc2af0800000000000000
+      internalID: -419742932524956704
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: zombie_tilesheet_17
+      rect:
+        serializedVersion: 2
+        x: 641
+        y: 111
+        width: 78
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5bcf56058d843c680800000000000000
+      internalID: -8736058758269633355
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: zombie_tilesheet_18
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 76
+        height: 91
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a670d96d327f8de00800000000000000
+      internalID: 1069876644797024106
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: zombie_tilesheet_19
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 0
+        width: 80
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2c76b25466dab2bd0800000000000000
+      internalID: -2653836900646033470
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: zombie_tilesheet_20
+      rect:
+        serializedVersion: 2
+        x: 164
+        y: 0
+        width: 77
+        height: 98
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0306e662b4f2bd190800000000000000
+      internalID: -7936697918496546768
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: zombie_tilesheet_21
+      rect:
+        serializedVersion: 2
+        x: 249
+        y: 0
+        width: 69
+        height: 92
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0355af4d5db793cb0800000000000000
+      internalID: -4883736162575166160
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: zombie_tilesheet_22
+      rect:
+        serializedVersion: 2
+        x: 328
+        y: 0
+        width: 65
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a5de2a855d6cff010800000000000000
+      internalID: 1224916243285470554
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: zombie_tilesheet_23
+      rect:
+        serializedVersion: 2
+        x: 409
+        y: 0
+        width: 62
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 047fde3e25ccfece0800000000000000
+      internalID: -1373654704941304000
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      zombie_tilesheet_0: -2240331397610851084
+      zombie_tilesheet_1: -3883605644601859268
+      zombie_tilesheet_10: -4080834747062874032
+      zombie_tilesheet_11: -5421515508682518197
+      zombie_tilesheet_12: -8328268865440478453
+      zombie_tilesheet_13: -4727207223768349634
+      zombie_tilesheet_14: 5176146722895605129
+      zombie_tilesheet_15: -6778872786586104091
+      zombie_tilesheet_16: -419742932524956704
+      zombie_tilesheet_17: -8736058758269633355
+      zombie_tilesheet_18: 1069876644797024106
+      zombie_tilesheet_19: -2653836900646033470
+      zombie_tilesheet_2: -8705077556956619041
+      zombie_tilesheet_20: -7936697918496546768
+      zombie_tilesheet_21: -4883736162575166160
+      zombie_tilesheet_22: 1224916243285470554
+      zombie_tilesheet_23: -1373654704941304000
+      zombie_tilesheet_3: 3562207803371887300
+      zombie_tilesheet_4: -9185438766412413912
+      zombie_tilesheet_5: -5390322055574218052
+      zombie_tilesheet_6: 8784327029183798177
+      zombie_tilesheet_7: 5026179357354115288
+      zombie_tilesheet_8: 7956452117759604075
+      zombie_tilesheet_9: -8294697879514352471
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
