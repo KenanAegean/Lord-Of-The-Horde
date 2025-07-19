@@ -2157,6 +2157,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5116518313637765095, guid: 0bfe216c11692334d940df7117e9d95e, type: 3}
+      propertyPath: m_Volume
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 5824667016958263368, guid: 0bfe216c11692334d940df7117e9d95e, type: 3}
       propertyPath: m_Name
       value: AudioManager
@@ -2197,6 +2201,10 @@ PrefabInstance:
       propertyPath: playerDeathClip
       value: 
       objectReference: {fileID: 8300000, guid: 9dd0fb9541f81b54c919a4cc81fc3a00, type: 3}
+    - target: {fileID: 8728045467792086526, guid: 0bfe216c11692334d940df7117e9d95e, type: 3}
+      propertyPath: m_Volume
+      value: 0.2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

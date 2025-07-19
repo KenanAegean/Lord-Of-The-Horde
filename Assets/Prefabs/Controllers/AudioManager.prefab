@@ -45,7 +45,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -176,15 +176,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   musicSource: {fileID: 5116518313637765095}
-  menuMusic: {fileID: 0}
-  gameMusic: {fileID: 0}
+  menuMusic: {fileID: 8300000, guid: 11d97fbaf37a86142922fa4b2c98e77f, type: 3}
+  gameMusic: {fileID: 8300000, guid: c48af44846f546f48b790d525d14ac25, type: 3}
   sfxSource: {fileID: 8728045467792086526}
-  shootClip: {fileID: 0}
-  collectClip: {fileID: 0}
-  enemyDeathClip: {fileID: 0}
-  levelUpClip: {fileID: 0}
-  playerDeathClip: {fileID: 0}
-  hitClip: {fileID: 0}
+  shootClip: {fileID: 8300000, guid: bb681342c49be7c4791dec798deeb056, type: 3}
+  collectClip: {fileID: 8300000, guid: c4f15c271d482ef40a00e162b613ba60, type: 3}
+  enemyDeathClip: {fileID: 8300000, guid: ea8db451060e15f4dbcfe2939ac99aae, type: 3}
+  levelUpClip: {fileID: 8300000, guid: 6e37f3bc9d64f26499ef6b56d6a5f06b, type: 3}
+  playerDeathClip: {fileID: 8300000, guid: 9dd0fb9541f81b54c919a4cc81fc3a00, type: 3}
+  hitClip: {fileID: 8300000, guid: 701f1e3b09c2b9b44a2057da0dd707ab, type: 3}
+  clickClip: {fileID: 8300000, guid: e9d8ecb522011f945a1cab0d025e8de7, type: 3}
 --- !u!1 &7509407737876216597
 GameObject:
   m_ObjectHideFlags: 0
@@ -230,7 +231,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 0
   Mute: 0
