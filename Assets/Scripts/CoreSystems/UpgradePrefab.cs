@@ -63,7 +63,7 @@ public class UpgradePrefab : MonoBehaviour
             case UpgradeType.SpeedIncrease: return $"Increase player speed by +{value}.";
             case UpgradeType.WeaponActivation: return "Unlock a new weapon!";
             case UpgradeType.OrbitalSpeed: return $"Increase weapon speed by x{value}.";
-            case UpgradeType.OrbitDirection: return $"Change the weapon's orbit direction.";
+            case UpgradeType.OrbitDirection: return $"Change the weapon's orbit direction and increase weapon speed by +{speedValue}.";
             case UpgradeType.Magnet: return $"Magnet: +{value:F0} radius, +{speedValue:F0} pull speed per upgrade.";
             default:
                 return "Upgrade your abilities.";
@@ -91,6 +91,7 @@ public class UpgradePrefab : MonoBehaviour
                 weapon.rotationSpeed *= value;
                 break;
             case UpgradeType.OrbitDirection:
+                weapon.rotationSpeed += speedValue;
                 weapon.rotationSpeed *= value;
                 break;
             case UpgradeType.Magnet:

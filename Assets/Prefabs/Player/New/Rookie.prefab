@@ -420,10 +420,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerName: Rookie
   playerDescription: This is Player Description. Here Will Be Updated Soon
-  maxHealth: 1000
-  startHealth: 1000
+  maxHealth: 800
+  startHealth: 800
   startXP: 0
   xpToNextLevel: 50
-  speed: 4
-  orbitalSpeed: 100
+  speed: 10
+  orbitalSpeed: 200
   secondaryWeapons: []

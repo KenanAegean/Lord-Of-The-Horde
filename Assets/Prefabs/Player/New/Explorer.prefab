@@ -342,12 +342,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerName: Explorer
   playerDescription: This is Player Description. Here Will Be Updated Soon
-  maxHealth: 990
-  startHealth: 990
+  maxHealth: 1000
+  startHealth: 1000
   startXP: 0
   xpToNextLevel: 50
-  speed: 2
-  orbitalSpeed: 140
+  speed: 4
+  orbitalSpeed: 170
   secondaryWeapons: []
 --- !u!1 &7202263403288052926
 GameObject:

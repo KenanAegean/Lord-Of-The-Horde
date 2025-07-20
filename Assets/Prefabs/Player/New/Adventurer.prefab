@@ -342,8 +342,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerName: Adventurer
   playerDescription: This is Player Description. Here Will Be Updated Soon
-  maxHealth: 1500
-  startHealth: 1500
+  maxHealth: 1000
+  startHealth: 1000
   startXP: 0
   xpToNextLevel: 50
   speed: 5

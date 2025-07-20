@@ -45,8 +45,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeName: OrbitalDirection
-  type: 3
+  type: 4
   description: 
   value: -1
-  weaponToActivate: {fileID: 0}
+  speedValue: 25
+  weaponPrefab: {fileID: 0}
   icon: {fileID: 0}

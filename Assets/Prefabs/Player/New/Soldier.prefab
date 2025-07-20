@@ -366,12 +366,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerName: Soldier
   playerDescription: This is Player Description. Here Will Be Updated Soon
-  maxHealth: 990
-  startHealth: 990
+  maxHealth: 2000
+  startHealth: 2000
   startXP: 0
   xpToNextLevel: 50
   speed: 2
-  orbitalSpeed: 120
+  orbitalSpeed: 100
   secondaryWeapons: []
 --- !u!1 &8746988366034816594
 GameObject:

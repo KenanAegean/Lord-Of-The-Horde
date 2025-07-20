@@ -48,5 +48,6 @@ MonoBehaviour:
   type: 2
   description: 
   value: 0
+  speedValue: 0
   weaponPrefab: {fileID: 6499991311865988432, guid: 01bcb6d8f74edfc4c93aca4aae246def, type: 3}
-  icon: {fileID: 21300000, guid: 9c6c98c7aeddce24f886d25762dc7201, type: 3}
+  icon: {fileID: 21300000, guid: 27c74cfa4569c784b976134a8475b957, type: 3}
