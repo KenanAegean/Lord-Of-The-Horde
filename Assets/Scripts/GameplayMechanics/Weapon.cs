@@ -20,6 +20,9 @@ public class Weapon : MonoBehaviour, IPausable
 
     private bool isPaused = false;
     private Coroutine shootingCoroutine;
+    
+    // static so it's shared across all Weapon instances
+    private static int _lastFramePlayed = -1;
 
     void Start()
     {
@@ -71,7 +74,12 @@ public class Weapon : MonoBehaviour, IPausable
     {
         while (true)
         {
-            AudioManager.Instance.PlaySFX(AudioManager.Instance.shootClip);
+            // only play once per frame
+            if (_lastFramePlayed != Time.frameCount)
+            {
+                AudioManager.Instance.PlaySFX(AudioManager.Instance.shootClip);
+                _lastFramePlayed = Time.frameCount;
+            }
             while (isPaused) yield return null;
 
             GameObject bullet = Instantiate(bulletPrefab, transform.position, transform.rotation);

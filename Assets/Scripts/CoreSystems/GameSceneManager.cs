@@ -144,6 +144,8 @@ public class GameSceneManager : MonoBehaviour
 
     public void Navigate(int direction)
     {
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.clickClip);
+        
         currentIndex += direction;
         if (currentIndex < 0) currentIndex = playerPrefabs.Count - 1;
         if (currentIndex >= playerPrefabs.Count) currentIndex = 0;

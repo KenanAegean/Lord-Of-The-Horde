@@ -219,6 +219,142 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &244436377
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 244436378}
+  - component: {fileID: 244436380}
+  - component: {fileID: 244436379}
+  m_Layer: 5
+  m_Name: Text (TMP) (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &244436378
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 244436377}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1710102150}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -100, y: -47}
+  m_SizeDelta: {x: 200, y: 50}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &244436379
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 244436377}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: "USED KENNEY ASSETS PACKS\r\n\t-kenney_cursor-pixel-pack\r\n\t-kenney_micro-roguelike\r\n\t-kenney_monochrome-pirates\r\n\t-kenney_platformer-art-extended-enemies\r\n\t-kenney_platformer-characters\r\n\t-kenney_toon-characters-1\r\nSFX\r\n\t-https://dagurasusk.itch.io/retrosounds"
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 13c63a41b66599b44bb3a13202c31247, type: 2}
+  m_sharedMaterial: {fileID: -1932700597653822022, guid: 13c63a41b66599b44bb3a13202c31247, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 9
+  m_fontSizeBase: 9
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 18
+  m_fontStyle: 0
+  m_HorizontalAlignment: 1
+  m_VerticalAlignment: 256
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_TextWrappingMode: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 1
+  m_ActiveFontFeatures: 6e72656b
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_EmojiFallbackSupport: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: -333.11353, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &244436380
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 244436377}
+  m_CullTransparentMesh: 1
 --- !u!1 &246392459
 GameObject:
   m_ObjectHideFlags: 0
@@ -369,11 +505,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 604362866316858870, guid: 8ab2cb88669422743b3d888058c6bbf9, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 0.000061035
       objectReference: {fileID: 0}
     - target: {fileID: 604362866316858870, guid: 8ab2cb88669422743b3d888058c6bbf9, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -260
+      value: -191
       objectReference: {fileID: 0}
     - target: {fileID: 1254042548149187223, guid: 8ab2cb88669422743b3d888058c6bbf9, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -405,15 +541,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1782579297079857073, guid: 8ab2cb88669422743b3d888058c6bbf9, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1782579297079857073, guid: 8ab2cb88669422743b3d888058c6bbf9, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -180
+      value: -290
       objectReference: {fileID: 0}
     - target: {fileID: 2335346070582731440, guid: 8ab2cb88669422743b3d888058c6bbf9, type: 3}
       propertyPath: m_text
-      value: "USED KENNEY ASSETS PACKS\r\n\t-kenney_cursor-pixel-pack\r\n\t-kenney_micro-roguelike\r\n\t-kenney_monochrome-pirates\r\n\t-kenney_platformer-art-extended-enemies\r\n\t-kenney_platformer-characters\r\n\t-kenney_toon-characters-1\r\n\r\nSFX\r\n\t-https://dagurasusk.itch.io/retrosounds"
+      value: "USED KENNEY ASSETS PACKS\r\n\t-kenney_cursor-pixel-pack\r\n\t-kenney_micro-roguelike\r\n\t-kenney_monochrome-pirates\r\n\t-kenney_platformer-art-extended-enemies\r\n\t-kenney_platformer-characters\r\n\t-kenney_toon-characters-1\r\nSFX\r\n\t-https://dagurasusk.itch.io/retrosounds"
       objectReference: {fileID: 0}
     - target: {fileID: 2335346070582731440, guid: 8ab2cb88669422743b3d888058c6bbf9, type: 3}
       propertyPath: m_fontSize
@@ -515,6 +651,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -191
       objectReference: {fileID: 0}
+    - target: {fileID: 5240798470744074132, guid: 8ab2cb88669422743b3d888058c6bbf9, type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
+      objectReference: {fileID: 0}
     - target: {fileID: 5540122102567831643, guid: 8ab2cb88669422743b3d888058c6bbf9, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0.5
@@ -530,6 +670,10 @@ PrefabInstance:
     - target: {fileID: 5540122102567831643, guid: 8ab2cb88669422743b3d888058c6bbf9, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -123
+      objectReference: {fileID: 0}
+    - target: {fileID: 5652292690270582188, guid: 8ab2cb88669422743b3d888058c6bbf9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5924654109487108344, guid: 8ab2cb88669422743b3d888058c6bbf9, type: 3}
       propertyPath: m_Pivot.x
@@ -611,6 +755,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6175322404895132595, guid: 8ab2cb88669422743b3d888058c6bbf9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6227033454735390446, guid: 8ab2cb88669422743b3d888058c6bbf9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6699575279391166731, guid: 8ab2cb88669422743b3d888058c6bbf9, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0.5
@@ -665,7 +817,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 2347068718886022499, guid: 8ab2cb88669422743b3d888058c6bbf9, type: 3}
+      insertIndex: 0
+      addedObject: {fileID: 244436378}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8ab2cb88669422743b3d888058c6bbf9, type: 3}
 --- !u!114 &1095347126 stripped
@@ -804,6 +959,11 @@ GameObject:
 --- !u!1 &1710102149 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5652292690270582188, guid: 8ab2cb88669422743b3d888058c6bbf9, type: 3}
+  m_PrefabInstance: {fileID: 1087309658}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &1710102150 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 2347068718886022499, guid: 8ab2cb88669422743b3d888058c6bbf9, type: 3}
   m_PrefabInstance: {fileID: 1087309658}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &1800309146 stripped

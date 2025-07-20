@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Random = UnityEngine.Random;
 
 public class NewPlayer : PhysicsObject, IPausable
 {
@@ -25,6 +26,15 @@ public class NewPlayer : PhysicsObject, IPausable
     public bool isAlive = true;
     private bool isPaused = false;
     private SpriteRenderer spriteRenderer;
+    
+    [Header("Hit Feedback")]
+    [SerializeField] private Color hitColor = Color.red;
+    [SerializeField] private float flashDuration = 0.2f;
+    [SerializeField] private float shakeMagnitude = 0.1f;
+    
+    private Color originalColor;
+    private bool isFlashing = false;
+
 
     // Weapon slots
     public GameObject[] weaponSlots = new GameObject[4]; // Main weapon in slot 0, upgrades in slot 1-3
@@ -60,11 +70,10 @@ public class NewPlayer : PhysicsObject, IPausable
         }
 
         spriteRenderer = GetComponent<SpriteRenderer>();
-
         if (spriteRenderer == null)
-        {
-            Debug.LogError("SpriteRenderer could not be found on the parent object!");
-        }
+            Debug.LogError("SpriteRenderer not found on player!");
+
+        originalColor = spriteRenderer.color;
 
         // Initialize UI
         uiManager.UpdateHealthUI(health, maxHealth);
@@ -107,13 +116,19 @@ public class NewPlayer : PhysicsObject, IPausable
 
     public void TakeDamage(float damage)
     {
-        AudioManager.Instance.PlaySFX(AudioManager.Instance.hitClip);
-        
         health -= damage;
         uiManager.UpdateHealthUI(health, maxHealth);
         uiManager.ShowDamagePopup(damage);
 
-        if (health <= 0) Die();
+        if (health > 0f)
+        {
+            if (!isFlashing)
+                StartCoroutine(FlashAndShake());
+        }
+        else
+        {
+            Die();
+        }
     }
 
     public void CollectXP(float xpAmount)
@@ -144,6 +159,29 @@ public class NewPlayer : PhysicsObject, IPausable
         uiManager.ShowLastScore(score);
     }
 
+    private IEnumerator FlashAndShake()
+    {
+        isFlashing = true;
+        float elapsed = 0f;
+        Vector3 originalPos = transform.position;
+
+        while (elapsed < flashDuration)
+        {
+            // Tint red
+            spriteRenderer.color = hitColor;
+            // Jitter position
+            transform.position = originalPos + (Vector3)Random.insideUnitCircle * shakeMagnitude;
+
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        // Restore
+        spriteRenderer.color = originalColor;
+        transform.position     = originalPos;
+        isFlashing             = false;
+    }
+    
     private void Die()
     {
         AudioManager.Instance.PlaySFX(AudioManager.Instance.playerDeathClip);
